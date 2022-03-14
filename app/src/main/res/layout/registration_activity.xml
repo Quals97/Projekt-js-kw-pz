@@ -11,17 +11,27 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="50dp"
         android:text="@string/registration"
         />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         android:text="@string/email"
         />
     <EditText
         android:id="@+id/user_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         android:maxLines="1"
         android:singleLine="true"
         android:hint="@string/user_email"
@@ -30,10 +40,14 @@
         android:id="@+id/checkInputUserData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         android:text="@string/user_password"
         />
     <EditText
@@ -43,16 +57,22 @@
         android:lines="1"
         android:maxLines="1"
         android:singleLine="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         android:hint="@string/user_password"
         />
     <TextView
         android:id="@+id/checkInputUserPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         android:text="@string/first_name"
         />
     <EditText
@@ -60,6 +80,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="1"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         android:singleLine="true"
         android:hint="@string/first_name"
 
@@ -68,12 +90,16 @@
         android:id="@+id/checkInputUserFirstName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         />
 
     <Button
         android:id="@+id/registration_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         android:text="@string/registration"
 
         />

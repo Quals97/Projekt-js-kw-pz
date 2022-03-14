@@ -51,21 +51,29 @@ class RegistrationActivity : AppCompatActivity() {
         override fun afterTextChanged(s: Editable?) {
 
             val checkBoolean: Boolean = checkUserInputPassword(user_password.text.toString())
-            if(checkBoolean)
-            {
-                checkInputUserPassword.setTextColor(Color.GREEN)
-                checkInputUserPassword.text = "Success"
-            }else if(!checkBoolean){
-                if(user_password.text.toString().isEmpty())
+
+
+
+                if(checkBoolean)
                 {
-                    checkInputUserPassword.text = ""
-                }else{
-                    checkInputUserPassword.setTextColor(Color.RED)
-                    checkInputUserPassword.text = "The password should have between 12 and 64 charakters with special charakters like [',;/.?\\{}] and numbers between 0 and 9"
+                    checkInputUserPassword.setTextColor(Color.GREEN)
+                    checkInputUserPassword.text = "Success"
+                }else if(!checkBoolean){
+                    if(user_password.text.toString().isEmpty())
+                    {
+                        checkInputUserPassword.text = ""
+                    }else{
+                        checkInputUserPassword.setTextColor(Color.RED)
+                        checkInputUserPassword.text = "The password should have between 12 and 64 charakters with one special charakter like [@.,';']"
+                    }
+
+
                 }
 
 
-            }
+
+
+
         }
 
 
@@ -123,7 +131,7 @@ class RegistrationActivity : AppCompatActivity() {
                     checkInputUserData.text = ""
                 }else{
                     checkInputUserData.setTextColor(Color.RED)
-                    checkInputUserData.text = "Wrong data format (example213@gmail.com) without special charakters."
+                    checkInputUserData.text = "Wrong data format (example.213@gmail.com)"
                 }
 
 
@@ -184,21 +192,17 @@ class RegistrationActivity : AppCompatActivity() {
     }
     private fun checkUserInputEmail(email:String): Boolean
     {
-       // val pattern: Pattern = Pattern.compile("^(\\w+)([\\.\\-]{1}[\\w+])*@([a-z0-9]+)\\.([a-z]{1,3})\$")
-        val pattern: Pattern = Pattern.compile("^(\\w+)([\\-.'][\\w]+)*@(\\w){1,10}\\.([A-Za-z]){2,6}\$")
+        val pattern: Pattern = Pattern.compile("^(\\w+)([\\-.'][\\w]+)*@(\\w+)([\\.][\\w]+)*\\.([A-Za-z]){2,6}\$")
         val matcher: Matcher = pattern.matcher(email)
 
         return matcher.matches()
     }
     private fun checkUserInputPassword(password:String): Boolean
     {
-        //val pattern: Pattern = Pattern.compile("^(?=.*[a-z])(?=.*[0-9])(?=.*[\\p{Punct}[^\\s]]).{12,64}\$")
-        //val pattern: Pattern = Pattern.compile("^(?=.*[a-z])(?=.*[0-9])(?=.*[\\p{Punct}@\$%&#])(?=\\S+\$).{12,64}\$")
-
         var check: Boolean = false
         if(password.length in 12..64)
         {
-            val pattern: Pattern = Pattern.compile("^(\\w+)([\\p{Punct}][\\w]+)\$")
+            val pattern: Pattern = Pattern.compile("^(\\w+)([\\p{Punct}\\+\\=\\^\\\$][\\w]+)||([\\w]+[\\p{Punct}\\+\\=\\^\\$])\$")
             val matcher: Matcher = pattern.matcher(password)
             if (matcher.matches())
             {

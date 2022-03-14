@@ -16,11 +16,14 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.database.ktx.database
 import kotlinx.android.synthetic.main.activity_login.*
 import org.w3c.dom.Text
+import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
+import kotlin.concurrent.schedule
 
 
 class LoginActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -34,6 +37,15 @@ class LoginActivity : AppCompatActivity() {
         registration.setOnClickListener(registrationListener)
 
 
+    }
+
+
+
+    override fun onBackPressed() {
+
+
+        moveTaskToBack(false)
+        //super.onBackPressed()
     }
 
 
@@ -62,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
                     checkUserEmail.text = ""
                 }else{
                     checkUserEmail.setTextColor(Color.RED)
-                    checkUserEmail.text = "Wrong data format (example213@gmail.com) without special charakters."
+                    checkUserEmail.text = "Wrong data format (example213@gmail.com)"
                 }
 
             }
@@ -82,6 +94,8 @@ class LoginActivity : AppCompatActivity() {
 
         override fun afterTextChanged(s: Editable?) {
             val checkBoolean: Boolean = checkInputUserPassword(user_password.text.toString())
+
+
             if(checkBoolean)
             {
                 checkUserPassword.setTextColor(Color.GREEN)
@@ -146,7 +160,7 @@ class LoginActivity : AppCompatActivity() {
         return matcher.matches()
     }
     private fun checkInputUserEmail(userEmail:String):Boolean{
-        val pattern: Pattern = Pattern.compile("^(\\w+)([\\-.'][\\w]+)*@(\\w){1,10}\\.([A-Za-z]){2,6}\$")
+        val pattern: Pattern = Pattern.compile("^(\\w+)([\\-.'][\\w]+)*@(\\w+)([\\.][\\w]+)*\\.([A-Za-z]){2,6}\$")
         val matcher: Matcher = pattern.matcher(userEmail)
 
         return matcher.matches()
