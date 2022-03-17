@@ -3,9 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/PAM/MathApp/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
+        <entry key="..\:/PAM/MathApp/app/src/main/res/drawable/ic_baseline_remove_red_eye_24_1.xml" value="0.1" />
+        <entry key="..\:/PAM/MathApp/app/src/main/res/drawable/show_password.xml" value="0.24322916666666666" />
+        <entry key="..\:/PAM/MathApp/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/PAM/MathApp/app/src/main/res/layout/activity_main.xml" value="0.35260416666666666" />
+        <entry key="..\:/PAM/MathApp/app/src/main/res/layout/change_password_activity.xml" value="0.22708333333333333" />
+        <entry key="..\:/PAM/MathApp/app/src/main/res/layout/forgot_password_activity.xml" value="0.36666666666666664" />
+        <entry key="..\:/PAM/MathApp/app/src/main/res/layout/options_activity.xml" value="0.22708333333333333" />
+        <entry key="..\:/PAM/MathApp/app/src/main/res/layout/position_in_sience_recycler_view.xml" value="0.28229166666666666" />
         <entry key="..\:/PAM/MathApp/app/src/main/res/layout/registration_activity.xml" value="0.33" />
+        <entry key="..\:/PAM/MathApp/app/src/main/res/layout/science_activity.xml" value="0.2682291666666667" />
+        <entry key="..\:/PAM/MathApp/app/src/main/res/layout/sign_out_activity.xml" value="0.22708333333333333" />
         <entry key="..\:/PAM/MathApp/app/src/main/res/layout/start_activity.xml" value="0.338768115942029" />
       </map>
     </option>

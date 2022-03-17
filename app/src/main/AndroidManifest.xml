@@ -10,6 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
+            android:name=".useroption.signout.SignOutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".useroption.changepassword.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".useroption.OptionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".science.ScienceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".authentication.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".StartActivity"
             android:exported="true">
             <intent-filter>
@@ -23,9 +38,7 @@
             android:exported="false" />
         <activity
             android:name=".authentication.LoginActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true" />

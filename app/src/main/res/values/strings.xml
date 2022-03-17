@@ -10,11 +10,26 @@
     <string name="registration">Rejestracja</string>
     <string name="first_name">Imię</string>
     <string name="recover_password">Odzyskaj hasło</string>
+    <string name="forgot_password">Odzyskaj</string>
 
 
+    <!-- Main Page -->
+    <string name="study">Nauka</string>
+    <string name="options">Opcje</string>
+    <string name="challenge">Wyzwanie</string>
+
+    <!--User Options -->
+    <string name="logout">Wyloguj</string>
+    <string name="change_password">Zmień hasło</string>
+
+    <!-- Change Password -->
+    <string name="change_password1">Zmiana hasła</string>
+    <string name="change_password2">Zmień hasło</string>
+    <string name="new_password">Nowe hasło</string>
 
     <string name="logo">Logo</string>
     <string name="start">Rozpocznij</string>
     <string name="start_description">Tu będzie opis.</string>
+
 
 </resources>

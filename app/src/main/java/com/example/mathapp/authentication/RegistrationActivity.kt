@@ -5,6 +5,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
@@ -13,7 +14,10 @@ import com.example.mathapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.registration_activity.*
+import kotlinx.android.synthetic.main.registration_activity.user_email
+import kotlinx.android.synthetic.main.registration_activity.user_password
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -27,15 +31,102 @@ class RegistrationActivity : AppCompatActivity() {
         user_email.addTextChangedListener(emailWatcher)
         //Nasłuchiwanie wprowadzania hasła przez użytkownika
         user_password.addTextChangedListener(passwordWatcher)
+
+        repeat_user_password.addTextChangedListener(reapeatPassword)
+
         //Nasłuchiwanie wprowadzania imienia przez użytkownika
         user_first_name.addTextChangedListener(firstNameWatcher)
 
         //Nasłuchiwanie wciśnięcia przycisku 'Zarejestruj'
         registration_button.setOnClickListener(registrationListener)
 
+        show_password_registration.setOnClickListener(showPasswordListener)
 
 
 
+    }
+
+    private val reapeatPassword = object: TextWatcher{
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+
+            val checkBoolean: Boolean = checkUserInputPassword(repeat_user_password.text.toString())
+            println("checkBoolean: ${checkBoolean}")
+
+            if (user_password.text.toString().isEmpty())
+            {
+                if(checkBoolean)
+                {
+
+                    checkInputUserRepeatPassword.setTextColor(Color.parseColor("#E4731B"))
+                    checkInputUserRepeatPassword.text = "Success"
+
+                }else if(!checkBoolean){
+                    if (repeat_user_password.text.toString().isEmpty())
+                    {
+                        checkInputUserRepeatPassword.text = ""
+                    }else{
+                        checkInputUserRepeatPassword.setTextColor(Color.RED)
+                        //checkInputUserRepeatPassword.text = "The password should have between 12 and 64 charakters with one special charakter like [@.,';]"
+                        checkInputUserRepeatPassword.text = "Hasło powinno zawierać od 12 do 64 znaków w tym jeden znak specjalny taki jak [@.,';]"
+                    }
+
+
+
+
+                }
+
+
+            }else if(user_password.text.toString().isNotEmpty())
+            {
+                if (user_password.text.toString() == repeat_user_password.text.toString())
+                {
+                    checkInputUserRepeatPassword.setTextColor(Color.parseColor("#E4731B"))
+                    checkInputUserRepeatPassword.text = "Success"
+                    if (!checkUserInputPassword(user_password.text.toString()))
+                    {
+                        checkInputUserRepeatPassword.setTextColor(Color.RED)
+                        checkInputUserRepeatPassword.text = "Hasło powinno zawierać od 12 do 64 znaków w tym jeden znak specjalny taki jak [@.,';]"
+
+
+                    }
+
+
+                }else if(user_password.text.toString() != repeat_user_password.text.toString())
+                {
+                    checkInputUserRepeatPassword.setTextColor(Color.RED)
+                    checkInputUserRepeatPassword.text = "Hasła nie są identyczne."
+                }
+
+            }
+
+
+
+
+        }
+
+
+    }
+
+    private val showPasswordListener = View.OnClickListener {
+        if (user_password.inputType == 129)
+        {
+            user_password.inputType  = InputType.TYPE_CLASS_TEXT
+            repeat_user_password.inputType = InputType.TYPE_CLASS_TEXT
+            show_password_registration.setImageResource(R.drawable.ic_baseline_remove_red_eye_24_1)
+        }else
+        {
+            user_password.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            repeat_user_password.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            show_password_registration.setImageResource(R.drawable.ic_baseline_remove_red_eye_24)
+        }
 
     }
 
@@ -53,10 +144,11 @@ class RegistrationActivity : AppCompatActivity() {
             val checkBoolean: Boolean = checkUserInputPassword(user_password.text.toString())
 
 
-
+            if (repeat_user_password.text.toString().isEmpty())
+            {
                 if(checkBoolean)
                 {
-                    checkInputUserPassword.setTextColor(Color.GREEN)
+                    checkInputUserPassword.setTextColor(Color.parseColor("#E4731B"))
                     checkInputUserPassword.text = "Success"
                 }else if(!checkBoolean){
                     if(user_password.text.toString().isEmpty())
@@ -64,11 +156,37 @@ class RegistrationActivity : AppCompatActivity() {
                         checkInputUserPassword.text = ""
                     }else{
                         checkInputUserPassword.setTextColor(Color.RED)
-                        checkInputUserPassword.text = "The password should have between 12 and 64 charakters with one special charakter like [@.,';']"
+                        checkInputUserPassword.text = "Hasło powinno zawierać od 12 do 64 znaków w tym jeden znak specjalny taki jak [@.,';]"
                     }
 
 
                 }
+
+
+            }else if(repeat_user_password.text.toString().isNotEmpty())
+            {
+                if (repeat_user_password.text.toString() == user_password.text.toString())
+                {
+
+                    checkInputUserPassword.setTextColor(Color.parseColor("#E4731B"))
+                    checkInputUserPassword.text = "Success"
+                    if (!checkUserInputPassword(repeat_user_password.text.toString()))
+                    {
+                        checkInputUserPassword.setTextColor(Color.RED)
+                        checkInputUserPassword.text = "Hasło powinno zawierać od 12 do 64 znaków w tym jeden znak specjalny taki jak [@.,';]"
+
+
+                    }
+
+
+
+                }else if(repeat_user_password.text.toString() != user_password.text.toString())
+                {
+                    checkInputUserPassword.setTextColor(Color.RED)
+                    checkInputUserPassword.text = "Hasła nie są identyczne."
+                }
+
+            }
 
 
 
@@ -92,7 +210,7 @@ class RegistrationActivity : AppCompatActivity() {
             val checkBoolean: Boolean = checkUserInputFirtName(user_first_name.text.toString())
                 if (checkBoolean)
                 {
-                    checkInputUserFirstName.setTextColor(Color.GREEN)
+                    checkInputUserFirstName.setTextColor(Color.parseColor("#E4731B"))
                     checkInputUserFirstName.text = "Success"
                 }else if(!checkBoolean){
                     if(user_first_name.text.toString().isEmpty())
@@ -123,7 +241,7 @@ class RegistrationActivity : AppCompatActivity() {
 
             if(checkBoolean)
             {
-                checkInputUserData.setTextColor(Color.GREEN)
+                checkInputUserData.setTextColor(Color.parseColor("#E4731B"))
                 checkInputUserData.text = "Success"
             }else if(!checkBoolean){
                 if (user_email.text.toString().isEmpty())
@@ -166,13 +284,21 @@ class RegistrationActivity : AppCompatActivity() {
 
 
                     }else{
-                        Toast.makeText(applicationContext,
-                            task.exception!!.message.toString(),
-                            Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(applicationContext,
+//                            task.exception!!.message.toString(),
+//                            Toast.LENGTH_SHORT).show()
+                        if (task.exception!!.message == "The email address is already in use by another account.")
+                        {
+                            Toast.makeText(applicationContext, "Ten email jest już używany.", Toast.LENGTH_LONG).show()
+                        }
+
                     }
 
                 }
 
+
+        }else if(user_email.text.toString().isEmpty() || user_password.text.toString().isEmpty() || user_first_name.text.toString().isEmpty()) {
+            Toast.makeText(applicationContext, "Należy wypełnić wszystkie pola", Toast.LENGTH_LONG).show()
 
         }else{
             Toast.makeText(applicationContext, "Błędny format wprowadzonych danych", Toast.LENGTH_LONG).show()

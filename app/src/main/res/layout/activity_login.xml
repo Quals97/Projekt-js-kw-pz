@@ -5,8 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FF3C3C3A"
+    android:background="#F1EEEE"
+
     tools:context=".authentication.LoginActivity">
+
+
+    <ImageView
+        android:id="@+id/image_logo_login_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        />
 
     <TextView
         android:layout_width="match_parent"
@@ -15,76 +24,105 @@
         android:textAlignment="center"
         android:textSize="30dp"
         android:layout_marginBottom="50dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="#E4731B"
         />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="#FF3C3C3A"
         android:text="@string/email"/>
 
     <EditText
         android:id="@+id/user_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:maxLines="1"
-        android:singleLine="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textColorHint="#878783"
+        android:textColor="@color/black"
+        android:backgroundTint="#FF3C3C3A"
         android:hint="@string/user_email"
-        />
+        android:maxLines="1"
+        android:singleLine="true" />
     <TextView
         android:id="@+id/checkUserEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="#FF3C3C3A"
         android:text="@string/user_password"
     />
 
-    <EditText
-        android:id="@+id/user_password"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
-        android:hint="@string/user_password"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:inputType="text"
-        />
+        >
+
+        <EditText
+            android:id="@+id/user_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="#FF3C3C3A"
+            android:hint="@string/user_password"
+            android:inputType="text"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="#878783" />
+
+        <ImageView
+            android:id="@+id/show_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_baseline_remove_red_eye_24" />
+
+
+    </RelativeLayout>
+
+
+
     <TextView
         android:id="@+id/checkUserPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+
         />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginBottom="10dp"
         android:orientation="horizontal"
     >
         <TextView
 
-            android:id="@+id/recover_password"
+            android:id="@+id/forgot_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
+            android:textColor="#FF3C3C3A"
             android:textSize="15dp"
             android:text="@string/recover_password"
             />
@@ -93,7 +131,8 @@
             android:layout_weight="1"
             android:gravity="right"
             android:textSize="15dp"
-            android:layout_marginRight="5dp"
+            android:textColor="#FF3C3C3A"
+            android:layout_marginRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/registration"
@@ -106,9 +145,11 @@
         android:id="@+id/login_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:text="@string/user_login_button"
+        android:textColor="#F1EEEE"
+        android:background="#E4731B"
 
         />
 
