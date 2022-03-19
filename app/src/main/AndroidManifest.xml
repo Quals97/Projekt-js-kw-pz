@@ -9,9 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity
-            android:name=".useroption.signout.SignOutActivity"
-            android:exported="false" />
+
         <activity
             android:name=".useroption.changepassword.ChangePasswordActivity"
             android:exported="false" />

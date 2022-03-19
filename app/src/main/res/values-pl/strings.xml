@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MathApp</string>
+    <string name="user_password" translatable="false">Hasło</string>
+    <string name="repeat_password">Powtórz hasło</string>
+    <string name="registration">Utwórz konto</string>
+    <string name="first_name">Imię</string>
+    <string name="recover_password">Odzyskaj hasło</string>
+    <string name="forgot_password">Odzyskaj</string>
+    <string name="study">Nauka</string>
+    <string name="options">Opcje</string>
+    <string name="challenge">Wyzwanie</string>
+    <string name="logout" translatable="false">Wyloguj</string>
+    <string name="change_password">Zmień hasło</string>
+    <string name="change_password1">Zmiana hasła</string>
+    <string name="change_password2">Zmień hasło</string>
+    <string name="new_password">Nowe hasło</string>
+    <string name="start">Rozpocznij</string>
+    <string name="login" translatable="false">Logowanie</string>
+    <string name="user_login_button" translatable="false">Zaloguj</string>
+</resources>

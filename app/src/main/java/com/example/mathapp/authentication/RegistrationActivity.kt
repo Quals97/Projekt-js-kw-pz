@@ -7,13 +7,19 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.mathapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.registration_activity.*
 import kotlinx.android.synthetic.main.registration_activity.user_email
@@ -42,9 +48,25 @@ class RegistrationActivity : AppCompatActivity() {
 
         show_password_registration.setOnClickListener(showPasswordListener)
 
+        var query = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
+
+        query.child("logo").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var link: String? = snapshot.getValue(String::class.java)
+                Picasso.get().load(link).into(image_logo_registration_activity)
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
 
 
     }
+
+
+
+
 
     private val reapeatPassword = object: TextWatcher{
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -58,75 +80,32 @@ class RegistrationActivity : AppCompatActivity() {
         override fun afterTextChanged(s: Editable?) {
 
             val checkBoolean: Boolean = checkUserInputPassword(repeat_user_password.text.toString())
-            println("checkBoolean: ${checkBoolean}")
-
-            if (user_password.text.toString().isEmpty())
+            if(checkBoolean)
             {
-                if(checkBoolean)
-                {
 
-                    checkInputUserRepeatPassword.setTextColor(Color.parseColor("#E4731B"))
-                    checkInputUserRepeatPassword.text = "Success"
-
-                }else if(!checkBoolean){
-                    if (repeat_user_password.text.toString().isEmpty())
-                    {
-                        checkInputUserRepeatPassword.text = ""
-                    }else{
-                        checkInputUserRepeatPassword.setTextColor(Color.RED)
-                        //checkInputUserRepeatPassword.text = "The password should have between 12 and 64 charakters with one special charakter like [@.,';]"
-                        checkInputUserRepeatPassword.text = "Hasło powinno zawierać od 12 do 64 znaków w tym jeden znak specjalny taki jak [@.,';]"
-                    }
-
-
-
-
-                }
-
-
-            }else if(user_password.text.toString().isNotEmpty())
-            {
-                if (user_password.text.toString() == repeat_user_password.text.toString())
+                if(repeat_user_password.text.toString() == user_password.text.toString())
                 {
                     checkInputUserRepeatPassword.setTextColor(Color.parseColor("#E4731B"))
                     checkInputUserRepeatPassword.text = "Success"
-                    if (!checkUserInputPassword(user_password.text.toString()))
-                    {
-                        checkInputUserRepeatPassword.setTextColor(Color.RED)
-                        checkInputUserRepeatPassword.text = "Hasło powinno zawierać od 12 do 64 znaków w tym jeden znak specjalny taki jak [@.,';]"
-
-
-                    }
-
-
-                }else if(user_password.text.toString() != repeat_user_password.text.toString())
-                {
+                }else{
                     checkInputUserRepeatPassword.setTextColor(Color.RED)
                     checkInputUserRepeatPassword.text = "Hasła nie są identyczne."
                 }
 
+            }else if(!checkBoolean){
+                if (repeat_user_password.text.toString().isEmpty())
+                {
+                    checkInputUserRepeatPassword.text = ""
+                }else{
+                    checkInputUserRepeatPassword.setTextColor(Color.RED)
+                    //checkInputUserRepeatPassword.text = "The password should have between 12 and 64 charakters with one special charakter like [@.,';]"
+                    checkInputUserRepeatPassword.text = "Hasło powinno zawierać od 12 do 64 znaków w tym jeden znak specjalny taki jak [@.,';]"
+                }
+
             }
 
-
-
-
         }
 
-
-    }
-
-    private val showPasswordListener = View.OnClickListener {
-        if (user_password.inputType == 129)
-        {
-            user_password.inputType  = InputType.TYPE_CLASS_TEXT
-            repeat_user_password.inputType = InputType.TYPE_CLASS_TEXT
-            show_password_registration.setImageResource(R.drawable.ic_baseline_remove_red_eye_24_1)
-        }else
-        {
-            user_password.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-            repeat_user_password.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-            show_password_registration.setImageResource(R.drawable.ic_baseline_remove_red_eye_24)
-        }
 
     }
 
@@ -143,14 +122,13 @@ class RegistrationActivity : AppCompatActivity() {
 
             val checkBoolean: Boolean = checkUserInputPassword(user_password.text.toString())
 
-
-            if (repeat_user_password.text.toString().isEmpty())
-            {
-                if(checkBoolean)
+            if(checkBoolean)
                 {
                     checkInputUserPassword.setTextColor(Color.parseColor("#E4731B"))
                     checkInputUserPassword.text = "Success"
+                    repeat_user_password.isEnabled = true
                 }else if(!checkBoolean){
+                    repeat_user_password.isEnabled = false
                     if(user_password.text.toString().isEmpty())
                     {
                         checkInputUserPassword.text = ""
@@ -159,37 +137,7 @@ class RegistrationActivity : AppCompatActivity() {
                         checkInputUserPassword.text = "Hasło powinno zawierać od 12 do 64 znaków w tym jeden znak specjalny taki jak [@.,';]"
                     }
 
-
                 }
-
-
-            }else if(repeat_user_password.text.toString().isNotEmpty())
-            {
-                if (repeat_user_password.text.toString() == user_password.text.toString())
-                {
-
-                    checkInputUserPassword.setTextColor(Color.parseColor("#E4731B"))
-                    checkInputUserPassword.text = "Success"
-                    if (!checkUserInputPassword(repeat_user_password.text.toString()))
-                    {
-                        checkInputUserPassword.setTextColor(Color.RED)
-                        checkInputUserPassword.text = "Hasło powinno zawierać od 12 do 64 znaków w tym jeden znak specjalny taki jak [@.,';]"
-
-
-                    }
-
-
-
-                }else if(repeat_user_password.text.toString() != user_password.text.toString())
-                {
-                    checkInputUserPassword.setTextColor(Color.RED)
-                    checkInputUserPassword.text = "Hasła nie są identyczne."
-                }
-
-            }
-
-
-
 
 
         }
@@ -257,6 +205,23 @@ class RegistrationActivity : AppCompatActivity() {
         }
 
     }
+    //Zmiana hasła na tekst jawny/ tekst ukryty
+    private val showPasswordListener = View.OnClickListener {
+
+        if (user_password.transformationMethod == PasswordTransformationMethod.getInstance())
+        {
+            user_password.transformationMethod = HideReturnsTransformationMethod.getInstance()
+            repeat_user_password.transformationMethod = HideReturnsTransformationMethod.getInstance()
+
+            show_password_registration.setImageResource(R.drawable.ic_baseline_remove_red_eye_24_1)
+        }else
+        {
+            user_password.transformationMethod = PasswordTransformationMethod.getInstance()
+            repeat_user_password.transformationMethod = PasswordTransformationMethod.getInstance()
+            show_password_registration.setImageResource(R.drawable.ic_baseline_remove_red_eye_24)
+        }
+
+    }
 
     private val registrationListener: View.OnClickListener = View.OnClickListener {
 
@@ -264,40 +229,40 @@ class RegistrationActivity : AppCompatActivity() {
         val password: String = user_password.text.toString()
 
 
-        if (checkUserInputEmail(user_email.text.toString()) && checkUserInputPassword(user_password.text.toString()) && checkUserInputFirtName(user_first_name.text.toString())
+        if (checkUserInputEmail(user_email.text.toString()) && checkUserInputPassword(user_password.text.toString()) && checkUserInputPassword(repeat_user_password.text.toString())  && checkUserInputFirtName(user_first_name.text.toString())
+                    && checkInputUserRepeatPassword.text.toString() != "Hasła nie są identyczne."
         ){
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password)
-                .addOnCompleteListener(){
-                        task ->
-                    if (task.isSuccessful)
-                    {
-
-
-                        //val firebaseUser: FirebaseUser = task.result!!.user!!
-
-
-
-                        Toast.makeText(applicationContext, "Pomyślnie zarejestrowano.", Toast.LENGTH_LONG).show()
-                        val intent = Intent(applicationContext, LoginActivity::class.java)
-                        startActivity(intent)
-                        finish()
-
-
-                    }else{
-//                        Toast.makeText(applicationContext,
-//                            task.exception!!.message.toString(),
-//                            Toast.LENGTH_SHORT).show()
-                        if (task.exception!!.message == "The email address is already in use by another account.")
+            if (user_password.text.toString() == repeat_user_password.text.toString())
+            {
+                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password)
+                    .addOnCompleteListener(){
+                            task ->
+                        if (task.isSuccessful)
                         {
-                            Toast.makeText(applicationContext, "Ten email jest już używany.", Toast.LENGTH_LONG).show()
+
+                            Toast.makeText(applicationContext, "Pomyślnie zarejestrowano.", Toast.LENGTH_LONG).show()
+                            val intent = Intent(applicationContext, LoginActivity::class.java)
+                            startActivity(intent)
+                            finish()
+
+
+                        }else{
+                            if (task.exception!!.message == "The email address is already in use by another account.")
+                            {
+                                Toast.makeText(applicationContext, "Ten email jest już używany.", Toast.LENGTH_LONG).show()
+                            }
+
                         }
 
                     }
 
-                }
+            }else{
+                Toast.makeText(applicationContext,"Hasła nie są identyczne",Toast.LENGTH_SHORT).show()
+            }
 
 
-        }else if(user_email.text.toString().isEmpty() || user_password.text.toString().isEmpty() || user_first_name.text.toString().isEmpty()) {
+
+        }else if(user_email.text.toString().isEmpty() || user_password.text.toString().isEmpty() || user_first_name.text.toString().isEmpty() || repeat_user_password.text.toString().isEmpty()) {
             Toast.makeText(applicationContext, "Należy wypełnić wszystkie pola", Toast.LENGTH_LONG).show()
 
         }else{
@@ -338,11 +303,6 @@ class RegistrationActivity : AppCompatActivity() {
             check = false
         }
 
-        //val pattern: Pattern = Pattern.compile("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#\$%^&+=])(?=\\S+\$).{8,}\$")
-
-
-
-        //return matcher.matches()
         return check
     }
 

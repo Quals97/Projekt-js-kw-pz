@@ -1,6 +1,8 @@
 package com.example.mathapp.science
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +19,21 @@ class ScienceAdapter(val context: Context): RecyclerView.Adapter<MySienceViewHol
 
     override fun onBindViewHolder(holder: MySienceViewHolder, position: Int) {
         val moduleTitle = holder.view.module_title
+        val layout = holder.view.position_in_sience_recycler_view
         moduleTitle.text = "Module ${position}"
+
+        layout.setBackgroundResource(R.drawable.roundup)
+
+        var drawable: GradientDrawable = layout.background as GradientDrawable
+
+        if (position % 2 == 1)
+        {      drawable.setColor(Color.parseColor("#E4731B"))
+          //  layout.setBackgroundColor(Color.parseColor("#E4731B"))
+        }
+        if(position % 2 ==0)
+        {   drawable.setColor(Color.parseColor("#ffbd59"))
+           // layout.setBackgroundColor(Color.parseColor("#ffbd59"))
+        }
     }
 
     override fun getItemCount(): Int {

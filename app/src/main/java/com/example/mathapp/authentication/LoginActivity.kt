@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.widget.Toast
 import androidx.exifinterface.media.ExifInterface
@@ -43,14 +45,14 @@ class LoginActivity : AppCompatActivity() {
 
 
         user_password.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+
         var query = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
+
         query.child("logo").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 var link: String? = snapshot.getValue(String::class.java)
-                println("LINK: ${link}")
                 Picasso.get().load(link).into(image_logo_login_activity)
             }
-
             override fun onCancelled(error: DatabaseError) {
 
             }
@@ -79,19 +81,6 @@ class LoginActivity : AppCompatActivity() {
         //super.onBackPressed()
     }
 
-    private val showPasswordListener = View.OnClickListener {
-
-        if (user_password.inputType == 129)
-        {
-            user_password.inputType  = InputType.TYPE_CLASS_TEXT
-            show_password.setImageResource(R.drawable.ic_baseline_remove_red_eye_24_1)
-        }else
-        {
-            user_password.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-            show_password.setImageResource(R.drawable.ic_baseline_remove_red_eye_24)
-        }
-
-    }
 
     private val emailWatcher: TextWatcher = object : TextWatcher{
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -148,6 +137,24 @@ class LoginActivity : AppCompatActivity() {
                 checkUserPassword.setTextColor(Color.RED)
                 checkUserPassword.text = ""
             }
+        }
+
+
+    }
+
+    private val showPasswordListener = View.OnClickListener {
+
+        if (user_password.transformationMethod == PasswordTransformationMethod.getInstance())
+        {
+            user_password.transformationMethod = HideReturnsTransformationMethod.getInstance()
+
+
+            show_password.setImageResource(R.drawable.ic_baseline_remove_red_eye_24_1)
+        }else
+        {
+            user_password.transformationMethod = PasswordTransformationMethod.getInstance()
+
+            show_password.setImageResource(R.drawable.ic_baseline_remove_red_eye_24)
         }
 
 
@@ -279,6 +286,7 @@ class LoginActivity : AppCompatActivity() {
 
         return matcher.matches()
     }
+
     private fun checkInputUserEmail(userEmail:String):Boolean{
         val pattern: Pattern = Pattern.compile("^(\\w+)([\\-.'][\\w]+)*@(\\w+)([\\.][\\w]+)*\\.([A-Za-z]){2,6}\$")
         val matcher: Matcher = pattern.matcher(userEmail)

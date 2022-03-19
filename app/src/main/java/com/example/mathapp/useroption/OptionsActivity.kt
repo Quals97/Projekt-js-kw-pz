@@ -24,6 +24,7 @@ class OptionsActivity : AppCompatActivity() {
         goToChangePasswordActivity()
 
     }
+
     private val logOutListener = View.OnClickListener {
         logOut()
 

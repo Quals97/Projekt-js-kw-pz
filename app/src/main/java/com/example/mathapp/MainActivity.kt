@@ -23,24 +23,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun goToScienceActivity(){
-        val intent = Intent(applicationContext,ScienceActivity::class.java)
-        startActivity(intent)
-
-    }
-    private fun goToOptionsActivity(){
-        val intent = Intent(applicationContext,OptionsActivity::class.java)
-        startActivity(intent)
-
-    }
-    private val scienceListener: View.OnClickListener = View.OnClickListener {
-        goToScienceActivity()
-    }
-    private val optionsListener: View.OnClickListener = View.OnClickListener {
-        goToOptionsActivity()
-    }
-
-
 
     override fun onBackPressed() {
         if (doubleBackClick)
@@ -58,6 +40,26 @@ class MainActivity : AppCompatActivity() {
             doubleBackClick = false
         }
 
+
+    }
+
+    private val scienceListener: View.OnClickListener = View.OnClickListener {
+        goToScienceActivity()
+    }
+
+    private val optionsListener: View.OnClickListener = View.OnClickListener {
+        goToOptionsActivity()
+    }
+
+    private fun goToScienceActivity(){
+        val intent = Intent(applicationContext,ScienceActivity::class.java)
+        startActivity(intent)
+
+    }
+
+    private fun goToOptionsActivity(){
+        val intent = Intent(applicationContext,OptionsActivity::class.java)
+        startActivity(intent)
 
     }
 
