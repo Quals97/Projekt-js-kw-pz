@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mathapp.FakeModulesList
 import com.example.mathapp.R
 import kotlinx.android.synthetic.main.position_in_sience_recycler_view.view.*
 
@@ -20,7 +21,8 @@ class ScienceAdapter(val context: Context): RecyclerView.Adapter<MySienceViewHol
     override fun onBindViewHolder(holder: MySienceViewHolder, position: Int) {
         val moduleTitle = holder.view.module_title
         val layout = holder.view.position_in_sience_recycler_view
-        moduleTitle.text = "Module ${position}"
+        //moduleTitle.text = "Module ${position}"
+        moduleTitle.text = FakeModulesList.modulesList[position]
 
         layout.setBackgroundResource(R.drawable.roundup)
 
@@ -37,7 +39,7 @@ class ScienceAdapter(val context: Context): RecyclerView.Adapter<MySienceViewHol
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return FakeModulesList.modulesList.size
     }
 
 }
