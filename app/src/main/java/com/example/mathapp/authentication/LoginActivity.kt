@@ -98,7 +98,7 @@ class LoginActivity : AppCompatActivity() {
             if (checkBoolean)
             {
                 checkUserEmail.setTextColor(Color.parseColor("#E4731B"))
-                checkUserEmail.text = "Success"
+                checkUserEmail.text = "${applicationContext.getString(R.string.correct_input)}"
             }else if(!checkBoolean)
             {
                 if (user_email.text.toString().isEmpty())
@@ -106,7 +106,7 @@ class LoginActivity : AppCompatActivity() {
                     checkUserEmail.text = ""
                 }else{
                     checkUserEmail.setTextColor(Color.RED)
-                    checkUserEmail.text = "Wrong data format (example213@gmail.com)"
+                    checkUserEmail.text = "${applicationContext.getString(R.string.wrong_data_format)}"
                 }
 
             }
@@ -131,7 +131,7 @@ class LoginActivity : AppCompatActivity() {
             if(checkBoolean)
             {
                 checkUserPassword.setTextColor(Color.GREEN)
-                checkUserPassword.text = "Success"
+                checkUserPassword.text = "${applicationContext.getString(R.string.correct_input)}"
             }else if(!checkBoolean)
             {
                 checkUserPassword.setTextColor(Color.RED)
@@ -191,7 +191,7 @@ class LoginActivity : AppCompatActivity() {
                         myRef.setValue("Hello, World!")
 
                         Toast.makeText(applicationContext,
-                            "Pomyślnie zalogowano",
+                            applicationContext.getString(R.string.success_login_in),
                             Toast.LENGTH_SHORT).show()
 
                         val intent = Intent(applicationContext, MainActivity::class.java)
@@ -206,7 +206,7 @@ class LoginActivity : AppCompatActivity() {
                         if (task.exception!!.message == "The password is invalid or the user does not have a password." ||
                             task.exception!!.message == "There is no user record corresponding to this identifier. The user may have been deleted.")
                         {
-                            Toast.makeText(applicationContext, "Niepoprawny login lub hasło", Toast.LENGTH_LONG).show()
+                            Toast.makeText(applicationContext, "${applicationContext.getString(R.string.invalid_login_password)}", Toast.LENGTH_LONG).show()
                         }
 
 //                        Toast.makeText(applicationContext,
@@ -223,11 +223,12 @@ class LoginActivity : AppCompatActivity() {
 
 
         }else if(user_email.text.toString().isNotEmpty() && user_password.text.toString().isNotEmpty()){
-            Toast.makeText(applicationContext, "Błędny format danych", Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, applicationContext.getString(R.string.wrong_data), Toast.LENGTH_LONG).show()
 
         }else if(user_email.text.toString().isEmpty() || user_password.text.toString().isEmpty())
         {
-            Toast.makeText(applicationContext, "Pola nie mogą być puste", Toast.LENGTH_LONG).show()
+            //Toast.makeText(applicationContext, "Pola nie mogą być puste", Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, "${applicationContext.getString(R.string.empty_fields)}", Toast.LENGTH_LONG).show()
         }
 
 

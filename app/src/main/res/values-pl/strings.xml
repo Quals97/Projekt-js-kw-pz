@@ -18,4 +18,17 @@
     <string name="start">Rozpocznij</string>
     <string name="login" translatable="false">Logowanie</string>
     <string name="user_login_button" translatable="false">Zaloguj</string>
+    <string name="empty_fields" translatable="false">Pola nie mogą być puste</string>
+    <string name="wrong_data">Niepoprawny format danych</string>
+    <string name="invalid_login_password">Niepoprawny login lub hasło</string>
+    <string name="success_login_in">Pomyślnie zalogowano</string>
+    <string name="correct_input">Prawidłowo</string>
+    <string name="wrong_data_format">Nieprawidłowy format danych (example213@gmail.com)</string>
+    <string name="wrong_data_format1">Błędny format wprowadzonych danych</string>
+    <string name="fields_must_be_completed">Należy wypełnić wszystkie pola</string>
+    <string name="match_passwords">Hasła nie są identyczne</string>
+    <string name="email_already_used">Ten e-mail jest już używany</string>
+    <string name="successfully_registered">Pomyślnie zarejestrowano</string>
+    <string name="name_validation">" Nazwa powinna zaczynać się od wielkich liter bez specjalnych znaków"</string>
+    <string name="password_validation">Hasło powinno zawierać od 12 do 64 znaków w tym jeden znak specjalny</string>
 </resources>

@@ -86,10 +86,10 @@ class RegistrationActivity : AppCompatActivity() {
                 if(repeat_user_password.text.toString() == user_password.text.toString())
                 {
                     checkInputUserRepeatPassword.setTextColor(Color.parseColor("#E4731B"))
-                    checkInputUserRepeatPassword.text = "Success"
+                    checkInputUserRepeatPassword.text = "${applicationContext.getString(R.string.correct_input)}"
                 }else{
                     checkInputUserRepeatPassword.setTextColor(Color.RED)
-                    checkInputUserRepeatPassword.text = "Hasła nie są identyczne."
+                    checkInputUserRepeatPassword.text = "${applicationContext.getString(R.string.match_passwords)}"
                 }
 
             }else if(!checkBoolean){
@@ -99,7 +99,7 @@ class RegistrationActivity : AppCompatActivity() {
                 }else{
                     checkInputUserRepeatPassword.setTextColor(Color.RED)
                     //checkInputUserRepeatPassword.text = "The password should have between 12 and 64 charakters with one special charakter like [@.,';]"
-                    checkInputUserRepeatPassword.text = "Hasło powinno zawierać od 12 do 64 znaków w tym jeden znak specjalny taki jak [@.,';]"
+                    checkInputUserRepeatPassword.text = "${applicationContext.getString(R.string.password_validation)}"
                 }
 
             }
@@ -125,7 +125,7 @@ class RegistrationActivity : AppCompatActivity() {
             if(checkBoolean)
                 {
                     checkInputUserPassword.setTextColor(Color.parseColor("#E4731B"))
-                    checkInputUserPassword.text = "Success"
+                    checkInputUserPassword.text = "${applicationContext.getString(R.string.correct_input)}"
                     repeat_user_password.isEnabled = true
                 }else if(!checkBoolean){
                     repeat_user_password.isEnabled = false
@@ -134,7 +134,7 @@ class RegistrationActivity : AppCompatActivity() {
                         checkInputUserPassword.text = ""
                     }else{
                         checkInputUserPassword.setTextColor(Color.RED)
-                        checkInputUserPassword.text = "Hasło powinno zawierać od 12 do 64 znaków w tym jeden znak specjalny taki jak [@.,';]"
+                        checkInputUserPassword.text = "${applicationContext.getString(R.string.password_validation)}"
                     }
 
                 }
@@ -159,14 +159,14 @@ class RegistrationActivity : AppCompatActivity() {
                 if (checkBoolean)
                 {
                     checkInputUserFirstName.setTextColor(Color.parseColor("#E4731B"))
-                    checkInputUserFirstName.text = "Success"
+                    checkInputUserFirstName.text = "${applicationContext.getString(R.string.correct_input)}"
                 }else if(!checkBoolean){
                     if(user_first_name.text.toString().isEmpty())
                     {
                         checkInputUserFirstName.text = ""
                     }else{
                         checkInputUserFirstName.setTextColor(Color.RED)
-                        checkInputUserFirstName.text = "The name should start with Upper-case without special charakters"
+                        checkInputUserFirstName.text = "${applicationContext.getString(R.string.name_validation)}"
                     }
 
                 }
@@ -190,14 +190,14 @@ class RegistrationActivity : AppCompatActivity() {
             if(checkBoolean)
             {
                 checkInputUserData.setTextColor(Color.parseColor("#E4731B"))
-                checkInputUserData.text = "Success"
+                checkInputUserData.text = "${applicationContext.getString(R.string.correct_input)}"
             }else if(!checkBoolean){
                 if (user_email.text.toString().isEmpty())
                 {
                     checkInputUserData.text = ""
                 }else{
                     checkInputUserData.setTextColor(Color.RED)
-                    checkInputUserData.text = "Wrong data format (example.213@gmail.com)"
+                    checkInputUserData.text = "${applicationContext.getString(R.string.wrong_data_format)}"
                 }
 
 
@@ -230,7 +230,7 @@ class RegistrationActivity : AppCompatActivity() {
 
 
         if (checkUserInputEmail(user_email.text.toString()) && checkUserInputPassword(user_password.text.toString()) && checkUserInputPassword(repeat_user_password.text.toString())  && checkUserInputFirtName(user_first_name.text.toString())
-                    && checkInputUserRepeatPassword.text.toString() != "Hasła nie są identyczne."
+                    && checkInputUserRepeatPassword.text.toString() != "${applicationContext.getString(R.string.match_passwords)}"
         ){
             if (user_password.text.toString() == repeat_user_password.text.toString())
             {
@@ -240,7 +240,7 @@ class RegistrationActivity : AppCompatActivity() {
                         if (task.isSuccessful)
                         {
 
-                            Toast.makeText(applicationContext, "Pomyślnie zarejestrowano.", Toast.LENGTH_LONG).show()
+                            Toast.makeText(applicationContext, "${applicationContext.getString(R.string.successfully_registered)}", Toast.LENGTH_LONG).show()
                             val intent = Intent(applicationContext, LoginActivity::class.java)
                             startActivity(intent)
                             finish()
@@ -249,7 +249,7 @@ class RegistrationActivity : AppCompatActivity() {
                         }else{
                             if (task.exception!!.message == "The email address is already in use by another account.")
                             {
-                                Toast.makeText(applicationContext, "Ten email jest już używany.", Toast.LENGTH_LONG).show()
+                                Toast.makeText(applicationContext, "${applicationContext.getString(R.string.email_already_used)}", Toast.LENGTH_LONG).show()
                             }
 
                         }
@@ -257,16 +257,16 @@ class RegistrationActivity : AppCompatActivity() {
                     }
 
             }else{
-                Toast.makeText(applicationContext,"Hasła nie są identyczne",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext,"${applicationContext.getString(R.string.match_passwords)}",Toast.LENGTH_SHORT).show()
             }
 
 
 
         }else if(user_email.text.toString().isEmpty() || user_password.text.toString().isEmpty() || user_first_name.text.toString().isEmpty() || repeat_user_password.text.toString().isEmpty()) {
-            Toast.makeText(applicationContext, "Należy wypełnić wszystkie pola", Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, "${applicationContext.getString(R.string.fields_must_be_completed)}", Toast.LENGTH_LONG).show()
 
         }else{
-            Toast.makeText(applicationContext, "Błędny format wprowadzonych danych", Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, "${applicationContext.getString(R.string.wrong_data_format1)}", Toast.LENGTH_LONG).show()
         }
 
 

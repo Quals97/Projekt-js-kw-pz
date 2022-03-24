@@ -12,7 +12,19 @@
     <string name="first_name">Name</string>
     <string name="recover_password">Login</string>
     <string name="forgot_password">Recovery</string>
-
+    <string name="empty_fields">Fields cannot be empty</string>
+    <string name="wrong_data">Wrong data format</string>
+    <string name="invalid_login_password">Invalid login or password</string>
+    <string name="success_login_in">Successfully logged in</string>
+    <string name="correct_input">Correctly</string>
+    <string name="wrong_data_format">Wrong data format (example213@gmail.com)</string>
+    <string name="wrong_data_format1">Incorrect format of the entered data</string>
+    <string name="fields_must_be_completed">All fields must be completed</string>
+    <string name="match_passwords">The passwords do not match</string>
+    <string name="email_already_used">This e-mail is already in use</string>
+    <string name="successfully_registered">Successfully registered</string>
+    <string name="name_validation">The name should start with Upper-case without special charakters</string>
+    <string name="password_validation">The password should contain from 12 to 64 characters, including one special character</string>
 
     <!-- Main Page -->
     <string name="study">Study</string>
