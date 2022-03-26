@@ -172,10 +172,47 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private val loginListener = View.OnClickListener {
-//        val email = "kamilwin21@gmail.com"
-//        val password = "12345678"
-        val email: String = user_email.text.toString()
-        val password: String = user_password.text.toString()
+        val email = "kamilwin21@gmail.com"
+        val password = "123456789abc;"
+       // val email: String = user_email.text.toString()
+       // val password: String = user_password.text.toString()
+//====================================================
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
+            .addOnCompleteListener(){ task ->
+
+                if(task.isSuccessful){
+
+                    val database = Firebase.database
+                    val myRef = database.getReference("message")
+
+                    myRef.setValue("Hello, World!")
+
+                    Toast.makeText(applicationContext,
+                        applicationContext.getString(R.string.success_login_in),
+                        Toast.LENGTH_SHORT).show()
+
+                    val intent = Intent(applicationContext, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    intent.putExtra("user_id", FirebaseAuth.getInstance().currentUser!!.uid)
+                    intent.putExtra("email_id", email)
+                    startActivity(intent)
+                    finish()
+
+
+                }else{
+                    if (task.exception!!.message == "The password is invalid or the user does not have a password." ||
+                        task.exception!!.message == "There is no user record corresponding to this identifier. The user may have been deleted.")
+                    {
+                        Toast.makeText(applicationContext, "${applicationContext.getString(R.string.invalid_login_password)}", Toast.LENGTH_LONG).show()
+                    }
+
+
+
+
+                }
+
+            }
+//============================================================================
 
 
         if(user_email.text.toString().isNotEmpty() && user_password.text.toString().isNotEmpty() && checkInputUserEmail(user_email.text.toString()) && checkInputUserPassword(user_password.text.toString()))
@@ -209,12 +246,7 @@ class LoginActivity : AppCompatActivity() {
                             Toast.makeText(applicationContext, "${applicationContext.getString(R.string.invalid_login_password)}", Toast.LENGTH_LONG).show()
                         }
 
-//                        Toast.makeText(applicationContext,
-//                            task.exception!!.toString(),
-//                            Toast.LENGTH_SHORT).show()
-                        println("FBERROR: ${task.exception!!}")
-                        println("FBERROR1: ${task.exception!!.localizedMessage}")
-                        println("FBERROR1: ${taskId}")
+
 
 
                     }
@@ -230,51 +262,6 @@ class LoginActivity : AppCompatActivity() {
             //Toast.makeText(applicationContext, "Pola nie mogą być puste", Toast.LENGTH_LONG).show()
             Toast.makeText(applicationContext, "${applicationContext.getString(R.string.empty_fields)}", Toast.LENGTH_LONG).show()
         }
-
-
-//            FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
-//                .addOnCompleteListener(){ task ->
-//
-//
-//
-//                    if(task.isSuccessful && user_email.text.toString().isNotEmpty() && user_password.text.toString().isNotEmpty() && checkInputUserEmail(user_email.text.toString()) && checkInputUserPassword(user_password.text.toString())){
-//
-//
-//
-//
-//                        val database = Firebase.database
-//                        val myRef = database.getReference("message")
-//
-//                        myRef.setValue("Hello, World!")
-//
-//                        Toast.makeText(applicationContext,
-//                            "Pomyślnie zalogowano",
-//                            Toast.LENGTH_SHORT).show()
-//
-//                        val intent = Intent(applicationContext, MainActivity::class.java)
-//                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//                        intent.putExtra("user_id", FirebaseAuth.getInstance().currentUser!!.uid)
-//                        intent.putExtra("email_id", email)
-//                        startActivity(intent)
-//                        finish()
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//                    }else{
-//                        Toast.makeText(applicationContext,
-//                            task.exception!!.message.toString(),
-//                            Toast.LENGTH_SHORT).show()
-//
-//                    }
-//
-//                }
-
 
 
 

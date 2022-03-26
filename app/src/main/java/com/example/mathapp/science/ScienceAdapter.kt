@@ -1,6 +1,7 @@
 package com.example.mathapp.science
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mathapp.FakeModulesList
 import com.example.mathapp.R
+import com.example.mathapp.science.modules.Zbiory
 import kotlinx.android.synthetic.main.position_in_sience_recycler_view.view.*
 
 class ScienceAdapter(val context: Context): RecyclerView.Adapter<MySienceViewHolder>(){
@@ -27,6 +29,19 @@ class ScienceAdapter(val context: Context): RecyclerView.Adapter<MySienceViewHol
         layout.setBackgroundResource(R.drawable.roundup)
 
         var drawable: GradientDrawable = layout.background as GradientDrawable
+
+        layout.setOnClickListener{
+            when(position)
+            {
+                0 -> {
+                    val intent = Intent(holder.view.context.applicationContext, Zbiory::class.java)
+                    holder.view.context.startActivity(intent)
+                }
+
+            }
+
+        }
+
 
         if (position % 2 == 1)
         {      drawable.setColor(Color.parseColor("#E4731B"))
