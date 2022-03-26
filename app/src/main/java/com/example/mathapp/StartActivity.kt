@@ -4,6 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.mathapp.authentication.LoginActivity
+import com.example.mathapp.challenges.classes.Answer
+import com.example.mathapp.challenges.classes.Answers
+import com.example.mathapp.challenges.classes.Question
 import com.example.mathapp.science.classes.Module
 import com.example.mathapp.science.classes.Paragraph
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -15,6 +18,7 @@ import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.start_activity.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class StartActivity : AppCompatActivity() {
 
@@ -81,11 +85,45 @@ class StartActivity : AppCompatActivity() {
 
         ))
 
+        val questionsList: ArrayList<Question> = arrayListOf(
+            Question("0", "5+2",
+                Answers(
+                    Answer("4"),
+                    Answer("7"),
+                    Answer("10"),
+                    Answer("2"),
+                    Answer("7"),
+                )
+            ),
+            Question("1", "10*10",
+                Answers(
+                    Answer("1000"),
+                    Answer("100"),
+                    Answer("90"),
+                    Answer("150"),
+                    Answer("100"),
+
+
+                )
+                )
+
+
+        )
+
+        val question: Question = Question("0", "5+2",
+            Answers(
+                Answer("4"),
+                Answer("7"),
+                Answer("10"),
+                Answer("2"),
+                Answer("7"),
+            )
+            )
 
 
         var dbReference = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
        //dbReference.child("Modules").child(time.toString()).setValue(module)
-
+        dbReference.child("Questions").setValue(questionsList)
 
 
 

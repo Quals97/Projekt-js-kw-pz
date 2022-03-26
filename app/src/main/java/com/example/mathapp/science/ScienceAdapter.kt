@@ -10,10 +10,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mathapp.FakeModulesList
 import com.example.mathapp.R
+import com.example.mathapp.science.classes.Module
 import com.example.mathapp.science.modules.Zbiory
 import kotlinx.android.synthetic.main.position_in_sience_recycler_view.view.*
+import java.io.PipedOutputStream
 
-class ScienceAdapter(val context: Context): RecyclerView.Adapter<MySienceViewHolder>(){
+class ScienceAdapter(val context: Context, val modulesList:ArrayList<Module>): RecyclerView.Adapter<MySienceViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MySienceViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val positionList = inflater.inflate(R.layout.position_in_sience_recycler_view, parent, false)
@@ -23,8 +25,8 @@ class ScienceAdapter(val context: Context): RecyclerView.Adapter<MySienceViewHol
     override fun onBindViewHolder(holder: MySienceViewHolder, position: Int) {
         val moduleTitle = holder.view.module_title
         val layout = holder.view.position_in_sience_recycler_view
-        //moduleTitle.text = "Module ${position}"
-        moduleTitle.text = FakeModulesList.modulesList[position]
+
+        moduleTitle.text = modulesList[position].name
 
         layout.setBackgroundResource(R.drawable.roundup)
 
@@ -54,7 +56,8 @@ class ScienceAdapter(val context: Context): RecyclerView.Adapter<MySienceViewHol
     }
 
     override fun getItemCount(): Int {
-        return FakeModulesList.modulesList.size
+        return modulesList.size
+        //return FakeModulesList.modulesList.size
     }
 
 }

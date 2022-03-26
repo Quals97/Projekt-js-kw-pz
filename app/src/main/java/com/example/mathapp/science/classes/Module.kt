@@ -4,10 +4,12 @@ class Module {
 
         var id: String = "0"
         var name: String = String()
-        var images: ArrayList<String> = arrayListOf()
+        var images: ArrayList<PictureLocalization> = arrayListOf()
         var paragraph: ArrayList<Paragraph> = arrayListOf()
 
-    constructor(id: String, name: String, images: ArrayList<String>, paragraph: ArrayList<Paragraph>)
+    constructor()
+
+    constructor(id: String, name: String, images: ArrayList<PictureLocalization>, paragraph: ArrayList<Paragraph>)
     {
         this.id = id
         this.name = name
@@ -15,7 +17,7 @@ class Module {
         this.paragraph = paragraph
     }
 
-    constructor()
+
 
 
 
