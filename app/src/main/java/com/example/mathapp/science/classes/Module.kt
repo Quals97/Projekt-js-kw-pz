@@ -2,7 +2,7 @@ package com.example.mathapp.science.classes
 
 class Module {
 
-        var id: String = "0"
+        var id: String = "-1"
         var name: String = String()
         var images: ArrayList<PictureLocalization> = arrayListOf()
         var paragraph: ArrayList<Paragraph> = arrayListOf()

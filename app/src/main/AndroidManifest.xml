@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
+            android:name=".science.modules.ModulesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ExampleActivity"
+            android:exported="false" />
+        <activity
             android:name=".challenges.ChallengesActivity"
             android:exported="false" />
         <activity

@@ -12,6 +12,7 @@ import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.example.mathapp.LogoTextApp
 import com.example.mathapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -50,10 +51,26 @@ class RegistrationActivity : AppCompatActivity() {
 
         var query = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
 
-        query.child("logo").addListenerForSingleValueEvent(object : ValueEventListener {
+        query.child("AppInfo").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                var link: String? = snapshot.getValue(String::class.java)
-                Picasso.get().load(link).into(image_logo_registration_activity)
+
+                var appInfor = LogoTextApp()
+
+                for (ai in snapshot.children)
+                {
+
+                    if (ai.key == "logo")
+                    {
+                        appInfor.logo = ai.value.toString()
+                    }else if(ai.key == "text")
+                    {
+                        appInfor.text = ai.value.toString()
+                    }
+
+
+                }
+
+                Picasso.get().load(appInfor.logo).into(image_logo_registration_activity)
             }
             override fun onCancelled(error: DatabaseError) {
 

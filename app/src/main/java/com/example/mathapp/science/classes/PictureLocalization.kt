@@ -1,7 +1,7 @@
 package com.example.mathapp.science.classes
 
 class PictureLocalization {
-    var localization: String = String()
+    var localization: String= String()
 
     constructor()
 

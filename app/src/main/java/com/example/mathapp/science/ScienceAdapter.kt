@@ -8,12 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mathapp.FakeModulesList
 import com.example.mathapp.R
 import com.example.mathapp.science.classes.Module
-import com.example.mathapp.science.modules.Zbiory
+import com.example.mathapp.science.modules.ModulesActivity
 import kotlinx.android.synthetic.main.position_in_sience_recycler_view.view.*
-import java.io.PipedOutputStream
 
 class ScienceAdapter(val context: Context, val modulesList:ArrayList<Module>): RecyclerView.Adapter<MySienceViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MySienceViewHolder {
@@ -33,14 +31,13 @@ class ScienceAdapter(val context: Context, val modulesList:ArrayList<Module>): R
         var drawable: GradientDrawable = layout.background as GradientDrawable
 
         layout.setOnClickListener{
-            when(position)
-            {
-                0 -> {
-                    val intent = Intent(holder.view.context.applicationContext, Zbiory::class.java)
-                    holder.view.context.startActivity(intent)
-                }
 
-            }
+                    //val intent = Intent(holder.view.context.applicationContext, Zbiory::class.java)
+                    //val intent = Intent(holder.view.context.applicationContext, ExampleActivity::class.java)
+                    val intent = Intent(holder.view.context.applicationContext, ModulesActivity::class.java)
+                    intent.putExtra("position", position)
+                    holder.view.context.startActivity(intent)
+
 
         }
 

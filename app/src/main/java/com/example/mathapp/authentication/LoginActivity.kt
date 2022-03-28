@@ -13,6 +13,7 @@ import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.widget.Toast
 import androidx.exifinterface.media.ExifInterface
+import com.example.mathapp.LogoTextApp
 import com.example.mathapp.MainActivity
 import com.example.mathapp.R
 import com.google.firebase.auth.FirebaseAuth
@@ -48,10 +49,41 @@ class LoginActivity : AppCompatActivity() {
 
         var query = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
 
-        query.child("logo").addListenerForSingleValueEvent(object : ValueEventListener {
+        query.child("AppInfo").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                var link: String? = snapshot.getValue(String::class.java)
-                Picasso.get().load(link).into(image_logo_login_activity)
+
+                if (snapshot.exists())
+                {
+
+                    var appInfor = LogoTextApp()
+
+                    for (ai in snapshot.children)
+                    {
+
+                        if (ai.key == "logo")
+                        {
+                            appInfor.logo = ai.value.toString()
+                        }else if(ai.key == "text")
+                        {
+                            appInfor.text = ai.value.toString()
+                        }
+
+                        //val appInfor = ai.getValue(LogoTextApp::class.java)!!
+
+                    }
+
+//
+
+
+
+
+                    Picasso.get().load(appInfor.logo).into(image_logo_login_activity)
+
+                }
+
+
+                //var link: String? = snapshot.getValue(String::class.java)
+
             }
             override fun onCancelled(error: DatabaseError) {
 
@@ -177,41 +209,41 @@ class LoginActivity : AppCompatActivity() {
        // val email: String = user_email.text.toString()
        // val password: String = user_password.text.toString()
 //====================================================
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
-            .addOnCompleteListener(){ task ->
-
-                if(task.isSuccessful){
-
-                    val database = Firebase.database
-                    val myRef = database.getReference("message")
-
-                    myRef.setValue("Hello, World!")
-
-                    Toast.makeText(applicationContext,
-                        applicationContext.getString(R.string.success_login_in),
-                        Toast.LENGTH_SHORT).show()
-
-                    val intent = Intent(applicationContext, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    intent.putExtra("user_id", FirebaseAuth.getInstance().currentUser!!.uid)
-                    intent.putExtra("email_id", email)
-                    startActivity(intent)
-                    finish()
-
-
-                }else{
-                    if (task.exception!!.message == "The password is invalid or the user does not have a password." ||
-                        task.exception!!.message == "There is no user record corresponding to this identifier. The user may have been deleted.")
-                    {
-                        Toast.makeText(applicationContext, "${applicationContext.getString(R.string.invalid_login_password)}", Toast.LENGTH_LONG).show()
-                    }
-
-
-
-
-                }
-
-            }
+//        FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
+//            .addOnCompleteListener(){ task ->
+//
+//                if(task.isSuccessful){
+//
+//                    val database = Firebase.database
+//                    val myRef = database.getReference("message")
+//
+//                    myRef.setValue("Hello, World!")
+//
+//                    Toast.makeText(applicationContext,
+//                        applicationContext.getString(R.string.success_login_in),
+//                        Toast.LENGTH_SHORT).show()
+//
+//                    val intent = Intent(applicationContext, MainActivity::class.java)
+//                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                    intent.putExtra("user_id", FirebaseAuth.getInstance().currentUser!!.uid)
+//                    intent.putExtra("email_id", email)
+//                    startActivity(intent)
+//                    finish()
+//
+//
+//                }else{
+//                    if (task.exception!!.message == "The password is invalid or the user does not have a password." ||
+//                        task.exception!!.message == "There is no user record corresponding to this identifier. The user may have been deleted.")
+//                    {
+//                        Toast.makeText(applicationContext, "${applicationContext.getString(R.string.invalid_login_password)}", Toast.LENGTH_LONG).show()
+//                    }
+//
+//
+//
+//
+//                }
+//
+//            }
 //============================================================================
 
 

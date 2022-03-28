@@ -28,7 +28,6 @@ class Zbiory : AppCompatActivity() {
 
                     for (m in snapshot.children) {
                         var module: Module? = m.getValue(Module::class.java)
-                        println("${module}")
                         modules.add(module!!)
 
                     }
