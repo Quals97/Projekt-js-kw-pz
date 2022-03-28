@@ -43,12 +43,12 @@ class StartActivity : AppCompatActivity() {
                                 "N = {0,1,2,3,4,5,6,7...} - zbiór liczb naturanlnych \n" +
                                 "D = {1,3,6,9,18} - zbiór naturalnych dzielników liczby 18\n"
                         ),
-                        Paragraph("1", "image",
-                            PictureLocalization("https://firebasestorage.googleapis.com/v0/b/mathapp-74bce.appspot.com/o/logo.png?alt=media&token=66db2991-f726-414a-bd0e-bac2624edbf8")),
-                        Paragraph("2", "text", "Zbiór, który ma skończoną liczbę elementów, nazywamy zbiorem skończonym." +
+//                        Paragraph("1", "image",
+//                            PictureLocalization("https://firebasestorage.googleapis.com/v0/b/mathapp-74bce.appspot.com/o/logo.png?alt=media&token=66db2991-f726-414a-bd0e-bac2624edbf8")),
+                        Paragraph("1", "text", "Zbiór, który ma skończoną liczbę elementów, nazywamy zbiorem skończonym." +
                                 "Zbiór, do którego należy nieskończenie wiele elementów, nazywamy zbiorem" +
                                 "nieskończonym.\n"),
-                        Paragraph("3", "text", "Aby zapisać, że element należy do zbioru, używamy symbolu ∈, np. 7 ∈ N," +
+                        Paragraph("2", "text", "Aby zapisać, że element należy do zbioru, używamy symbolu ∈, np. 7 ∈ N," +
                                 "aby zapisać, że element nie należy do zbioru — symbolu £, np. V2 £ W." +
                                 "Zbiór, do którego nie należy żaden element, nazywamy zbiorem pustym i ozna-" +
                                 "czamy symbolem f.\n")
@@ -137,6 +137,54 @@ class StartActivity : AppCompatActivity() {
                     )
 
             )
+        )
+
+
+        val module3 = Module(time.toString(), "Liczby naturalne",
+            arrayListOf(),
+            arrayListOf(
+                Section("0", "",
+                arrayListOf(
+                    Paragraph("0", "text","Liczb naturalnych: 0,1,2,3,... jest nieskończenie wiele. Dla dowolnej liczby" +
+                            "naturalnej n liczba n +1 jest następna (większa o 1) i tak po milionie następuje" +
+                            "milion jeden, potem milion dwa, milion trzy, zaś po bilionie następuje bilion" +
+                            "jeden itd. Zbiór liczb naturalnych oznaczamy literą <b>N</b>.\n")
+
+                )),
+                Section("1", "DEFINICJA:",
+                arrayListOf(
+                    Paragraph("0", "text", "Liczbę naturalną m ≠ 0 nazywamy <b>dzielnikiem</b> liczby naturalnej n, gdy" +
+                            "iloraz n : m jest liczbą naturalną.\n"),
+                    Paragraph("1", "text", "Liczba 12 ma następujące dzielniki: 1, 2, 3, 4, 6, 12." +
+                            "Zauważ, że:\n"),
+                    Paragraph("2", "text", "- liczba 1 jest dzielnikiem każdej liczby naturalnej,"),
+                    Paragraph("3", "text", "- liczba 0 nie jest dzielnikiem żadnej liczby,"),
+                    Paragraph("4", "text", "każda dodatnia liczba naturalna jest dzielnikiem liczby 0.")
+
+                )),
+                Section("2", "CECHY PODZIELNOŚCI: ",
+                    arrayListOf(
+                        Paragraph("0", "text", "Liczba naturalna jest podzielna przez:\n"),
+                        Paragraph("1", "text", "* 2, gdy ostatnią jej cyfrą jest jedna z cyfr: 0, 2, 4, 6,\n"),
+                        Paragraph("2", "text", "* 3, gdy suma jej cyfr jest podzielna przez 3;\n"),
+                        Paragraph("3", "text", "* 5, gdy ostatnią jej cyfrą jest 0 lub 5;\n"),
+                        Paragraph("4", "text", "* 9, gdy suma jej cyfr jest podzielna przez 9.\n")
+
+                    )
+                    ),
+                Section("3", "",
+                    arrayListOf(
+                        Paragraph("0", "text",
+                                "\n\nLiczbę naturalną nazywamy parzystą, gdy jest ona podzielna przez 2, lub" +
+                                "nieparzystą, gdy nie jest podzielna przez 2. Zero jest liczbą parzystą.\n")
+
+                    )
+                    )
+
+
+            )
+
+
         )
 
 
@@ -283,7 +331,7 @@ class StartActivity : AppCompatActivity() {
 
         var dbReference = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
         //dbReference.child("Modules").child(time.toString()).setValue(module)
-        //dbReference.child("Modules").child(time.toString()).setValue(module1)
+        dbReference.child("Modules").child(time.toString()).setValue(module)
         //dbReference.child("questionsCategories").child(category.id).setValue(category)
 
 
