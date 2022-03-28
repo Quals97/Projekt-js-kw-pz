@@ -34,18 +34,18 @@ class Zbiory : AppCompatActivity() {
 
                     zbiory_module_title.text = modules[0].name
 
-                    modele_paragraph1.text = modules[0].paragraph[0].text
-                    modele_paragraph2.text = modules[0].paragraph[1].text
-                    modele_paragraph3.text = modules[0].paragraph[3].text
-                    modele_paragraph4.text = modules[0].paragraph[4].text
-                    modele_paragraph5.text = modules[0].paragraph[5].text
-                    modele_paragraph6.text = modules[0].paragraph[6].text
-                    modele_paragraph7.text = modules[0].paragraph[7].text
-                    modele_paragraph8.text = modules[0].paragraph[8].text
-                    modele_paragraph9.text = modules[0].paragraph[9].text
-                    modele_paragraph10.text = modules[0].paragraph[10].text
-                    modele_paragraph11.text = modules[0].paragraph[11].text
-                    modele_paragraph12.text = modules[0].paragraph[12].text
+//                    modele_paragraph1.text = modules[0].paragraph[0].text
+//                    modele_paragraph2.text = modules[0].paragraph[1].text
+//                    modele_paragraph3.text = modules[0].paragraph[3].text
+//                    modele_paragraph4.text = modules[0].paragraph[4].text
+//                    modele_paragraph5.text = modules[0].paragraph[5].text
+//                    modele_paragraph6.text = modules[0].paragraph[6].text
+//                    modele_paragraph7.text = modules[0].paragraph[7].text
+//                    modele_paragraph8.text = modules[0].paragraph[8].text
+//                    modele_paragraph9.text = modules[0].paragraph[9].text
+//                    modele_paragraph10.text = modules[0].paragraph[10].text
+//                    modele_paragraph11.text = modules[0].paragraph[11].text
+//                    modele_paragraph12.text = modules[0].paragraph[12].text
 
                     // module_title.text = modules[0].id
 

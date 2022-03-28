@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#FF3C3C3A"
     tools:context=".science.modules.ModulesActivity">
 
 
@@ -17,6 +18,7 @@
             android:id="@+id/layout_add"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#FF3C3C3A"
             android:orientation="vertical">
 
 

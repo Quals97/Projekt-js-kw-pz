@@ -95,7 +95,7 @@ class LoginActivity : AppCompatActivity() {
 
         login_button.setOnClickListener(loginListener)
 
-        forgot_password.setOnClickListener(forgotPasswordListener)
+        //forgot_password.setOnClickListener(forgotPasswordListener)
 
         registration.setOnClickListener(registrationListener)
 
@@ -204,10 +204,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private val loginListener = View.OnClickListener {
-        val email = "kamilwin21@gmail.com"
-        val password = "123456789abc;"
-       // val email: String = user_email.text.toString()
-       // val password: String = user_password.text.toString()
+//        val email = "kamilwin21@gmail.com"
+//        val password = "123456789abc;"
+        val email: String = user_email.text.toString()
+        val password: String = user_password.text.toString()
 //====================================================
 //        FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
 //            .addOnCompleteListener(){ task ->

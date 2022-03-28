@@ -136,7 +136,7 @@
             android:layout_weight="1"
             android:textColor="@color/white"
             android:textSize="18dp"
-            android:text="@string/recover_password"
+
             />
         <TextView
             android:id="@+id/registration"
@@ -163,6 +163,12 @@
         android:text="@string/user_login_button"
         android:textColor="#F1EEEE"
         android:background="#E4731B"
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
         />
 
