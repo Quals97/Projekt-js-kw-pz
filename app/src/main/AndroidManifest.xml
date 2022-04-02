@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
+            android:name=".challenges.quizfiles.QuizResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".challenges.quizfiles.CategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".challenges.quizfiles.QuizActivity"
+            android:exported="false" />
+        <activity
             android:name=".science.modules.ModulesActivity"
             android:exported="false" />
         <activity

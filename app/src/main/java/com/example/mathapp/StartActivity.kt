@@ -1,6 +1,7 @@
 package com.example.mathapp
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,9 @@ import com.example.mathapp.challenges.classes.Answer
 import com.example.mathapp.challenges.classes.Answers
 import com.example.mathapp.challenges.classes.Category
 import com.example.mathapp.challenges.classes.Question
+import com.example.mathapp.challenges.classes.lengthquiz.DifficultyLevels
+import com.example.mathapp.challenges.classes.lengthquiz.LengthOfTheQuiz
+import com.example.mathapp.challenges.classes.lengthquiz.QuizSettings
 import com.example.mathapp.science.classes.Module
 import com.example.mathapp.science.classes.Paragraph
 import com.example.mathapp.science.classes.PictureLocalization
@@ -281,44 +285,86 @@ class StartActivity : AppCompatActivity() {
 
 
                     )
-            )
+            ),
+            Question("2", "10-2",
+                Answers(
+                    Answer("5"),
+                    Answer("8"),
+                    Answer("12"),
+                    Answer("5"),
+                    Answer("8"),
+
+                )
+                ),
+            Question("3", "Wzór na kwadrat to:",
+                Answers(
+                    Answer("a*a"),
+                    Answer("a*b"),
+                    Answer("a+b*2"),
+                    Answer("b-a"),
+                    Answer("a*a"),
+
+                )
+                ),
+            Question("4", "Pytanie",
+                Answers(
+                    Answer("fałszywa odpowiedź"),
+                    Answer("fałszywa odpowiedź"),
+                    Answer("prawdziwa odpowiedź"),
+                    Answer("fałszywa odpowiedź"),
+                    Answer("prawdziwa odpowiedź"),
+
+                )
+                ),
+            Question("5", "Objętość prostokąta to:",
+                Answers(
+                    Answer("a*b"),
+                    Answer("a*a"),
+                    Answer("a+b"),
+                    Answer("2*a"),
+                    Answer("a*b"),
+
+                )
+                ),
+            Question("6", "2*1",
+                Answers(
+                    Answer("4"),
+                    Answer("6"),
+                    Answer("8"),
+                    Answer("2"),
+                    Answer("2"),
+
+                )
+                ),
 
 
 
         ))
 
-        val questionsList: ArrayList<Question> = arrayListOf(
-            Question("0", "5+2",
-                Answers(
-                    Answer("4"),
-                    Answer("7"),
-                    Answer("10"),
-                    Answer("2"),
-                    Answer("7"),
-                )
+        val quizSettings: QuizSettings = QuizSettings(
+            time.toString(),
+
+                arrayListOf(
+                    LengthOfTheQuiz(
+                        "0",
+                        "Łatwy",
+                        "Krótki quiz, pięć losowych pytań.",
+                        "5"
+                    ),
+                    LengthOfTheQuiz(
+                        "1",
+                        "Średni",
+                        "Dziesięć losowych pytań do danego tematu.",
+                        "10"
+                    )
+
+
             ),
-            Question("1", "10*10",
-                Answers(
-                    Answer("1000"),
-                    Answer("100"),
-                    Answer("90"),
-                    Answer("150"),
-                    Answer("100"),
-                )
-                )
+            Color.parseColor("#E4731B").toString()
 
 
         )
 
-        val question: Question = Question("0", "5+2",
-            Answers(
-                Answer("4"),
-                Answer("7"),
-                Answer("10"),
-                Answer("2"),
-                Answer("7"),
-            )
-            )
 
         val appInfo = LogoTextApp(
             "https://firebasestorage.googleapis.com/v0/b/mathapp-74bce.appspot.com/o/logo.png?alt=media&token=66db2991-f726-414a-bd0e-bac2624edbf8",
@@ -327,11 +373,12 @@ class StartActivity : AppCompatActivity() {
         )
 
         val db = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
-        db.child("AppInfo").setValue(appInfo)
+        //db.child("QuizSettings").child(time.toString()).setValue(quizSettings)
+        //db.child("AppInfo").setValue(appInfo)
 
         var dbReference = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
         //dbReference.child("Modules").child(time.toString()).setValue(module)
-        dbReference.child("Modules").child(time.toString()).setValue(module)
+        //dbReference.child("Modules").child(time.toString()).setValue(module)
         //dbReference.child("questionsCategories").child(category.id).setValue(category)
 
 

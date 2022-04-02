@@ -38,6 +38,7 @@ class ModulesActivity : AppCompatActivity() {
                         modules.add(module!!)
 
                     }
+
                     val moduleTitle = TextView(applicationContext)
                    // moduleTitle.setTextColor(Color.WHITE)
                     moduleTitle.setTextColor(Color.parseColor("#E4731B"))
@@ -49,11 +50,17 @@ class ModulesActivity : AppCompatActivity() {
                     for (s in 0 until modules[modulePosition].sections.size)
                     {
 
+
+
                         val sectionName = TextView(applicationContext)
                         //sectionName.setTextColor(Color.WHITE)
                         sectionName.setTextColor(Color.parseColor("#E4731B"))
                         sectionName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20.0F)
                         sectionName.text = modules[modulePosition].sections[s].name
+                        if(sectionName.text.toString().isBlank())
+                        {
+                            sectionName.height = 10
+                        }
                         layout_add.addView(sectionName)
                         for (p in 0 until modules[modulePosition].sections[s].paragraphs.size)
                         {

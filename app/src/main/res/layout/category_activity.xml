@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".challenges.ChallengesActivity">
+    tools:context=".challenges.quizfiles.CategoryActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_difficulty_levels"
+        android:id="@+id/category_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
+
 
 </LinearLayout>

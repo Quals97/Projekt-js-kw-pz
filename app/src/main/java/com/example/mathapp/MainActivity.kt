@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.example.mathapp.challenges.ChallengesActivity
 import com.example.mathapp.science.ScienceActivity
 import com.example.mathapp.science.ScienceAdapter
 import com.example.mathapp.useroption.OptionsActivity
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         study_button.setOnClickListener(scienceListener)
         options_button.setOnClickListener(optionsListener)
+        challenge_button.setOnClickListener(challengeListener)
 
     }
 
@@ -43,12 +45,21 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private val challengeListener: View.OnClickListener = View.OnClickListener {
+        goToChallengeActivity()
+    }
+
     private val scienceListener: View.OnClickListener = View.OnClickListener {
         goToScienceActivity()
     }
 
     private val optionsListener: View.OnClickListener = View.OnClickListener {
         goToOptionsActivity()
+    }
+
+    private fun goToChallengeActivity(){
+        val intent = Intent(applicationContext, ChallengesActivity::class.java)
+        startActivity(intent)
     }
 
     private fun goToScienceActivity(){

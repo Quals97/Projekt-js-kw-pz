@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#FF3C3C3A"
+    android:padding="10dp"
     tools:context=".science.modules.ModulesActivity">
 
 

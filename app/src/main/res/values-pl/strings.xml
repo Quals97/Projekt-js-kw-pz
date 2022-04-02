@@ -31,4 +31,6 @@
     <string name="successfully_registered">Pomyślnie zarejestrowano</string>
     <string name="name_validation">" Nazwa powinna zaczynać się od wielkich liter bez specjalnych znaków"</string>
     <string name="password_validation">Hasło powinno zawierać od 12 do 64 znaków w tym jeden znak specjalny</string>
+    <string name="result">Wynik</string>
+    <string name="points">Punkty</string>
 </resources>
