@@ -57,7 +57,8 @@ class QuizActivity : AppCompatActivity() {
                                     answer3,
                                     answer4,
                                 ),
-                                questionCategories[categoryId].questions
+                                questionCategories[categoryId].questions,
+                                difficultyLevel
                             )
 
                             answer1.setOnClickListener(questionClickListener)

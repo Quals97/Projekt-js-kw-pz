@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
     android:orientation="vertical"
     tools:context=".challenges.quizfiles.QuizActivity">
 
@@ -11,12 +12,18 @@
         android:id="@+id/questionTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
+        android:background="#878783"
+        android:textAlignment="center"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+
         >
 
         <LinearLayout
@@ -28,12 +35,20 @@
             <TextView
                 android:id="@+id/btn_question_answer_1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:background="#878783"
+                android:layout_margin="5dp"
                 />
             <TextView
                 android:id="@+id/btn_question_answer_2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:textAlignment="center"
+                android:gravity="center"
+                android:layout_height="60dp"
+                android:layout_margin="5dp"
+                android:background="#878783"/>
 
 
         </LinearLayout>
@@ -46,11 +61,19 @@
             <TextView
                 android:id="@+id/btn_question_answer_3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:textAlignment="center"
+                android:gravity="center"
+                android:layout_height="60dp"
+                android:layout_margin="5dp"
+                android:background="#878783"/>
             <TextView
                 android:id="@+id/btn_question_answer_4"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:textAlignment="center"
+                android:gravity="center"
+                android:layout_height="60dp"
+                android:layout_margin="5dp"
+                android:background="#878783"/>
 
         </LinearLayout>
 

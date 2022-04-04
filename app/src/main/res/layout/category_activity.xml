@@ -8,6 +8,7 @@
     tools:context=".challenges.quizfiles.CategoryActivity">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_margin="10dp"
         android:id="@+id/category_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

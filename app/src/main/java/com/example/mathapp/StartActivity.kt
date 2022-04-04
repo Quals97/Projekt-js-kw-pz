@@ -263,6 +263,286 @@ class StartActivity : AppCompatActivity() {
 //
 //
 //        )
+        val category3 = Category(
+            time.toString(), "Zbiory",
+            arrayListOf(
+                Question("0", "Wskaż poprawne zależności pomiędzy zbiorami A, B i C A=(1,2,3,4,5,6,7} B={1,2,3} C={6,7}",
+                    Answers(
+                        Answer("B ⊂ A, C ⊂ B"),
+                        Answer("B ⊂ A, C ⊂ A"),
+                        Answer("C ⊂ A, A ⊂ B"),
+                        Answer("A ⊂ B, C ⊂ B"),
+                        Answer("B ⊂ A, C ⊂ A")
+                    )
+                ),
+
+
+                Question("1", "Wskaz poprawne stwierdzenie dla zbiorów A=(1,6,7} B={1,6,7,8}",
+                    Answers(
+                        Answer("B jest podzbiorem A"),
+                        Answer("A ∩ B = (1,6)"),
+                        Answer("A jest podzbiorem B"),
+                        Answer("A = B"),
+                        Answer("A jest podzbiorem B")
+
+                    )
+                ),
+
+
+                Question("2", "Ktore zbiory spełniają zależnośc A ⊂ B?",
+                    Answers(
+                        Answer("A=(1,2,3,4,5,6,7}, C={1,2,3}"),
+                        Answer("A={3,4,5,6,7}, B={1,2,3}"),
+                        Answer("A={3,7}, B={3,4,5,6,7}"),
+                        Answer("A= {1,2}, B={3,8,5}"),
+                        Answer("A={3,7}, B={3,4,5,6,7}")
+
+                    )
+                ),
+
+
+                Question("3", "Wskaż Zbiór równy zbiorowi A= {-3,-2,-1,0,1,2,3}",
+                    Answers(
+                        Answer("Zbiór liczb naturalnych których kwadraty są mniejsze od 10."),
+                        Answer("Zbiór liczb całkowitych których kwadraty są mniejsze od 10."),
+                        Answer("Zbiór liczb nieujemnych których kwadraty są mniejsze od 10."),
+                        Answer("Zbiór liczb naturalnych."),
+                        Answer("Zbiór liczb całkowitych których kwadraty są mniejsze od 10.")
+
+                    )
+                ),
+
+
+                Question("4", "Suma zbiorów A={2,3,6,7,11} i B= {5,8,2,6,11,9} to zbiór:",
+                    Answers(
+                        Answer("{2,2,3,5,6,6,7,8,9,11,11}"),
+                        Answer("{2,3,5,6,7,8,9,11}"),
+                        Answer("{2,6}"),
+                        Answer("{2,6,11}"),
+                        Answer("{2,3,5,6,7,8,9,11}")
+
+                    )
+                ),
+
+
+                Question("5", "Suma tych zbiorów to {1,2,5}, wskaż poprawne zbiory A i B",
+                    Answers(
+                        Answer("A={1,2,3,4,5}, B={4,5}"),
+                        Answer("A={1}, B={2}, C={5}"),
+                        Answer("A={1,2,5}, B={1,5}"),
+                        Answer("A={6,4,5}, B={5,3,0}"),
+                        Answer("A={1,2,5}, B={1,5}")
+
+                    )
+                ),
+
+
+                Question("6", "Iloczyn tych zbiorów to {4,5}, wskaż poprawne zbiory A i B",
+                    Answers(
+                        Answer("A={1,2,3,4,5}, B={4,5}"),
+                        Answer("B={4,5,6}, C={4,5}"),
+                        Answer("A={1,2,5}, B={1,5}"),
+                        Answer("A={1,3,2}, B={5,3,7}"),
+                        Answer("A={1,2,3,4,5}, B={4,5}")
+
+                    )
+                ),
+
+
+                Question("7", "Rożnica zbioru A\\B to {1,3,8,5}, wskaż poprawne zbiory A i B",
+                    Answers(
+                        Answer("A={1,2,3,4,5,6,7,8,9,10}, B={2,4,6,7,9,10}"),
+                        Answer("A={1,3,8,5,0}, C={4,5}"),
+                        Answer("A={1,3,8}, B={1,5}"),
+                        Answer("A={1,3,2}, B={5,3,7}"),
+                        Answer("A={1,2,3,4,5,6,7,8,9,10}, B={2,4,6,7,9,10}")
+
+                    )
+                ),
+
+
+                Question("8", "Suma tych zbiorów to {10,11,12}, wskaż poprawne zbiory A i B",
+                    Answers(
+                        Answer("A={10,11}, B={1,2,4,5}"),
+                        Answer("A={10}, B={12}, C={11}"),
+                        Answer("A={10,11,2}, B={12,5}"),
+                        Answer("A={1,0,10,12}, B={5,6,7}"),
+                        Answer("A={10,11,2} B={12,5}")
+
+                    )
+                ),
+
+
+                Question("9", "Iloczyn tych zbiorów to {10,11}, wskaż poprawne zbiory A i B",
+                    Answers(
+                        Answer("A={1,2,3,4,5,6,7,8,9,10,11,12,13}, B={2,3,4,5,6,7,8,9,1,0,11}"),
+                        Answer("B={10,11,21}, C={11,12,22}"),
+                        Answer("A={10,11,12}, B={1,5}"),
+                        Answer("A={1,3,2,10,11}, B={1,2,3,4,5,6,7,8,9,10,11,12,13}"),
+                        Answer("A={1,3,2,10,11}, B={1,2,3,4,5,6,7,8,9,10,11,12,13}")
+
+                    )
+                ),
+                Question("10", "Iloczyn zbiorów A={2,4,6,7,9,10} i B= {2,3,5,6,4} to zbiór:",
+                    Answers(
+                        Answer("{2,3,5,6,6,7,8,9,11,11}"),
+                        Answer("{2,4,5,6,7,8,9,11}"),
+                        Answer("{2,6}"),
+                        Answer("{2,6,11}"),
+                        Answer("{2,4,5,6,7,8,9,11}")
+
+                    )
+                ),
+                Question("11", "Zbiór A={2,3,6} jest podzbiorem zbioru B tylko kiedy",
+                    Answers(
+                        Answer("B={1,2,3,4,5}"),
+                        Answer("B={1,2,3,4,7}"),
+                        Answer("B={1,2,3,4,6}"),
+                        Answer("B={2,3,5}"),
+                        Answer("B={1,2,3,4,6}")
+
+                    )
+                ),
+                Question("12", "Zbiór A={1,2,3,4,6} jest podzbiorem zbioru B tylko kiedy",
+                    Answers(
+                        Answer("B={7,8,9,11,1,2,3,4,6}"),
+                        Answer("B={1,2,3,4,7,8,9,11}"),
+                        Answer("B={1,2,3,4}"),
+                        Answer("B={2,3,5}"),
+                        Answer("B={7,8,9,11,1,2,3,4,6}")
+
+                    )
+                ),
+
+                )
+
+        )
+
+
+        val category2 = Category(
+            time.toString(), "Liczby naturalne",
+            arrayListOf(
+                Question("0", "Ile jest liczb naturalnych mniejszych od 28 podzielnych przez 3?",
+                    Answers(
+                        Answer("7"),
+                        Answer("6"),
+                        Answer("9"),
+                        Answer("27"),
+                        Answer("9")
+                    )
+                ),
+
+
+                Question("1", "Ile jest liczb naturalnych mniejszych od 250 podzielnych przez 30?",
+                    Answers(
+                        Answer("10"),
+                        Answer("8"),
+                        Answer("9"),
+                        Answer("7"),
+                        Answer("7")
+
+                    )
+                ),
+
+
+                Question("2", "Wskaż liczbe naturalną",
+                    Answers(
+                        Answer("0"),
+                        Answer("-1"),
+                        Answer("-0.5"),
+                        Answer("-7.5"),
+                        Answer("0")
+
+                    )
+                ),
+
+
+                Question("3", "Wskaż liczbe która nie jest naturalna",
+                    Answers(
+                        Answer("2"),
+                        Answer("0"),
+                        Answer("3"),
+                        Answer("-1"),
+                        Answer("-1")
+
+                    )
+                ),
+
+
+                Question("4", "Który ułamek jest nieskracalny?",
+                    Answers(
+                        Answer("10/12"),
+                        Answer("13/17"),
+                        Answer("20/5"),
+                        Answer("15/3"),
+                        Answer("13/17")
+
+                    )
+                ),
+
+
+                Question("5", "Skrócona wersja ułamku 225/360 to",
+                    Answers(
+                        Answer("25/72"),
+                        Answer("25/80"),
+                        Answer("5/8"),
+                        Answer("38/60"),
+                        Answer("25/72")
+
+                    )
+                ),
+
+
+                Question("6", "Wynik działania 3/4*5/7 to",
+                    Answers(
+                        Answer("15/28"),
+                        Answer("15/11"),
+                        Answer("28/15"),
+                        Answer("2"),
+                        Answer("15/28")
+
+                    )
+                ),
+
+
+                Question("7", "Wskaz poprawne rozszerzenie ułamka 3/8",
+                    Answers(
+                        Answer("24/56"),
+                        Answer("8/3"),
+                        Answer("25/60"),
+                        Answer("30/72"),
+                        Answer("24/56")
+
+                    )
+                ),
+
+
+                Question("8", "Przez ktora z tych liczb 60 nie jest podzielne?",
+                    Answers(
+                        Answer("6"),
+                        Answer("10"),
+                        Answer("5"),
+                        Answer("8"),
+                        Answer("8")
+
+                    )
+                ),
+
+
+                Question("9", "Przez ktora z tych liczb 40 jest podzielne?",
+                    Answers(
+                        Answer("3"),
+                        Answer("16"),
+                        Answer("8"),
+                        Answer("7"),
+                        Answer("8")
+
+                    )
+                ),
+
+            )
+
+        )
 
         val category = Category(time.toString(), "First",
         arrayListOf(
@@ -379,7 +659,7 @@ class StartActivity : AppCompatActivity() {
         var dbReference = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
         //dbReference.child("Modules").child(time.toString()).setValue(module)
         //dbReference.child("Modules").child(time.toString()).setValue(module)
-        //dbReference.child("questionsCategories").child(category.id).setValue(category)
+        //dbReference.child("questionsCategories").child(category.id).setValue(category3)
 
 
 

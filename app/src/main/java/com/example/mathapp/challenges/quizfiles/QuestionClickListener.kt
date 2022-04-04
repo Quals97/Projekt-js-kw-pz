@@ -4,20 +4,24 @@ import android.content.Intent
 import android.view.View
 import android.widget.TextView
 import com.example.mathapp.challenges.classes.Question
+import kotlin.math.max
 
 class QuestionClickListener: View.OnClickListener {
     var currentIdQuestion: Int = 0
     var viewList: ArrayList<TextView> = arrayListOf()
     var questionList: ArrayList<Question> = arrayListOf()
     var pointsReceived: Int = 0
+    var maxQuestion: Int = 0
 
     constructor()
 
-    constructor(currentIdQuestion: Int, viewList: ArrayList<TextView>, questionList: ArrayList<Question>)
+    constructor(currentIdQuestion: Int, viewList: ArrayList<TextView>, questionList: ArrayList<Question>,
+                maxQuestion: Int)
     {
         this.currentIdQuestion = currentIdQuestion
         this.viewList = viewList
         this.questionList = questionList
+        this.maxQuestion = maxQuestion
     }
 
 
@@ -33,14 +37,24 @@ class QuestionClickListener: View.OnClickListener {
         currentIdQuestion++
         println("id: ${currentIdQuestion}")
 
-        if(currentIdQuestion < questionList.size)
-        {
-            showQuestion(questionList, currentIdQuestion)
+        if(currentIdQuestion < maxQuestion)
+            {
+                showQuestion(questionList, currentIdQuestion)
 
-        }else if(currentIdQuestion == questionList.size)
-        {
-            goToQuizResultActivity(v,pointsReceived)
-        }
+            }else if(currentIdQuestion == maxQuestion)
+            {
+                goToQuizResultActivity(v,pointsReceived)
+            }
+
+
+//        if(currentIdQuestion < questionList.size)
+//        {
+//            showQuestion(questionList, currentIdQuestion)
+//
+//        }else if(currentIdQuestion == questionList.size)
+//        {
+//            goToQuizResultActivity(v,pointsReceived)
+//        }
 
 
     }
