@@ -33,4 +33,5 @@
     <string name="password_validation">Hasło powinno zawierać od 12 do 64 znaków w tym jeden znak specjalny</string>
     <string name="result">Wynik</string>
     <string name="points">Punkty</string>
+    <string name="Test">Test</string>
 </resources>

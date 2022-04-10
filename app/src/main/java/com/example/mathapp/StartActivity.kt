@@ -273,7 +273,8 @@ class StartActivity : AppCompatActivity() {
                         Answer("C ⊂ A, A ⊂ B"),
                         Answer("A ⊂ B, C ⊂ B"),
                         Answer("B ⊂ A, C ⊂ A")
-                    )
+                    ),
+                    "1"
                 ),
 
 
@@ -285,7 +286,8 @@ class StartActivity : AppCompatActivity() {
                         Answer("A = B"),
                         Answer("A jest podzbiorem B")
 
-                    )
+                    ),
+                    "1"
                 ),
 
 
@@ -297,7 +299,8 @@ class StartActivity : AppCompatActivity() {
                         Answer("A= {1,2}, B={3,8,5}"),
                         Answer("A={3,7}, B={3,4,5,6,7}")
 
-                    )
+                    ),
+                    "1"
                 ),
 
 
@@ -309,7 +312,8 @@ class StartActivity : AppCompatActivity() {
                         Answer("Zbiór liczb naturalnych."),
                         Answer("Zbiór liczb całkowitych których kwadraty są mniejsze od 10.")
 
-                    )
+                    ),
+                    "1"
                 ),
 
 
@@ -321,7 +325,8 @@ class StartActivity : AppCompatActivity() {
                         Answer("{2,6,11}"),
                         Answer("{2,3,5,6,7,8,9,11}")
 
-                    )
+                    ),
+                    "1"
                 ),
 
 
@@ -333,7 +338,8 @@ class StartActivity : AppCompatActivity() {
                         Answer("A={6,4,5}, B={5,3,0}"),
                         Answer("A={1,2,5}, B={1,5}")
 
-                    )
+                    ),
+                    "1"
                 ),
 
 
@@ -345,7 +351,8 @@ class StartActivity : AppCompatActivity() {
                         Answer("A={1,3,2}, B={5,3,7}"),
                         Answer("A={1,2,3,4,5}, B={4,5}")
 
-                    )
+                    ),
+                    "1"
                 ),
 
 
@@ -357,7 +364,8 @@ class StartActivity : AppCompatActivity() {
                         Answer("A={1,3,2}, B={5,3,7}"),
                         Answer("A={1,2,3,4,5,6,7,8,9,10}, B={2,4,6,7,9,10}")
 
-                    )
+                    ),
+                    "1"
                 ),
 
 
@@ -369,7 +377,8 @@ class StartActivity : AppCompatActivity() {
                         Answer("A={1,0,10,12}, B={5,6,7}"),
                         Answer("A={10,11,2} B={12,5}")
 
-                    )
+                    ),
+                    "1"
                 ),
 
 
@@ -381,7 +390,8 @@ class StartActivity : AppCompatActivity() {
                         Answer("A={1,3,2,10,11}, B={1,2,3,4,5,6,7,8,9,10,11,12,13}"),
                         Answer("A={1,3,2,10,11}, B={1,2,3,4,5,6,7,8,9,10,11,12,13}")
 
-                    )
+                    ),
+                    "1"
                 ),
                 Question("10", "Iloczyn zbiorów A={2,4,6,7,9,10} i B= {2,3,5,6,4} to zbiór:",
                     Answers(
@@ -391,7 +401,8 @@ class StartActivity : AppCompatActivity() {
                         Answer("{2,6,11}"),
                         Answer("{2,4,5,6,7,8,9,11}")
 
-                    )
+                    ),
+                    "1"
                 ),
                 Question("11", "Zbiór A={2,3,6} jest podzbiorem zbioru B tylko kiedy",
                     Answers(
@@ -401,7 +412,8 @@ class StartActivity : AppCompatActivity() {
                         Answer("B={2,3,5}"),
                         Answer("B={1,2,3,4,6}")
 
-                    )
+                    ),
+                    "1"
                 ),
                 Question("12", "Zbiór A={1,2,3,4,6} jest podzbiorem zbioru B tylko kiedy",
                     Answers(
@@ -411,10 +423,122 @@ class StartActivity : AppCompatActivity() {
                         Answer("B={2,3,5}"),
                         Answer("B={7,8,9,11,1,2,3,4,6}")
 
-                    )
+                    ),
+                    "1"
                 ),
 
+                ),
+            arrayListOf(
+                Question("0", "Dla których wartosci zbiorów A i B jest prawdziwa zależność A ⊂ B",
+                    Answers(
+                        Answer("Zbiór dzielników liczby 63, zbiór dzielników liczby 36"),
+                        Answer("Zbiór dzielników liczby 36, zbiór dzielników liczby 63"),
+                        Answer("Zbiór dzielników liczby 36, zbiór dzielników liczby 72"),
+                        Answer("Zbiór dzielników liczby 72, zbiór dzielników liczby 36"),
+                        Answer("Zbiór dzielników liczby 36, zbiór dzielników liczby 72")
+                    ),
+                    "2"
+                ),
+                Question("1", "Dla których wartosci zbiorów A i B jest prawdziwa zależność A ∩ B = {3,4}",
+                    Answers(
+                        Answer("A = {π,4} B= {3,4}"),
+                        Answer("A = {X,4} B= {3,4} gdzie x to drugi najmniejszy dzielnik liczby 471"),
+                        Answer("A = {X,4} B= {1,0,3,4,7} gdzie x to drugi najmniejszy dzielnik liczby 103"),
+                        Answer("A - zbiór dzielników liczby 28, B = {3,4}"),
+                        Answer("A = {X,4} B= {3,4} gdzie x to drugi najmniejszy dzielnik liczby 471")
+                    ),
+                    "2"
+                ),
+                Question("2", "Dla których wartosci zbiorów A i B jest prawdziwa zależność B ⊂ A",
+                    Answers(
+                        Answer("A = {0,1,2,3}, B = {4,x} gdzie x to wynik dzielenia 100 przez 0"),
+                        Answer("A = {0,1,2,3} B = {4,x} gdzie x to iloraz 100 przez 0"),
+                        Answer("A = {0,1,2,3}, B = {4,x} gdzie x to wynik obliczenia 0*1*2*3*4+2-3+1"),
+                        Answer("A = {0,1,2,3}, B = {4,x} gdzie x to wynik obliczenia 1*2-1"),
+                        Answer("A = {0,1,2,3}, B = {4,x} gdzie x to wynik obliczenia 0*1*2*3*4+2-3+1")
+                    ),
+                    "2"
+                ),
+                Question("3", "Wskaż poprawną odpowiedź dla zbiorów A = { 1,2,3,4} B = {5,7,4}",
+                    Answers(
+                        Answer("A ∩ B ={4} i  A ⊄ B"),
+                        Answer("B ⊂ A"),
+                        Answer("A ⊂ B"),
+                        Answer("A ∪ B ={4} A  B ⊄ A"),
+                        Answer("A ∪ B ={4} A  B ⊄ A")
+                    ),
+                    "2"
+                ),
+                Question("4", "Wskaż poprawną odpowiedź dla zbiorów A = { 1,2,3,4} B = {5,4}",
+                    Answers(
+                        Answer("A ⊄ B bo zbior B tez posiada liczbę 4"),
+                        Answer("B ⊄ A bo zbior B tez posiada liczbę 4"),
+                        Answer("A ⊄ B bo zbior B ma większą liczbę"),
+                        Answer("B ⊄ A bo wszystkie elementy zbioru nie znajdują sie w drugim zbiorze"),
+                        Answer("B ⊄ A bo wszystkie elementy zbioru nie znajdują sie w drugim zbiorze")
+                    ),
+                    "2"
+                ),
+
+
+            ), //2
+            arrayListOf(), //3
+            arrayListOf(
+                Question("0", "Zbiór A jest podzbiorem zbioru B...",
+                    Answers(
+                        Answer("Kiedy suma elementów zbioru A jest mniejsza od zbioru B"),
+                        Answer("Każdy element zbioru B nalezy do zbioru A"),
+                        Answer("Każdy element zbioru A nalezy do zbioru B"),
+                        Answer("Zbiór B jest zawarty w zbiorze A"),
+                        Answer("Każdy element zbioru A nalezy do zbioru B")
+                    ),
+                    "0"
+                ),
+                Question("1", "Wskaż poprawną odp,iloczyn zbiorów A i B to...",
+                    Answers(
+                        Answer("Wynik mnożenia elementów zbiorów przez siebie"),
+                        Answer("Wynik dzielenia elementów zbiorów przez siebie"),
+                        Answer("Zbiór elementów które należa do przynajmniej jednego ze zbiorów"),
+                        Answer("Zbiór elementów które nalezy do jednocześnie obu zbiorów"),
+                        Answer("Zbiór elementów które nalezy do jednocześnie obu zbiorów")
+                    ),
+                    "0"
+                ),
+                Question("2", "Wskaż poprawną odp, suma zbiorów A i B to...",
+                    Answers(
+                        Answer("Liczba bedąca wynikiem dodawania wszystkich elementów obu zbiorów"),
+                        Answer("Wynik dzielenia elementów zbiorów przez siebie"),
+                        Answer("Suma wszystkich elementów obu zbiorów"),
+                        Answer("Zbiór elelementów które należa do conajmniej jednego ze zbiorów, wynik A + B"),
+                        Answer("Zbiór elelementów które należa do conajmniej jednego ze zbiorów, wynik A + B")
+                    ),
+                    "0"
+                ),
+                Question("3", "Wskaż poprawną odp dotyczącą różnicy zbiorów A i B...",
+                    Answers(
+                        Answer("Zbiór elementów które należa do zbioru A i nie należa od zbioru B"),
+                        Answer("Róznica oznaczana przez A - B"),
+                        Answer("Wynik tego odejmowania nazywamy zbiorem C"),
+                        Answer("Rożnica pomiedzy najwiekszym elementem zbioru A i zbioru B"),
+                        Answer("Zbiór elementów które należa do zbioru A i nie należa od zbioru B")
+                    ),
+                    "0"
+                ),
+                Question("4", "Jakie zależności zachodzą pomiedzy zbiorami A = {1,2,3,4,5,6,7,8} B={1,3,5} C={2,7,8}",
+                    Answers(
+                        Answer("B ⊂ C"),
+                        Answer("A ∩ B = {1,2,3,4,5}"),
+                        Answer("A ⊂ B, A ⊂ C, A ∪ B = { 1,2,3,4,5,6,7,8}"),
+                        Answer("B ⊂ A, C ⊂ A, A ∪ B = { 1,2,3,4,5,6,7,8}"),
+                        Answer("B ⊂ A, C ⊂ A, A ∪ B = { 1,2,3,4,5,6,7,8}")
+                    ),
+                    "0"
                 )
+
+
+
+            ) //0
+
 
         )
 
@@ -429,7 +553,8 @@ class StartActivity : AppCompatActivity() {
                         Answer("9"),
                         Answer("27"),
                         Answer("9")
-                    )
+                    ),
+                    "1"
                 ),
 
 
@@ -441,7 +566,8 @@ class StartActivity : AppCompatActivity() {
                         Answer("7"),
                         Answer("7")
 
-                    )
+                    ),
+                    "1"
                 ),
 
 
@@ -453,7 +579,8 @@ class StartActivity : AppCompatActivity() {
                         Answer("-7.5"),
                         Answer("0")
 
-                    )
+                    ),
+                    "1"
                 ),
 
 
@@ -465,7 +592,8 @@ class StartActivity : AppCompatActivity() {
                         Answer("-1"),
                         Answer("-1")
 
-                    )
+                    ),
+                    "1"
                 ),
 
 
@@ -477,7 +605,8 @@ class StartActivity : AppCompatActivity() {
                         Answer("15/3"),
                         Answer("13/17")
 
-                    )
+                    ),
+                    "1"
                 ),
 
 
@@ -489,7 +618,8 @@ class StartActivity : AppCompatActivity() {
                         Answer("38/60"),
                         Answer("25/72")
 
-                    )
+                    ),
+                    "1"
                 ),
 
 
@@ -501,7 +631,8 @@ class StartActivity : AppCompatActivity() {
                         Answer("2"),
                         Answer("15/28")
 
-                    )
+                    ),
+                    "1"
                 ),
 
 
@@ -513,7 +644,8 @@ class StartActivity : AppCompatActivity() {
                         Answer("30/72"),
                         Answer("24/56")
 
-                    )
+                    ),
+                    "1"
                 ),
 
 
@@ -525,7 +657,8 @@ class StartActivity : AppCompatActivity() {
                         Answer("8"),
                         Answer("8")
 
-                    )
+                    ),
+                    "1"
                 ),
 
 
@@ -537,89 +670,150 @@ class StartActivity : AppCompatActivity() {
                         Answer("7"),
                         Answer("8")
 
-                    )
+                    ),
+                    "1"
                 ),
 
-            )
+            ), //1
+            arrayListOf(), //2
+            arrayListOf(), //3
+            arrayListOf(
+                Question("0", "Wskaż poprawną odpowiedź",
+                    Answers(
+                        Answer("Liczby naturalne są nieujemne"),
+                        Answer("Liczb naturalnych jest skończona ilość"),
+                        Answer("0 nie jest liczbą naturalną"),
+                        Answer("każda liczba naturalna jest podzielna przez 1"),
+                        Answer("Liczby naturalne są nieujemne")
 
+                    ),
+                    "0"
+                ),
+                Question("1", "Liczba naturalna jest podzielna przez 3 kiedy",
+                    Answers(
+                        Answer("Liczba jest nieparzysta"),
+                        Answer("Ostatnia jej cyfrą jest 3,6 lub 9"),
+                        Answer("Suma jej cyfr jest podzielna przez 3"),
+                        Answer("Nie jest podzielna przez 2 i 5"),
+                        Answer("Suma jej cyfr jest podzielna przez 3")
+
+                    ),
+                    "0"
+                ),
+                Question("2", "Jakie  nieujemne dzielniki ma liczba 36?",
+                    Answers(
+                        Answer("1,3,4,6,13"),
+                        Answer("1,2,3,4,6,8,9,12,18,36"),
+                        Answer("1,2,3,4,6,9,12,18,36"),
+                        Answer("1,2,3,4,6,8,9,12,18,24,36"),
+                        Answer("1,2,3,4,6,9,12,18,36")
+
+                    ),
+                    "0"
+                ),
+                Question("3", "Wskaż poprawną odpowiedź",
+                    Answers(
+                        Answer("Liczba 0 jest parzysta"),
+                        Answer("Każda liczba parzysta jest podzielna przez 2"),
+                        Answer("Jest wiecej nieparzystych cyfr niz parzystych"),
+                        Answer("Jest wiecej parzystych cyfr niz nieparzystych"),
+                        Answer("Liczba 0 jest parzysta")
+
+                    ),
+                    "0"
+                ),
+                Question("4", "Jakie dzielniki ma liczba 6?",
+                    Answers(
+                        Answer("1,2,3,6"),
+                        Answer("1,2,3,6,-1,-2,-3,-6"),
+                        Answer("-1,-2,-3,-6"),
+                        Answer("-1,-2,-3,6"),
+                        Answer("1,2,3,6,-1,-2,-3,-6")
+
+                    ),
+                    "0"
+                ),
+
+
+            ) // 0
         )
 
-        val category = Category(time.toString(), "First",
-        arrayListOf(
-            Question("0", "5+2",
-                Answers(
-                    Answer("4"),
-                    Answer("7"),
-                    Answer("10"),
-                    Answer("2"),
-                    Answer("7"),
-                )
-            ),
-            Question("1", "10*10",
-                Answers(
-                    Answer("1000"),
-                    Answer("100"),
-                    Answer("90"),
-                    Answer("150"),
-                    Answer("100"),
-
-
-                    )
-            ),
-            Question("2", "10-2",
-                Answers(
-                    Answer("5"),
-                    Answer("8"),
-                    Answer("12"),
-                    Answer("5"),
-                    Answer("8"),
-
-                )
-                ),
-            Question("3", "Wzór na kwadrat to:",
-                Answers(
-                    Answer("a*a"),
-                    Answer("a*b"),
-                    Answer("a+b*2"),
-                    Answer("b-a"),
-                    Answer("a*a"),
-
-                )
-                ),
-            Question("4", "Pytanie",
-                Answers(
-                    Answer("fałszywa odpowiedź"),
-                    Answer("fałszywa odpowiedź"),
-                    Answer("prawdziwa odpowiedź"),
-                    Answer("fałszywa odpowiedź"),
-                    Answer("prawdziwa odpowiedź"),
-
-                )
-                ),
-            Question("5", "Objętość prostokąta to:",
-                Answers(
-                    Answer("a*b"),
-                    Answer("a*a"),
-                    Answer("a+b"),
-                    Answer("2*a"),
-                    Answer("a*b"),
-
-                )
-                ),
-            Question("6", "2*1",
-                Answers(
-                    Answer("4"),
-                    Answer("6"),
-                    Answer("8"),
-                    Answer("2"),
-                    Answer("2"),
-
-                )
-                ),
-
-
-
-        ))
+//        val category = Category(time.toString(), "First",
+//        arrayListOf(
+//            Question("0", "5+2",
+//                Answers(
+//                    Answer("4"),
+//                    Answer("7"),
+//                    Answer("10"),
+//                    Answer("2"),
+//                    Answer("7"),
+//                )
+//            ),
+//            Question("1", "10*10",
+//                Answers(
+//                    Answer("1000"),
+//                    Answer("100"),
+//                    Answer("90"),
+//                    Answer("150"),
+//                    Answer("100"),
+//
+//
+//                    )
+//            ),
+//            Question("2", "10-2",
+//                Answers(
+//                    Answer("5"),
+//                    Answer("8"),
+//                    Answer("12"),
+//                    Answer("5"),
+//                    Answer("8"),
+//
+//                )
+//                ),
+//            Question("3", "Wzór na kwadrat to:",
+//                Answers(
+//                    Answer("a*a"),
+//                    Answer("a*b"),
+//                    Answer("a+b*2"),
+//                    Answer("b-a"),
+//                    Answer("a*a"),
+//
+//                )
+//                ),
+//            Question("4", "Pytanie",
+//                Answers(
+//                    Answer("fałszywa odpowiedź"),
+//                    Answer("fałszywa odpowiedź"),
+//                    Answer("prawdziwa odpowiedź"),
+//                    Answer("fałszywa odpowiedź"),
+//                    Answer("prawdziwa odpowiedź"),
+//
+//                )
+//                ),
+//            Question("5", "Objętość prostokąta to:",
+//                Answers(
+//                    Answer("a*b"),
+//                    Answer("a*a"),
+//                    Answer("a+b"),
+//                    Answer("2*a"),
+//                    Answer("a*b"),
+//
+//                )
+//                ),
+//            Question("6", "2*1",
+//                Answers(
+//                    Answer("4"),
+//                    Answer("6"),
+//                    Answer("8"),
+//                    Answer("2"),
+//                    Answer("2"),
+//
+//                )
+//                ),
+//
+//
+//
+//        ))
 
         val quizSettings: QuizSettings = QuizSettings(
             time.toString(),
@@ -659,7 +853,7 @@ class StartActivity : AppCompatActivity() {
         var dbReference = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
         //dbReference.child("Modules").child(time.toString()).setValue(module)
         //dbReference.child("Modules").child(time.toString()).setValue(module)
-        //dbReference.child("questionsCategories").child(category.id).setValue(category3)
+        //dbReference.child("questionsCategories").child(category3.id).setValue(category3)
 
 
 

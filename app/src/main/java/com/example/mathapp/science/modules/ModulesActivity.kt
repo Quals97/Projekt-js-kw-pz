@@ -1,16 +1,19 @@
 package com.example.mathapp.science.modules
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.marginTop
 import com.example.mathapp.R
 import com.example.mathapp.science.classes.Module
+import com.example.mathapp.science.moduleexam.ModuleExamActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -86,28 +89,23 @@ class ModulesActivity : AppCompatActivity() {
 
 
 
+
                     }
+                    var examButton = Button(applicationContext)
+                    examButton.text = applicationContext.getString(R.string.Test)
+                    examButton.setBackgroundColor(Color.parseColor("#E4731B"))
+                    examButton.setTextColor(Color.WHITE)
 
 
-//                    for (m in 0 until modules[modulePosition].paragraph.size)
-//                    {
-//                        if (modules[modulePosition].paragraph[m].viewType == "text")
-//                        {
-//                            val text = TextView(applicationContext)
-//                            text.setTextColor(Color.WHITE)
-//                            text.text = modules[modulePosition].paragraph[m].text
-//                            layout_add.addView(text)
-//
-//                        }else if (modules[modulePosition].paragraph[m].viewType == "image")
-//                        {
-//                            val link: String = modules[modulePosition].paragraph[m].imageLocalization!!.localization
-//                            var imageView = ImageView(applicationContext)
-//                            layout_add.addView(imageView)
-//                            Picasso.get().load(link).into(imageView)
-//                        }
-//
-//                    }
+                    layout_add.addView(examButton)
 
+                    examButton.setOnClickListener{
+                        var intent = Intent(applicationContext, ModuleExamActivity::class.java)
+                        intent.putExtra("idModule", modules[modulePosition].id)
+                        intent.putExtra("categoryName", modules[modulePosition].name)
+                        startActivity(intent)
+
+                    }
 
                 }
 

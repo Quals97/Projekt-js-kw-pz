@@ -33,6 +33,7 @@
     <string name="password_validation">The password should contain from 12 to 64 characters, including one special character</string>
     <string name="result">Result</string>
     <string name="points">Points</string>
+    <string name="Test">Test</string>
 
 
 </resources>

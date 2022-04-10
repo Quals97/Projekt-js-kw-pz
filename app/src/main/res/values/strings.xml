@@ -45,6 +45,7 @@
     <string name="start_description" translatable="false">Tu będzie opis.</string>
     <string name="result">Result</string>
     <string name="points">Points</string>
+    <string name="Test">Test</string>
 
 
 </resources>

@@ -13,7 +13,7 @@ class QuizResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.quiz_result_activity)
 
-        result_points_received.text = intent.getIntExtra("points",-1).toString()
+        result_points_received.text = "${intent.getIntExtra("points",-1).toString()}/${intent.getIntExtra("totalPoints",-1)}"
 
         result_btn.setOnClickListener(buttonListener)
 

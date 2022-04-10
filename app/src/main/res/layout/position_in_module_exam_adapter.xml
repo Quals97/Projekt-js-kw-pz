@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/position_in_module_exam_adapter"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    >
+    <TextView
+        android:id="@+id/questionTitleModuleExamActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#878783"
+        android:minHeight="70dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/questionAnswer1ModuleExamActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:minHeight="40dp"
+            android:background="#878783"/>
+        <TextView
+            android:id="@+id/questionAnswer2ModuleExamActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:minHeight="40dp"
+            android:background="#878783"/>
+        <TextView
+            android:id="@+id/questionAnswer3ModuleExamActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:minHeight="40dp"
+            android:background="#878783"/>
+        <TextView
+            android:id="@+id/questionAnswer4ModuleExamActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:minHeight="40dp"
+            android:background="#878783"/>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

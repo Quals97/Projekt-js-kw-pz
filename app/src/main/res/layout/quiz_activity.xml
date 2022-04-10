@@ -8,6 +8,18 @@
     android:orientation="vertical"
     tools:context=".challenges.quizfiles.QuizActivity">
 
+    <ProgressBar
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:id="@+id/progress_bar_timer"
+        android:layout_centerInParent = "true"
+        android:layout_width="match_parent"
+        android:scaleY="2"
+        android:theme="@style/ProgressBarStyle"
+        android:indeterminate="false"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_height="30dp"/>
+
     <TextView
         android:id="@+id/questionTitle"
         android:layout_width="match_parent"
@@ -22,60 +34,46 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
 
         >
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/btn_question_answer_1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            >
-            <TextView
-                android:id="@+id/btn_question_answer_1"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:background="#878783"
-                android:layout_margin="5dp"
-                />
-            <TextView
-                android:id="@+id/btn_question_answer_2"
-                android:layout_width="match_parent"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:background="#878783"/>
-
-
-        </LinearLayout>
-        <LinearLayout
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:background="#878783"
+            android:layout_margin="5dp"
+            />
+        <TextView
+            android:id="@+id/btn_question_answer_2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            >
-            <TextView
-                android:id="@+id/btn_question_answer_3"
-                android:layout_width="match_parent"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:background="#878783"/>
-            <TextView
-                android:id="@+id/btn_question_answer_4"
-                android:layout_width="match_parent"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:background="#878783"/>
+            android:textAlignment="center"
+            android:gravity="center"
+            android:layout_height="60dp"
+            android:layout_margin="5dp"
+            android:background="#878783"/>
+        <TextView
+            android:id="@+id/btn_question_answer_3"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:layout_height="60dp"
+            android:layout_margin="5dp"
+            android:background="#878783"/>
+        <TextView
+            android:id="@+id/btn_question_answer_4"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:layout_height="60dp"
+            android:layout_margin="5dp"
+            android:background="#878783"/>
 
-        </LinearLayout>
+
+
 
 
     </LinearLayout>
