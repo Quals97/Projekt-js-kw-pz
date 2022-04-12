@@ -3,11 +3,15 @@ package com.example.mathapp.challenges.quizfiles
 import android.animation.ObjectAnimator
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
+import android.os.Looper
+import android.text.Layout
 import android.text.TextWatcher
+import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.Button
 import android.widget.ProgressBar
@@ -19,6 +23,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.position_in_module_exam_adapter.*
 import kotlinx.android.synthetic.main.quiz_activity.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -26,6 +31,11 @@ import kotlin.concurrent.schedule
 
 class QuizActivity : AppCompatActivity() {
     var totalTimeOnQestion: Long = 10000
+    var delayPerQuestion: Long = 3000
+    var correctAnswerColor = Color.parseColor("#CD038350")
+    var wrongAnswerColor = Color.parseColor("#780606")
+    var defaultAnswerColor = Color.parseColor("#878783")
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,11 +51,18 @@ class QuizActivity : AppCompatActivity() {
             animation.start()
 
 
-            var questionTitle = findViewById<TextView>(R.id.questionTitle)
+            var questionTitle = findViewById<TextView>(R.id.question_title_1)
             var answer1 = findViewById<TextView>(R.id.btn_question_answer_1)
             var answer2 = findViewById<TextView>(R.id.btn_question_answer_2)
             var answer3 = findViewById<TextView>(R.id.btn_question_answer_3)
             var answer4 = findViewById<TextView>(R.id.btn_question_answer_4)
+
+            var A = findViewById<TextView>(R.id.text_view_A)
+            var B = findViewById<TextView>(R.id.text_view_B)
+            var C = findViewById<TextView>(R.id.text_view_C)
+            var D = findViewById<TextView>(R.id.text_view_D)
+
+
 
 
             if (intent.hasExtra("difficultyLevel"))
@@ -104,11 +121,12 @@ class QuizActivity : AppCompatActivity() {
                                 difficultyLevel,
                                 progressBarTimer
                             )
-                            var timerCountDownTimer: CountDownTimer = setIntervalTimer(questionTitle, questionClickListener, progressBarTimer, animation)
-                            var timerCountDownTimer1: CountDownTimer = setIntervalTimer(questionTitle, questionClickListener, progressBarTimer, animation)
-                            var timerCountDownTimer2: CountDownTimer = setIntervalTimer(questionTitle, questionClickListener, progressBarTimer, animation)
-                            var timerCountDownTimer3: CountDownTimer = setIntervalTimer(questionTitle, questionClickListener, progressBarTimer, animation)
-                            var timerCountDownTimer4: CountDownTimer = setIntervalTimer(questionTitle, questionClickListener, progressBarTimer, animation)
+                            var timerCountDownTimer: CountDownTimer = setIntervalTimer(questionTitle, questionClickListener,
+                                progressBarTimer, animation, currentIdQuestion, selectedQuestions,selectedQuestions)
+//                            var timerCountDownTimer1: CountDownTimer = setIntervalTimer(questionTitle, questionClickListener, progressBarTimer, animation)
+//                            var timerCountDownTimer2: CountDownTimer = setIntervalTimer(questionTitle, questionClickListener, progressBarTimer, animation)
+//                            var timerCountDownTimer3: CountDownTimer = setIntervalTimer(questionTitle, questionClickListener, progressBarTimer, animation)
+//                            var timerCountDownTimer4: CountDownTimer = setIntervalTimer(questionTitle, questionClickListener, progressBarTimer, animation)
                             timerCountDownTimer.start()
 
 
@@ -117,55 +135,60 @@ class QuizActivity : AppCompatActivity() {
 
                                     if(answer1.text.toString() == selectedQuestions[questionClickListener.currentIdQuestion].answers.correctAnswer.title)
                                     {
-
-                                        it.setBackgroundColor(Color.GREEN)
-
-                                        Timer("set_options_btn_1", true).schedule(500){
-                                            this.run{
-
-
-                                                it.setBackgroundColor(Color.parseColor("#878783"))
-                                            }
-
+                                        it.setBackgroundColor(correctAnswerColor)
+                                        A.setTextColor(correctAnswerColor)
+                                        Timer("backgraundcolorTrue", false).schedule(delayPerQuestion)
+                                        {
+                                            it.setBackgroundColor(defaultAnswerColor)
+                                            A.setTextColor(Color.WHITE)
                                         }
 
-//                                        Timer().schedule(object : TimerTask(){
-//                                            override fun run() {
-//                                                println("klik")
-//                                                questionClickListener.onClick(answer1)
-//                                            }
-//
-//                                        }, 5000)
                                         println("Zielony")
 
                                     }else{
-                                        it.setBackgroundColor(Color.RED)
-                                        Timer("set_options_btn_1", false).schedule(500){
-                                            it.setBackgroundColor(Color.parseColor("#878783"))
 
+                                        it.setBackgroundColor(wrongAnswerColor)
+                                        A.setTextColor(wrongAnswerColor)
+                                        Timer("backgraundcolorFalse", false).schedule(delayPerQuestion)
+                                        {
+                                            it.setBackgroundColor(defaultAnswerColor)
+                                            A.setTextColor(Color.WHITE)
                                         }
 
-
-//                                        Timer().schedule(object : TimerTask(){
-//                                            override fun run() {
-//                                                println("klik")
-//                                                questionClickListener.onClick(answer1)
-//                                            }
-//
-//                                        }, 5000)
                                         println("Czerwony")
                                     }
 
 
-                                    animation.pause()
 
-                                    questionClickListener.onClick(answer1)
-                                    timerCountDownTimer.start()
-                                    timerCountDownTimer1.cancel()
-                                    timerCountDownTimer2.cancel()
-                                    timerCountDownTimer3.cancel()
-                                    timerCountDownTimer4.cancel()
-                                    animation.start()
+
+                                    animation.pause()
+                                    timerCountDownTimer.cancel()
+                                        Timer("next_question", false).schedule(delayPerQuestion)
+                                        {
+                                            questionClickListener.onClick(questionClickListener.viewList[1])
+                                            Thread(Runnable {
+
+
+                                                this@QuizActivity.runOnUiThread(java.lang.Runnable {
+                                                    var id = questionClickListener.currentIdQuestion
+                                                    if(id < selectedQuestions.size)
+                                                    {
+                                                        question_title_1.text = "${selectedQuestions[id].title}"
+                                                        answer1.text = "${selectedQuestions[id].answers.answer1.title}"
+
+                                                    }
+
+                                                })
+                                            }).start()
+
+                                            timerCountDownTimer.start()
+                                        }
+                                        Handler(Looper.getMainLooper()).postDelayed({
+                                            animation.start()
+                                        },delayPerQuestion)
+
+
+
                                     println("currentIdQuestion: ${questionClickListener.currentIdQuestion-1}")
 
 
@@ -179,125 +202,163 @@ class QuizActivity : AppCompatActivity() {
                             answer2.setOnClickListener{
                                 if(answer2.text.toString() == selectedQuestions[questionClickListener.currentIdQuestion].answers.correctAnswer.title)
                                 {
-
-                                    it.setBackgroundColor(Color.GREEN)
-
-                                    Timer("set_options_btn_1", true).schedule(500){
-                                        this.run{
-
-
-                                            it.setBackgroundColor(Color.parseColor("#878783"))
-                                        }
-
-
-
+                                    it.setBackgroundColor(correctAnswerColor)
+                                    B.setTextColor(correctAnswerColor)
+                                    Timer("backgraundcolorTrue", false).schedule(delayPerQuestion)
+                                    {
+                                        it.setBackgroundColor(defaultAnswerColor)
+                                        B.setTextColor(Color.WHITE)
                                     }
+
 
                                     println("Zielony")
 
                                 }else{
-                                    it.setBackgroundColor(Color.RED)
-                                    Timer("set_options_btn_1", false).schedule(500){
-                                        it.setBackgroundColor(Color.parseColor("#878783"))
-
+                                    it.setBackgroundColor(wrongAnswerColor)
+                                    B.setTextColor(wrongAnswerColor)
+                                    Timer("backgraundcolorFalse", false).schedule(delayPerQuestion)
+                                    {
+                                        it.setBackgroundColor(defaultAnswerColor)
+                                        B.setTextColor(Color.WHITE)
                                     }
+
                                     println("Czerwony")
                                 }
 
 
 
 
-                                animation.pause()
-                                questionClickListener.onClick(answer2)
 
+                                animation.pause()
                                 timerCountDownTimer.cancel()
-                                timerCountDownTimer1.start()
-                                timerCountDownTimer2.cancel()
-                                timerCountDownTimer3.cancel()
-                                timerCountDownTimer4.cancel()
-                                animation.start()
+                                Timer("next_question", false).schedule(delayPerQuestion)
+                                {
+                                    questionClickListener.onClick(questionClickListener.viewList[2])
+                                    Thread(Runnable {
+
+
+                                        this@QuizActivity.runOnUiThread(java.lang.Runnable {
+                                            var id = questionClickListener.currentIdQuestion
+                                            if(id < selectedQuestions.size)
+                                            {
+                                                question_title_1.text = "${selectedQuestions[id].title}"
+
+                                            }
+
+                                        })
+                                    }).start()
+
+                                    timerCountDownTimer.start()
+                                }
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    animation.start()
+                                },delayPerQuestion)
+
                                 println("currentIdQuestion: ${questionClickListener.currentIdQuestion-1}")
 
                             }
                             answer3.setOnClickListener {
                                 if(answer3.text.toString() == selectedQuestions[questionClickListener.currentIdQuestion].answers.correctAnswer.title)
                                 {
-
-                                    it.setBackgroundColor(Color.GREEN)
-
-                                    Timer("set_options_btn_1", true).schedule(500){
-                                        this.run{
-
-
-                                            it.setBackgroundColor(Color.parseColor("#878783"))
-                                        }
-
-
-
+                                    it.setBackgroundColor(correctAnswerColor)
+                                    C.setTextColor(correctAnswerColor)
+                                    Timer("backgraundcolorTrue", false).schedule(delayPerQuestion)
+                                    {
+                                        it.setBackgroundColor(defaultAnswerColor)
+                                        C.setTextColor(Color.WHITE)
                                     }
+
 
                                     println("Zielony")
 
                                 }else{
-                                    it.setBackgroundColor(Color.RED)
-                                    Timer("set_options_btn_1", false).schedule(500){
-                                        it.setBackgroundColor(Color.parseColor("#878783"))
-
+                                    it.setBackgroundColor(wrongAnswerColor)
+                                    C.setTextColor(wrongAnswerColor)
+                                    Timer("backgraundcolorFalse", false).schedule(delayPerQuestion)
+                                    {
+                                        it.setBackgroundColor(defaultAnswerColor)
+                                        C.setTextColor(Color.WHITE)
                                     }
                                     println("Czerwony")
                                 }
-
-
                                 animation.pause()
-                                questionClickListener.onClick(answer3)
-
                                 timerCountDownTimer.cancel()
-                                timerCountDownTimer1.cancel()
-                                timerCountDownTimer2.start()
-                                timerCountDownTimer3.cancel()
-                                timerCountDownTimer4.cancel()
-                                animation.start()
+                                Timer("next_question", false).schedule(delayPerQuestion)
+                                {
+                                    questionClickListener.onClick(questionClickListener.viewList[3])
+                                    Thread(Runnable {
+
+
+                                        this@QuizActivity.runOnUiThread(java.lang.Runnable {
+                                            var id = questionClickListener.currentIdQuestion
+                                            if(id < selectedQuestions.size)
+                                            {
+                                                question_title_1.text = "${selectedQuestions[id].title}"
+
+                                            }
+
+                                        })
+                                    }).start()
+
+                                    timerCountDownTimer.start()
+                                }
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    animation.start()
+                                },delayPerQuestion)
+
+
                                 println("currentIdQuestion: ${questionClickListener.currentIdQuestion-1}")
                             }
                             answer4.setOnClickListener {
                                 if(answer4.text.toString() == selectedQuestions[questionClickListener.currentIdQuestion].answers.correctAnswer.title)
                                 {
-
-                                    it.setBackgroundColor(Color.GREEN)
-
-                                    Timer("set_options_btn_1", true).schedule(500){
-                                        this.run{
-
-
-                                            it.setBackgroundColor(Color.parseColor("#878783"))
-                                        }
-
-
-
+                                    it.setBackgroundColor(correctAnswerColor)
+                                    D.setTextColor(correctAnswerColor)
+                                    Timer("backgraundcolorTrue", false).schedule(delayPerQuestion)
+                                    {
+                                        it.setBackgroundColor(defaultAnswerColor)
+                                        D.setTextColor(Color.WHITE)
                                     }
 
                                     println("Zielony")
 
                                 }else{
-                                    it.setBackgroundColor(Color.RED)
-                                    Timer("set_options_btn_1", false).schedule(500){
-                                        it.setBackgroundColor(Color.parseColor("#878783"))
-
+                                    it.setBackgroundColor(wrongAnswerColor)
+                                    D.setTextColor(wrongAnswerColor)
+                                    Timer("backgraundcolorFalse", false).schedule(delayPerQuestion)
+                                    {
+                                        it.setBackgroundColor(defaultAnswerColor)
+                                        D.setTextColor(Color.WHITE)
                                     }
                                     println("Czerwony")
                                 }
 
-
-
                                 animation.pause()
-                                questionClickListener.onClick(answer4)
-
                                 timerCountDownTimer.cancel()
-                                timerCountDownTimer1.cancel()
-                                timerCountDownTimer2.cancel()
-                                timerCountDownTimer3.start()
-                                timerCountDownTimer4.cancel()
-                                animation.start()
+                                Timer("next_question", false).schedule(delayPerQuestion)
+                                {
+                                    questionClickListener.onClick(questionClickListener.viewList[4])
+                                    Thread(Runnable {
+
+
+                                        this@QuizActivity.runOnUiThread(java.lang.Runnable {
+                                            var id = questionClickListener.currentIdQuestion
+                                            if(id < selectedQuestions.size)
+                                            {
+                                                question_title_1.text = "${selectedQuestions[id].title}"
+
+                                            }
+
+                                        })
+                                    }).start()
+
+                                    timerCountDownTimer.start()
+                                }
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    animation.start()
+                                },delayPerQuestion)
+
+
                                 println("currentIdQuestion: ${questionClickListener.currentIdQuestion-1}")
 
                             }
@@ -328,7 +389,10 @@ class QuizActivity : AppCompatActivity() {
     }
 
 
-    private fun setIntervalTimer(textView: TextView?, questionClickListener: QuestionClickListener, progressBar: ProgressBar, animation: ObjectAnimator): CountDownTimer {
+    private fun setIntervalTimer(textView: TextView?, questionClickListener: QuestionClickListener, progressBar: ProgressBar,
+                                 animation: ObjectAnimator, currentQuestionId: Int, questionList: ArrayList<Question>,
+                                 selectedQuestions:ArrayList<Question>
+                                 ): CountDownTimer {
 
 
         val timer = object : CountDownTimer(totalTimeOnQestion, 1000)
@@ -344,7 +408,9 @@ class QuizActivity : AppCompatActivity() {
                 {
                     progressBar.progressTintList = ColorStateList.valueOf(Color.parseColor("#CDAF1010"))
                 }
+                timer_quiz_activity.text = "${(millisUntilFinished/1000) +1} sek"
 
+                println("Time: ${millisUntilFinished}")
 //                println("TIME: ${millisUntilFinished}")
                 //questionTimer.text = counter.toString()
 
@@ -363,6 +429,30 @@ class QuizActivity : AppCompatActivity() {
                 if (questionClickListener.currentIdQuestion <= questionClickListener.questionList.size)
                 {
                     questionClickListener.onClick(textView)
+                    Thread(Runnable {
+
+
+                        this@QuizActivity.runOnUiThread(java.lang.Runnable {
+                            var id = questionClickListener.currentIdQuestion
+                            if(id < selectedQuestions.size)
+                            {
+                                question_title_1.text = "${selectedQuestions[id].title}"
+
+                            }
+
+                        })
+                    }).start()
+
+//                        questionTitle.invalidate()
+//                        var id = currentQuestionId
+//                        questionTitle.isPressed = true
+//                        if (questionTitle.isPressed)
+//                        {
+//                            ++id
+//                            showQuestion(questionList, id)
+//                            questionTitle.setTextColor(Color.MAGENTA)
+//                        }
+
                     if (questionClickListener.currentIdQuestion < questionClickListener.questionList.size)
                     {
                         start()
@@ -386,7 +476,7 @@ class QuizActivity : AppCompatActivity() {
     {
         val question: Question =  questionsList[id]
 
-        questionTitle.text = question.title
+        question_title_1.text = question.title
         btn_question_answer_1.text = question.answers.answer1.title
         btn_question_answer_2.text = question.answers.answer2.title
         btn_question_answer_3.text = question.answers.answer3.title

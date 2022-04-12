@@ -1,6 +1,7 @@
 package com.example.mathapp.challenges.quizfiles
 
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -9,6 +10,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.mathapp.challenges.classes.Question
+import kotlinx.android.synthetic.main.quiz_activity.*
 import java.sql.Time
 import java.util.*
 import java.util.logging.Handler
@@ -129,8 +131,10 @@ class QuestionClickListener: View.OnClickListener {
         val question: Question = questionList[id]
 
 
-            viewList[0].text = question.title
-            viewList[1].text = question.answers.answer1.title
+            //viewList[0].text = question.title
+
+
+//            viewList[1].text = question.answers.answer1.title
             viewList[2].text = question.answers.answer2.title
             viewList[3].text = question.answers.answer3.title
             viewList[4].text = question.answers.answer4.title
