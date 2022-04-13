@@ -7,13 +7,34 @@
     android:orientation="vertical"
     tools:context=".science.moduleexam.ModuleExamActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
 
-        android:id="@+id/recycler_view_module_exam"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent">
 
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+
+                android:id="@+id/recycler_view_module_exam"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                />
+            <Button
+                android:id="@+id/btn_module_exam_activity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
 
 
 </LinearLayout>

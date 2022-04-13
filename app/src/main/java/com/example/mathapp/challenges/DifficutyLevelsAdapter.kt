@@ -37,6 +37,7 @@ class DifficutyLevelsAdapter(val context: Context, val diffucultyLevelsList: Arr
         layout.setOnClickListener{
             val intent = Intent(holder.view.context.applicationContext, CategoryActivity::class.java)
             intent.putExtra("difficultyLevel", diffucultyLevelsList[0].difficultyLevels[position].value)
+            intent.putExtra("difficultName", diffucultyLevelsList[0].difficultyLevels[position].name)
             holder.view.context.startActivity(intent)
         }
 

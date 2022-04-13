@@ -4,30 +4,146 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
     android:orientation="vertical"
     tools:context=".challenges.quizfiles.QuizResultActivity">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:textSize="20dp"
-        android:text="@string/points"
-        />
-    <TextView
-        android:id="@+id/result_points_received"
-        android:textSize="20dp"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="10dp"
-        android:layout_height="wrap_content"/>
-    <Button
-        android:id="@+id/result_btn"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:minHeight="120dp"
+        android:background="#E4731B">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/summary"
+            android:textAlignment="center"
+            android:paddingTop="30dp"
+            android:textSize="30dp"
+
+            />
+        <TextView
+            android:id="@+id/summary_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:textSize="20dp"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#E4731B"
-        android:text="@string/result"
-        />
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:text="@string/difficulty_level"
+            android:layout_marginBottom="10dp"
+            />
+        <TextView
+            android:id="@+id/difficultyLevel_result_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textSize="20dp"
+            android:text="@string/points_scored"
+            android:textAlignment="center"
+
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            >
+
+            <ProgressBar
+                android:id="@+id/progress_bar_points_scored"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:indeterminate="false"
+                android:scaleY="8"
+                android:theme="@style/ProgressBarStyle" />
+
+            <TextView
+                android:id="@+id/result_points_received"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="10dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/time_spent"
+                android:textAlignment="center"
+                android:textSize="20dp"
+                />
+
+            <TextView
+                android:id="@+id/time_spent_result_activity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="20dp"
+                />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/result_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#E4731B"
+            android:text="@string/result"
+            />
+
+    </LinearLayout>
+
 
 
 </LinearLayout>

@@ -3,19 +3,12 @@ package com.example.mathapp.challenges.quizfiles
 import android.animation.ObjectAnimator
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
+import android.os.*
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.os.CountDownTimer
-import android.os.Handler
-import android.os.Looper
-import android.text.Layout
-import android.text.TextWatcher
-import android.view.View
 import android.view.animation.DecelerateInterpolator
-import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import com.example.mathapp.R
 import com.example.mathapp.challenges.classes.Category
 import com.example.mathapp.challenges.classes.Question
@@ -25,17 +18,19 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.position_in_module_exam_adapter.*
 import kotlinx.android.synthetic.main.quiz_activity.*
+import java.time.LocalTime
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.concurrent.schedule
 
 class QuizActivity : AppCompatActivity() {
-    var totalTimeOnQestion: Long = 10000
+    var totalTimeOnQestion: Long = 20000
     var delayPerQuestion: Long = 3000
     var correctAnswerColor = Color.parseColor("#CD038350")
     var wrongAnswerColor = Color.parseColor("#780606")
     var defaultAnswerColor = Color.parseColor("#878783")
-
+    @RequiresApi(Build.VERSION_CODES.O)
+    var startQuiz: LocalTime? = LocalTime.now()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +41,7 @@ class QuizActivity : AppCompatActivity() {
             var animation = ObjectAnimator.ofInt(progressBarTimer, "progress", 100,0)
             progressBarTimer.progressTintList = ColorStateList.valueOf(Color.parseColor("#CD038350"))
 
-            animation.duration = 10000
+            animation.duration = totalTimeOnQestion
             animation.interpolator = DecelerateInterpolator()
             animation.start()
 
@@ -70,6 +65,7 @@ class QuizActivity : AppCompatActivity() {
                 var currentIdQuestion: Int = 0
                 val difficultyLevel: Int = intent.getIntExtra("difficultyLevel", -1)
                 val categoryId: Int = intent.getIntExtra("position",-1)
+                val difficultName = intent.getStringExtra("difficultName")
                 println("CategoryId: ${categoryId}")
                 println("DIFF: ${difficultyLevel}")
 
@@ -117,9 +113,15 @@ class QuizActivity : AppCompatActivity() {
                                     answer3,
                                     answer4,
                                 ),
+                                questionCategories[categoryId].categoryName,
                                 selectedQuestions,
                                 difficultyLevel,
-                                progressBarTimer
+                                progressBarTimer,
+                                startQuiz!!,
+                                delayPerQuestion,
+                                totalTimeOnQestion,
+                                difficultyLevel,
+                                difficultName!!
                             )
                             var timerCountDownTimer: CountDownTimer = setIntervalTimer(questionTitle, questionClickListener,
                                 progressBarTimer, animation, currentIdQuestion, selectedQuestions,selectedQuestions)
@@ -174,7 +176,7 @@ class QuizActivity : AppCompatActivity() {
                                                     if(id < selectedQuestions.size)
                                                     {
                                                         question_title_1.text = "${selectedQuestions[id].title}"
-                                                        answer1.text = "${selectedQuestions[id].answers.answer1.title}"
+                                                        //answer1.text = "${selectedQuestions[id].answers.answer1.title}"
 
                                                     }
 

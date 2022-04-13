@@ -37,9 +37,19 @@ class ModuleExamActivity : AppCompatActivity() {
                     val categoryName: String = intent.getStringExtra("categoryName").toString()
                     var categoriesList = categories.filter { n -> n.categoryName == "${categoryName}" }
                     val category: Category = categoriesList[0]
+
+                    val completedList: ArrayList<Pair<String, String>> = arrayListOf()
+                    for (c in category.questions0)
+                    {
+                        completedList.add(Pair("",""))
+
+                    }
+
                     //println("List: ${categories.filter { n -> n.categoryName == "Liczby naturalne" } }" )
                     recycler_view_module_exam.layoutManager = LinearLayoutManager(applicationContext)
-                    recycler_view_module_exam.adapter = ModuleExamAdapter(applicationContext, category)
+                    recycler_view_module_exam.adapter = ModuleExamAdapter(applicationContext, category, btn_module_exam_activity,
+                                                                                completedList
+                                                                            )
 
 
                 }

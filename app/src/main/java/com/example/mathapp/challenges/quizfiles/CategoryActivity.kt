@@ -35,8 +35,9 @@ class CategoryActivity : AppCompatActivity() {
                     if (intent.hasExtra("difficultyLevel"))
                     {
                         val difficultyLevel = intent.getStringExtra("difficultyLevel")
+                        val difficultName = intent.getStringExtra("difficultName")
                         category_recycler_view.layoutManager = LinearLayoutManager(applicationContext)
-                        category_recycler_view.adapter = CategoryAdapter(applicationContext, questionCategories, difficultyLevel!!.toInt())
+                        category_recycler_view.adapter = CategoryAdapter(applicationContext, questionCategories, difficultyLevel!!.toInt(), difficultName!! )
                     }
 
 

@@ -32,8 +32,18 @@
     <string name="name_validation">The name should start with Upper-case without special charakters</string>
     <string name="password_validation">The password should contain from 12 to 64 characters, including one special character</string>
     <string name="result">Result</string>
-    <string name="points">Points</string>
+
     <string name="Test">Test</string>
+    <string name="summary">Quiz summary</string>
+    <string name="points_scored">Points scored</string>
+    <string name="time_spent">Time spent</string>
+    <string name="minute">min</string>
+    <string name="second">sec</string>
+    <string name="difficulty_level">Difficulty level</string>
+    <string name="easy">Easy</string>
+    <string name="difficult">Difficult</string>
+    <string name="select_the_difficulty_level">Select the difficulty level</string>
+    <string name="select_a_module">Select a module</string>
 
 
 </resources>

@@ -12,7 +12,9 @@ import kotlinx.android.synthetic.main.position_in_category_recycler_view.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class CategoryAdapter (var context: Context, var categoriesList: ArrayList<Category>, val difficultyLevel: Int):RecyclerView.Adapter<CategoryViewHolder>(){
+class CategoryAdapter (var context: Context, var categoriesList: ArrayList<Category>, val difficultyLevel: Int,
+                       val difficultName: String
+                       ):RecyclerView.Adapter<CategoryViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val positionList = inflater.inflate(R.layout.position_in_category_recycler_view, parent, false)
@@ -28,6 +30,7 @@ class CategoryAdapter (var context: Context, var categoriesList: ArrayList<Categ
             val intent = Intent(holder.view.context.applicationContext, QuizActivity::class.java)
             intent.putExtra("difficultyLevel", difficultyLevel)
             intent.putExtra("position", position)
+            intent.putExtra("difficultName", difficultName)
             holder.view.context.startActivity(intent)
 
         }

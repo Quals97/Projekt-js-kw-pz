@@ -51,15 +51,16 @@
         android:id="@+id/user_email"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:paddingLeft="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:textColorHint="#878783"
-        android:textColor="@color/black"
         android:background="#63635E"
         android:hint="@string/user_email"
         android:maxLines="1"
-        android:singleLine="true" />
+        android:paddingLeft="5dp"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textColorHint="#878783" />
+
     <TextView
         android:id="@+id/checkUserEmail"
         android:layout_width="match_parent"

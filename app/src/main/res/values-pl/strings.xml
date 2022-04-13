@@ -32,6 +32,16 @@
     <string name="name_validation">" Nazwa powinna zaczynać się od wielkich liter bez specjalnych znaków"</string>
     <string name="password_validation">Hasło powinno zawierać od 12 do 64 znaków w tym jeden znak specjalny</string>
     <string name="result">Wynik</string>
-    <string name="points">Punkty</string>
+
     <string name="Test">Test</string>
+    <string name="summary">Podsumowanie quizu</string>
+    <string name="points_scored">Zdobyte punkty</string>
+    <string name="time_spent">Spędzony czas</string>
+    <string name="minute">min</string>
+    <string name="second">sek</string>
+    <string name="difficulty_level">Poziom trudności</string>
+    <string name="easy">Łatwy</string>
+    <string name="difficult">Trudny</string>
+    <string name="select_the_difficulty_level">Wybierz poziom trudności</string>
+    <string name="select_a_module">Wyberz moduł</string>
 </resources>

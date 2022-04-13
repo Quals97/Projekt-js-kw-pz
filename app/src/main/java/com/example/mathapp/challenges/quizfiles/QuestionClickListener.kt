@@ -1,47 +1,82 @@
 package com.example.mathapp.challenges.quizfiles
 
-import android.animation.ObjectAnimator
-import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.os.Build
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.core.content.ContextCompat
+import androidx.annotation.RequiresApi
 import com.example.mathapp.challenges.classes.Question
-import kotlinx.android.synthetic.main.quiz_activity.*
-import java.sql.Time
+import java.time.Duration
+import java.time.LocalTime
 import java.util.*
-import java.util.logging.Handler
 import kotlin.collections.ArrayList
 import kotlin.concurrent.schedule
-import kotlin.math.max
 
 class QuestionClickListener: View.OnClickListener {
     var currentIdQuestion: Int = 0
     var viewList: ArrayList<TextView> = arrayListOf()
+    var categoryName: String = String()
     var questionList: ArrayList<Question> = arrayListOf()
     var progressBar: ProgressBar? = null
+    @RequiresApi(Build.VERSION_CODES.O)
+    var startQuestion: LocalTime? = null
+    var finQuestion: LocalTime? = null
    // var animation: ObjectAnimator? = null
     var pointsReceived: Int = 0
     var maxQuestion: Int = 0
+    var delayTimeQuestion: Long =0
+    var timeToSpentOnTheQuestion: Long = 0
+    var spentAllTime: Int = 0
+    var difficultyLevel: Int = 0
+    var difficultName: String = String()
 
     constructor()
 
-    constructor(currentIdQuestion: Int, viewList: ArrayList<TextView>, questionList: ArrayList<Question>,
-                maxQuestion: Int, progressBar: ProgressBar)
+    constructor(currentIdQuestion: Int, viewList: ArrayList<TextView>,categoryName: String, questionList: ArrayList<Question>,
+                maxQuestion: Int, progressBar: ProgressBar, spentTimeOnTheQuiz: LocalTime?,
+                delayTimeQuestion: Long, timeToSpentOnTheQuestion: Long, difficultyLevel: Int,
+                difficultName: String
+                )
     {
         this.currentIdQuestion = currentIdQuestion
         this.viewList = viewList
+        this.categoryName = categoryName
         this.questionList = questionList
         this.maxQuestion = maxQuestion
         this.progressBar = progressBar
-        //this.animation = animation
+        this.startQuestion = spentTimeOnTheQuiz
+        this.delayTimeQuestion = delayTimeQuestion
+        this.timeToSpentOnTheQuestion = timeToSpentOnTheQuestion
+        this.difficultyLevel = difficultyLevel
+        this.difficultName = difficultName
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onClick(v: View?) {
+
+        finQuestion = LocalTime.now()
+        var duration = Duration.between(startQuestion, finQuestion)
+
+        if(v!!.id == viewList[0].id)
+        {
+            //println("SpentTime ${timeToSpentOnTheQuestion/1000}")
+            spentAllTime+= (timeToSpentOnTheQuestion/1000).toInt()
+
+        }else{
+
+            //println("SpentTime: ${duration.seconds-delayTimeQuestion/1000}")
+            spentAllTime+= (duration.seconds-delayTimeQuestion/1000).toInt()
+
+        }
+
+
+
+        startQuestion = finQuestion
+
         progressBar?.progressTintList = ColorStateList.valueOf(Color.parseColor("#CD038350"))
 
 
@@ -112,6 +147,10 @@ class QuestionClickListener: View.OnClickListener {
         val intent = Intent(v?.context?.applicationContext, QuizResultActivity::class.java)
         intent.putExtra("points", pointsReceived)
         intent.putExtra("totalPoints", questionList.size)
+        intent.putExtra("spentTime", spentAllTime)
+        intent.putExtra("categoryName", categoryName)
+        intent.putExtra("difficultyLevel", difficultyLevel)
+        intent.putExtra("difficultName", difficultName)
         v?.context?.startActivity(intent)
     }
 
@@ -134,7 +173,7 @@ class QuestionClickListener: View.OnClickListener {
             //viewList[0].text = question.title
 
 
-//            viewList[1].text = question.answers.answer1.title
+            viewList[1].text = question.answers.answer1.title
             viewList[2].text = question.answers.answer2.title
             viewList[3].text = question.answers.answer3.title
             viewList[4].text = question.answers.answer4.title
