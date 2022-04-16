@@ -37,6 +37,8 @@ class QuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.quiz_activity)
 
+
+
             val progressBarTimer = findViewById<ProgressBar>(R.id.progress_bar_timer)
             var animation = ObjectAnimator.ofInt(progressBarTimer, "progress", 100,0)
             progressBarTimer.progressTintList = ColorStateList.valueOf(Color.parseColor("#CD038350"))
@@ -71,6 +73,7 @@ class QuizActivity : AppCompatActivity() {
 
                 val db = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app//").reference
                 db.child("questionsCategories").addValueEventListener(object: ValueEventListener{
+                    @RequiresApi(Build.VERSION_CODES.O)
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.exists())
                         {
@@ -420,6 +423,7 @@ class QuizActivity : AppCompatActivity() {
 
             }
 
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun onFinish() {
 
                 progressBar.progressTintList = ColorStateList.valueOf(Color.parseColor("#CD038350"))

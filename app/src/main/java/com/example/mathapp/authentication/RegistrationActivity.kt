@@ -14,6 +14,7 @@ import android.view.View
 import android.widget.Toast
 import com.example.mathapp.LogoTextApp
 import com.example.mathapp.R
+import com.example.mathapp.authentication.classes.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -25,6 +26,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.registration_activity.*
 import kotlinx.android.synthetic.main.registration_activity.user_email
 import kotlinx.android.synthetic.main.registration_activity.user_password
+import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -244,18 +246,24 @@ class RegistrationActivity : AppCompatActivity() {
 
         val email: String = user_email.text.toString()
         val password: String = user_password.text.toString()
-
+        val name: String = user_first_name.text.toString()
 
         if (checkUserInputEmail(user_email.text.toString()) && checkUserInputPassword(user_password.text.toString()) && checkUserInputPassword(repeat_user_password.text.toString())  && checkUserInputFirtName(user_first_name.text.toString())
                     && checkInputUserRepeatPassword.text.toString() != "${applicationContext.getString(R.string.match_passwords)}"
         ){
             if (user_password.text.toString() == repeat_user_password.text.toString())
             {
+                val time = Date().time
+
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password)
                     .addOnCompleteListener(){
                             task ->
                         if (task.isSuccessful)
                         {
+                            val userUId = FirebaseAuth.getInstance().currentUser!!.uid
+                            val user = User(userUId,name, email, arrayListOf())
+                            val db = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
+                            db.child("Users").child(userUId).setValue(user)
 
                             Toast.makeText(applicationContext, "${applicationContext.getString(R.string.successfully_registered)}", Toast.LENGTH_LONG).show()
                             val intent = Intent(applicationContext, LoginActivity::class.java)

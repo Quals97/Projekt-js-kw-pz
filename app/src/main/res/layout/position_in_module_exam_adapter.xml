@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#878783"
-        android:minHeight="70dp"/>
+        android:minHeight="120dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,28 +24,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:minHeight="40dp"
+            android:minHeight="70dp"
             android:background="#878783"/>
         <TextView
             android:id="@+id/questionAnswer2ModuleExamActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:minHeight="40dp"
+            android:minHeight="70dp"
             android:background="#878783"/>
         <TextView
             android:id="@+id/questionAnswer3ModuleExamActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:minHeight="40dp"
+            android:minHeight="70dp"
             android:background="#878783"/>
         <TextView
             android:id="@+id/questionAnswer4ModuleExamActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:minHeight="40dp"
+            android:minHeight="70dp"
             android:background="#878783"/>
 
     </LinearLayout>

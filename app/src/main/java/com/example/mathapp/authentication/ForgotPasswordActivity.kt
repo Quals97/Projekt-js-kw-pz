@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.example.mathapp.R
+import com.example.mathapp.authentication.classes.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.forgot_password_activity.*

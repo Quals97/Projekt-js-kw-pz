@@ -56,6 +56,7 @@
     <string name="difficult">Difficult</string>
     <string name="select_the_difficulty_level">Select the difficulty level</string>
     <string name="select_a_module">Select a module</string>
+    <string name="select_module">Select a module to learn</string>
 
 
 </resources>

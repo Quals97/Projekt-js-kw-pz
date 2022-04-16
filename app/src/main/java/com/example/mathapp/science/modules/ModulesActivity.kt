@@ -96,13 +96,28 @@ class ModulesActivity : AppCompatActivity() {
                     examButton.setBackgroundColor(Color.parseColor("#E4731B"))
                     examButton.setTextColor(Color.WHITE)
 
+                    val idModulesPassed = intent.getStringExtra("idModulesPassed")
+                    val pointsModulesPassed = intent.getStringExtra("pointsModulesPassed")
+                    val statusModulesPassed = intent.getStringExtra("statusModulesPassed")
+                    val nameModulesPassed = intent.getStringExtra("nameModulesPassed")
+                    println("ModulesPassedModulesActivityid: ${idModulesPassed}")
+                    println("ModulesPassedModulesActivityPoints: ${pointsModulesPassed}")
+                    println("ModulesPassedModulesActivityStatus: ${statusModulesPassed}")
+                    println("ModulesPassedModulesActivityName: ${nameModulesPassed}")
+
+
 
                     layout_add.addView(examButton)
+
 
                     examButton.setOnClickListener{
                         var intent = Intent(applicationContext, ModuleExamActivity::class.java)
                         intent.putExtra("idModule", modules[modulePosition].id)
                         intent.putExtra("categoryName", modules[modulePosition].name)
+                        intent.putExtra("idModulesPassed", idModulesPassed)
+                        intent.putExtra("pointsModulesPassed", pointsModulesPassed)
+                        intent.putExtra("statusModulesPassed", statusModulesPassed)
+                        intent.putExtra("nameModulesPassed", nameModulesPassed)
                         startActivity(intent)
 
                     }
