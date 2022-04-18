@@ -5,6 +5,7 @@ class User {
     var name: String = String()
     var email: String = String()
     var modulesPassed: ArrayList<ModulesPassed> = arrayListOf()
+    var userSettings: UserSettings = UserSettings()
 
 
     constructor(id: String, name: String, email: String, modulesPassed: ArrayList<ModulesPassed>)

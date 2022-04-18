@@ -7,16 +7,28 @@
     android:orientation="vertical"
     tools:context=".science.moduleexam.ModuleExamActivity">
 
+    <TextView
 
-
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E4731B"
+        android:minHeight="60dp"
+        android:padding="10dp"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:text="@string/final_exam_of_the_module" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+
 
             <androidx.recyclerview.widget.RecyclerView
 
@@ -25,11 +37,14 @@
                 android:layout_height="match_parent"
 
                 />
+
             <Button
                 android:id="@+id/btn_module_exam_activity"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="#E4731B"
+                />
 
 
         </LinearLayout>

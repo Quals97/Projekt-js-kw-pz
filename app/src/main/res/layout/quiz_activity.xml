@@ -84,6 +84,7 @@
                     android:layout_height="90dp"
                     android:background="@drawable/round_question_activity"
                     android:gravity="center"
+                    android:textColor="@color/white"
                     android:text="A"
                     android:textSize="50dp" />
 
@@ -114,6 +115,7 @@
                     android:layout_height="90dp"
                     android:background="@drawable/round_question_activity"
                     android:gravity="center"
+                    android:textColor="@color/white"
                     android:text="B"
                     android:textSize="50dp" />
 
@@ -144,6 +146,7 @@
                     android:layout_height="90dp"
                     android:background="@drawable/round_question_activity"
                     android:gravity="center"
+                    android:textColor="@color/white"
                     android:text="C"
                     android:textSize="50dp" />
 
@@ -174,6 +177,7 @@
                     android:layout_height="90dp"
                     android:background="@drawable/round_question_activity"
                     android:gravity="center"
+                    android:textColor="@color/white"
                     android:text="D"
                     android:textSize="50dp" />
 

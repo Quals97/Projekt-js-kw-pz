@@ -3,14 +3,17 @@
     android:id="@+id/position_in_module_exam_adapter"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
     android:orientation="vertical"
     >
     <TextView
         android:id="@+id/questionTitleModuleExamActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#878783"
+        android:gravity="center"
+        android:padding="10dp"
+        android:background="#E4731B"
         android:minHeight="120dp"/>
 
     <LinearLayout
@@ -23,30 +26,38 @@
             android:id="@+id/questionAnswer1ModuleExamActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_marginBottom="10dp"
             android:minHeight="70dp"
-            android:background="#878783"/>
+            android:background="@drawable/round_answer_module_exam_adapter"
+            />
         <TextView
             android:id="@+id/questionAnswer2ModuleExamActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_marginBottom="10dp"
             android:minHeight="70dp"
-            android:background="#878783"/>
+            android:background="@drawable/round_answer_module_exam_adapter"
+            />
         <TextView
             android:id="@+id/questionAnswer3ModuleExamActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_marginBottom="10dp"
             android:minHeight="70dp"
-            android:background="#878783"/>
+            android:background="@drawable/round_answer_module_exam_adapter"
+            />
         <TextView
             android:id="@+id/questionAnswer4ModuleExamActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_marginBottom="10dp"
             android:minHeight="70dp"
-            android:background="#878783"/>
+            android:background="@drawable/round_answer_module_exam_adapter"
+            />
 
     </LinearLayout>
 

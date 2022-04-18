@@ -1,5 +1,6 @@
 package com.example.mathapp.challenges.quizfiles
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -7,7 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mathapp.R
+import com.example.mathapp.authentication.classes.User
 import com.example.mathapp.challenges.classes.Category
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.position_in_category_recycler_view.view.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -21,17 +28,51 @@ class CategoryAdapter (var context: Context, var categoriesList: ArrayList<Categ
         return CategoryViewHolder(positionList)
     }
 
-    override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CategoryViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val layout = holder.view.position_in_category_recycler_view
         val categoryName = holder.view.categoryName
 
         categoryName.text = categoriesList[position].categoryName
         layout.setOnClickListener{
-            val intent = Intent(holder.view.context.applicationContext, QuizActivity::class.java)
-            intent.putExtra("difficultyLevel", difficultyLevel)
-            intent.putExtra("position", position)
-            intent.putExtra("difficultName", difficultName)
-            holder.view.context.startActivity(intent)
+
+            val db = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
+            db.child("Users")
+                .addListenerForSingleValueEvent(object : ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists())
+                        {
+                            var users: ArrayList<User> = arrayListOf()
+                            for (u in snapshot.children)
+                            {
+                                println("u: ${u.children}")
+                                val user = u.getValue(User::class.java)
+                                users.add(user!!)
+                            }
+
+
+                            var currentUser: List<User> = users.filter { n->n.id == FirebaseAuth.getInstance().currentUser!!.uid }
+                            val intent = Intent(holder.view.context.applicationContext, QuizActivity::class.java)
+                            intent.putExtra("difficultyLevel", difficultyLevel)
+                            intent.putExtra("position", position)
+                            intent.putExtra("difficultName", difficultName)
+                            intent.putExtra("userSettingsTime", currentUser[0].userSettings.quizSettings.delayTimePerQuestion)
+
+                            holder.view.context.startActivity(intent)
+
+
+                            println("CURRENT USER: ${currentUser[0].email} ${currentUser[0].userSettings.quizSettings.delayTimePerQuestion}")
+
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+
+                    }
+
+
+                })
+
+
 
         }
 

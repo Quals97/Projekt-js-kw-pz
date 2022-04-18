@@ -57,6 +57,9 @@
     <string name="select_the_difficulty_level">Select the difficulty level</string>
     <string name="select_a_module">Select a module</string>
     <string name="select_module">Select a module to learn</string>
+    <string name="final_exam_of_the_module">Final exam of the module</string>
+    <string name="quiz_settings">Quiz settings</string>
+    <string name="text_information_about_delay_time">This option allows you to freeze the time at the value in seconds specified above. This time will be stopped after selecting the answer in the quiz.</string>
 
 
 </resources>

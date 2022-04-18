@@ -25,6 +25,8 @@ import kotlin.concurrent.schedule
 
 class QuizActivity : AppCompatActivity() {
     var totalTimeOnQestion: Long = 20000
+
+//    var delayPerQuestion: Long = intent.getStringExtra("userSettingsTime")!!.toLong()
     var delayPerQuestion: Long = 3000
     var correctAnswerColor = Color.parseColor("#CD038350")
     var wrongAnswerColor = Color.parseColor("#780606")
@@ -37,7 +39,8 @@ class QuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.quiz_activity)
 
-
+            var delayPerQuestion = intent.getStringExtra("userSettingsTime")!!.toLong()
+            println("DELAYSETTINGS ${delayPerQuestion}")
 
             val progressBarTimer = findViewById<ProgressBar>(R.id.progress_bar_timer)
             var animation = ObjectAnimator.ofInt(progressBarTimer, "progress", 100,0)
@@ -59,6 +62,10 @@ class QuizActivity : AppCompatActivity() {
             var C = findViewById<TextView>(R.id.text_view_C)
             var D = findViewById<TextView>(R.id.text_view_D)
 
+            A.setTextColor(Color.WHITE)
+            B.setTextColor(Color.WHITE)
+            C.setTextColor(Color.WHITE)
+            D.setTextColor(Color.WHITE)
 
 
 
@@ -176,8 +183,14 @@ class QuizActivity : AppCompatActivity() {
 
                                                 this@QuizActivity.runOnUiThread(java.lang.Runnable {
                                                     var id = questionClickListener.currentIdQuestion
+                                                    if (questionClickListener.currentIdQuestion == selectedQuestions.size)
+                                                    {
+                                                        timerCountDownTimer.cancel()
+                                                        finish()
+                                                    }
                                                     if(id < selectedQuestions.size)
                                                     {
+
                                                         question_title_1.text = "${selectedQuestions[id].title}"
                                                         //answer1.text = "${selectedQuestions[id].answers.answer1.title}"
 
@@ -244,8 +257,14 @@ class QuizActivity : AppCompatActivity() {
 
                                         this@QuizActivity.runOnUiThread(java.lang.Runnable {
                                             var id = questionClickListener.currentIdQuestion
+                                            if (questionClickListener.currentIdQuestion == selectedQuestions.size)
+                                            {
+                                                timerCountDownTimer.cancel()
+                                                finish()
+                                            }
                                             if(id < selectedQuestions.size)
                                             {
+
                                                 question_title_1.text = "${selectedQuestions[id].title}"
 
                                             }
@@ -296,6 +315,12 @@ class QuizActivity : AppCompatActivity() {
 
                                         this@QuizActivity.runOnUiThread(java.lang.Runnable {
                                             var id = questionClickListener.currentIdQuestion
+
+                                            if (questionClickListener.currentIdQuestion == selectedQuestions.size)
+                                            {
+                                                timerCountDownTimer.cancel()
+                                                finish()
+                                            }
                                             if(id < selectedQuestions.size)
                                             {
                                                 question_title_1.text = "${selectedQuestions[id].title}"
@@ -348,6 +373,12 @@ class QuizActivity : AppCompatActivity() {
 
                                         this@QuizActivity.runOnUiThread(java.lang.Runnable {
                                             var id = questionClickListener.currentIdQuestion
+
+                                            if (questionClickListener.currentIdQuestion == selectedQuestions.size)
+                                            {
+                                                timerCountDownTimer.cancel()
+                                                finish()
+                                            }
                                             if(id < selectedQuestions.size)
                                             {
                                                 question_title_1.text = "${selectedQuestions[id].title}"

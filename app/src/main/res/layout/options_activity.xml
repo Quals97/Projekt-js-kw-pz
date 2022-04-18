@@ -19,6 +19,17 @@
         android:text="@string/change_password"
         />
     <Button
+        android:id="@+id/quiz_settings_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E4731B"
+        android:enabled="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/quiz_settings"
+        />
+    <Button
         android:id="@+id/logout_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

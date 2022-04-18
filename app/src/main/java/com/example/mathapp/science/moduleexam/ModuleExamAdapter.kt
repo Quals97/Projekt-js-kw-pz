@@ -3,10 +3,14 @@ package com.example.mathapp.science.moduleexam
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Typeface
+import android.graphics.drawable.GradientDrawable
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mathapp.MainActivity
 import com.example.mathapp.R
@@ -30,20 +34,26 @@ class ModuleExamAdapter (var context: Context, var category: Category, val check
     }
 
     override fun onBindViewHolder(holder: MyModuleExamAdapter, position: Int) {
+
+        val percentToPass = 60
+        val questionsSize: Int = category.questions0.size
+
+        val layout = holder.view.position_in_module_exam_adapter
         var questionTitle = holder.view.questionTitleModuleExamActivity
         var answer1 = holder.view.questionAnswer1ModuleExamActivity
         var answer2 = holder.view.questionAnswer2ModuleExamActivity
         var answer3 = holder.view.questionAnswer3ModuleExamActivity
         var answer4 = holder.view.questionAnswer4ModuleExamActivity
 
-        println("ModuleExamAdapterName: ${modulesPassed.name}")
-        println("ModuleExamAdapterId: ${modulesPassed.id}")
-        println("ModuleExamAdapterPoints: ${modulesPassed.points}")
-        println("ModuleExamAdapterStatus: ${modulesPassed.status}")
 
 
 
-        questionTitle.text = "${category.questions0[position].title}"
+
+
+
+
+
+        questionTitle.text = "${position+1}. ${category.questions0[position].title}"
         answer1.text = "${category.questions0[position].answers.answer1.title}"
         answer2.text = "${category.questions0[position].answers.answer2.title}"
         answer3.text = "${category.questions0[position].answers.answer3.title}"
@@ -57,12 +67,7 @@ class ModuleExamAdapter (var context: Context, var category: Category, val check
 
         answer1.setOnClickListener {
 
-
-
-                answer2.setBackgroundColor(Color.parseColor("#878783"))
-                answer3.setBackgroundColor(Color.parseColor("#878783"))
-                answer4.setBackgroundColor(Color.parseColor("#878783"))
-                it.setBackgroundColor(Color.parseColor("#E4731B"))
+                setXmlOnButton(answer1, answer2, answer3, answer4)
 
             userAnswers[position] = Pair(category.questions0[position].id,answer1.text.toString())
             println("size: ${userAnswers.size}")
@@ -70,30 +75,28 @@ class ModuleExamAdapter (var context: Context, var category: Category, val check
         }
         answer2.setOnClickListener {
 
-            answer1.setBackgroundColor(Color.parseColor("#878783"))
-            answer3.setBackgroundColor(Color.parseColor("#878783"))
-            answer4.setBackgroundColor(Color.parseColor("#878783"))
-            it.setBackgroundColor(Color.parseColor("#E4731B"))
+            setXmlOnButton(answer2, answer1, answer3, answer4)
+
+
             userAnswers[position] = Pair(category.questions0[position].id,answer2.text.toString())
 
 
 
         }
         answer3.setOnClickListener {
-            answer1.setBackgroundColor(Color.parseColor("#878783"))
-            answer2.setBackgroundColor(Color.parseColor("#878783"))
-            answer4.setBackgroundColor(Color.parseColor("#878783"))
-            it.setBackgroundColor(Color.parseColor("#E4731B"))
+
+            setXmlOnButton(answer3, answer2, answer1, answer4)
+
+
             userAnswers[position] = Pair(category.questions0[position].id,answer3.text.toString())
 
 
 
         }
         answer4.setOnClickListener {
-            answer1.setBackgroundColor(Color.parseColor("#878783"))
-            answer2.setBackgroundColor(Color.parseColor("#878783"))
-            answer3.setBackgroundColor(Color.parseColor("#878783"))
-            it.setBackgroundColor(Color.parseColor("#E4731B"))
+
+            setXmlOnButton( answer4, answer3, answer2, answer1)
+
             userAnswers[position] = Pair(category.questions0[position].id,answer4.text.toString())
 
         }
@@ -107,7 +110,8 @@ class ModuleExamAdapter (var context: Context, var category: Category, val check
 
             var check: Boolean = false
 
-            check = correctAnswers.size >= 3
+            check = (correctAnswers.size*100)/questionsSize >= percentToPass
+            //check = correctAnswers.size >= 3
 
             val time = Date().time
             val db = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
@@ -131,6 +135,7 @@ class ModuleExamAdapter (var context: Context, var category: Category, val check
 
             }
             val intent = Intent(holder.view.context.applicationContext, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             holder.view.context.startActivity(intent)
         }
     }
@@ -139,6 +144,20 @@ class ModuleExamAdapter (var context: Context, var category: Category, val check
         return category.questions0.size
     }
 
+
+}
+
+private fun setXmlOnButton(answer1: TextView, answer2: TextView, answer3: TextView, answer4: TextView){
+    answer1.setTypeface(null, Typeface.BOLD)
+    answer1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14F)
+    answer2.setTypeface(null, Typeface.NORMAL)
+    answer3.setTypeface(null, Typeface.NORMAL)
+    answer4.setTypeface(null, Typeface.NORMAL)
+
+    answer2.setBackgroundResource(R.drawable.round_answer_module_exam_adapter)
+    answer3.setBackgroundResource(R.drawable.round_answer_module_exam_adapter)
+    answer4.setBackgroundResource(R.drawable.round_answer_module_exam_adapter)
+    answer1.setBackgroundResource(R.drawable.round_answer_module_exam_adapter_color)
 
 }
 

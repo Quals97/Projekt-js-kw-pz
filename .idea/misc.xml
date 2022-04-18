@@ -7,12 +7,15 @@
         <entry key="..\:/PAM/MathApp/app/src/main/res/drawable/cos.xml" value="0.2851851851851852" />
         <entry key="..\:/PAM/MathApp/app/src/main/res/drawable/ic_baseline_remove_red_eye_24.xml" value="0.2851851851851852" />
         <entry key="..\:/PAM/MathApp/app/src/main/res/drawable/ic_baseline_remove_red_eye_24_1.xml" value="0.1" />
+        <entry key="..\:/PAM/MathApp/app/src/main/res/drawable/round_answer_module_exam_adapter.xml" value="0.3828125" />
+        <entry key="..\:/PAM/MathApp/app/src/main/res/drawable/round_answer_module_exam_adapter_color.xml" value="0.3828125" />
         <entry key="..\:/PAM/MathApp/app/src/main/res/drawable/round_question_activity.xml" value="0.3828125" />
         <entry key="..\:/PAM/MathApp/app/src/main/res/drawable/roundup.xml" value="0.3828125" />
         <entry key="..\:/PAM/MathApp/app/src/main/res/drawable/show_password.xml" value="0.24322916666666666" />
         <entry key="..\:/PAM/MathApp/app/src/main/res/layout/activity_example.xml" value="0.36666666666666664" />
         <entry key="..\:/PAM/MathApp/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/PAM/MathApp/app/src/main/res/layout/activity_main.xml" value="0.35260416666666666" />
+        <entry key="..\:/PAM/MathApp/app/src/main/res/layout/activity_quiz_settings.xml" value="0.5" />
         <entry key="..\:/PAM/MathApp/app/src/main/res/layout/category_activity.xml" value="0.36666666666666664" />
         <entry key="..\:/PAM/MathApp/app/src/main/res/layout/challenge_activity.xml" value="0.36666666666666664" />
         <entry key="..\:/PAM/MathApp/app/src/main/res/layout/challenges_activity.xml" value="0.36666666666666664" />

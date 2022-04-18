@@ -45,4 +45,7 @@
     <string name="select_the_difficulty_level">Wybierz poziom trudności</string>
     <string name="select_a_module">Wyberz moduł</string>
     <string name="select_module">Wybierz moduł do nauki</string>
+    <string name="final_exam_of_the_module">Egzamin końcowy z modułu</string>
+    <string name="quiz_settings">Opcje quizu</string>
+    <string name="text_information_about_delay_time">Opcja pozwala na zatrzymanie czasu na określoną wyżej wartość w sekundach. Czas ten zatrzymany będzie po wybraniu odpowiedzi w quizie.</string>
 </resources>

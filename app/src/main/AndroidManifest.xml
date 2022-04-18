@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
+            android:name=".useroption.quizsettings.QuizSettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".science.moduleexam.ModuleExamActivity"
             android:exported="false" />
         <activity
