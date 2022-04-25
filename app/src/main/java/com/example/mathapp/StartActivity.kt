@@ -143,6 +143,33 @@ class StartActivity : AppCompatActivity() {
             )
         )
 
+        val modulePrzyb = Module(time.toString(), "Przybliżenia",
+            arrayListOf(),
+            arrayListOf(
+                Section("0","",
+                    arrayListOf(
+                        Paragraph("0", "text", "Przybliżając liczbę w postaci dziesiętnej, zwykle stosujemy regułę zaokrąglania, " +
+                                "która polega na odrzuceniu końcowych cyfr tej liczby:\n" +
+                                "- gdy pierwsza z odrzuconych cyfr jest: 0, 1, 2, 3, 4, " +
+                                "to ostatni z zachowanych cyfr pozostawiamy bez zmian;" +
+                                "- gdy pierwszą z odrzuconych cyfr jest: 5, 6, 7, 8, 9, " +
+                                "to ostatnią z zachowanych cyfr zwiększamy o jeden.\n"),
+                        Paragraph("1", "text", "Gdy przybliżenie liczby jest od niej " +
+                                "mniejsze, to mówimy o przybliżeniu z niedomiarem. \n" +
+                                "Natomiast gdy przybliżenie liczby jest od niej większe, " +
+                                "to mówimy o przybliżeniu z nadmiarem.\n"),
+                        Paragraph("2", "text", "Należy pamiętać, że decydując " +
+                                "się na użycie przybliżonej wartości liczby, otrzymujemy wynik z pewnym błędem.\n" +
+                                "Błąd przybliżenia jest równy różnicy liczby i jej przybliżenia.\n" +
+                                "Zastępując liczbę 19.645 jej przybliżoną wartością 19.7, popełniamy błąd:\n" +
+                                "19.645-19.7 = -0.055")
+
+                    )
+                    )
+
+            )
+
+            )
 
         val module3 = Module(time.toString(), "Liczby naturalne",
             arrayListOf(),
@@ -263,6 +290,60 @@ class StartActivity : AppCompatActivity() {
 //
 //
 //        )
+
+        var categoryPrzyb = Category(
+            time.toString(), "Przybliżenia",
+            arrayListOf(),
+            arrayListOf(),
+            arrayListOf(),
+            arrayListOf(
+                Question("0", "Która liczba jest przybliżona z niedomiarem do liczby 136.274?",
+                    Answers(
+                        Answer("136.27"),
+                        Answer("136.28"),
+                        Answer("136.275"),
+                        Answer("136.280"),
+                        Answer("136.27")
+                    ),
+                    "0"
+                ),
+                Question("1", "Która liczba jest przybliżona z nadmiarem do liczby 24.375?",
+                    Answers(
+                        Answer("24.38"),
+                        Answer("24.37"),
+                        Answer("24.400"),
+                        Answer("24.379"),
+                        Answer("24.38")
+                    ),
+                    "0"
+                    ),
+                Question("2", "Przybliżona wartośc liczby z dokładnością do jednego miejsca " +
+                        "po przecinku, oraz jego błąd przybliżenia liczby 0.0399 to?",
+                    Answers(
+                        Answer("0, błąd: 0.0399"),
+                        Answer("0.03 błąd: 0.0099"),
+                        Answer("0.4 błąd: -0.3601"),
+                        Answer("1 błąd: -0.9601"),
+                        Answer("0, błąd: 0.0399")
+                    ),
+                    "0"
+                ),
+                Question("3", "Liczba 3,141592653589 przedstawiona z dokładnością do 4 miejsc po przecinku ma postać?",
+                    Answers(
+                        Answer("3,1415"),
+                        Answer("3,14159"),
+                        Answer("3,141"),
+                        Answer("3,1416"),
+                        Answer("3,1415")
+                    ),
+                    "0"
+                ),
+
+            )
+
+
+        )
+
         val category3 = Category(
             time.toString(), "Zbiory",
             arrayListOf(
@@ -852,8 +933,8 @@ class StartActivity : AppCompatActivity() {
 
         var dbReference = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
         //dbReference.child("Modules").child(time.toString()).setValue(module)
-        //dbReference.child("Modules").child(time.toString()).setValue(module)
-        //dbReference.child("questionsCategories").child(category3.id).setValue(category3)
+        //dbReference.child("Modules").child(time.toString()).setValue(modulePrzyb)
+        dbReference.child("questionsCategories").child(category3.id).setValue(categoryPrzyb)
 
 
 

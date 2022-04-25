@@ -44,6 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="#E4731B"
+                android:text="@string/result"
                 />
 
 
