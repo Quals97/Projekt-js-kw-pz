@@ -5,12 +5,14 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
+import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mathapp.MainActivity
 import com.example.mathapp.R
@@ -18,14 +20,16 @@ import com.example.mathapp.authentication.classes.ModulesPassed
 import com.example.mathapp.challenges.classes.Category
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.module_exam_activity.*
 import kotlinx.android.synthetic.main.module_exam_activity.view.*
 import kotlinx.android.synthetic.main.position_in_module_exam_adapter.view.*
+import kotlinx.android.synthetic.main.quiz_activity.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
 class ModuleExamAdapter (var context: Context, var category: Category, val checkAnswerButton: Button,
                          var userAnswers: ArrayList<Pair<String, String>> = arrayListOf(),
-                         var modulesPassed: ModulesPassed
+                         var modulesPassed: ModulesPassed?
                          ):RecyclerView.Adapter<MyModuleExamAdapter>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyModuleExamAdapter {
         val inflater = LayoutInflater.from(parent.context)
@@ -34,7 +38,6 @@ class ModuleExamAdapter (var context: Context, var category: Category, val check
     }
 
     override fun onBindViewHolder(holder: MyModuleExamAdapter, position: Int) {
-
         val percentToPass = 60
         val questionsSize: Int = category.questions0.size
 
@@ -62,49 +65,173 @@ class ModuleExamAdapter (var context: Context, var category: Category, val check
         var id = category.questions0[position].id
 
 
+//        for (i in userAnswers)
+//        {
+//            println("UserAnswers: ${i.first} : ${i.second}")
+//        }
+
+        if(modulesPassed == null)
+       {
+           if (category.questions0[position].answers.correctAnswer.title == userAnswers[position].second)
+           {
+               if (answer1.text == userAnswers[position].second)
+               {
+                   answer1.setBackgroundColor(Color.GREEN)
+
+               }else if (answer2.text == userAnswers[position].second)
+               {
+                   answer2.setBackgroundColor(Color.GREEN)
+
+               }else if (answer3.text == userAnswers[position].second){
+                   answer3.setBackgroundColor(Color.GREEN)
+
+               }else if (answer4.text == userAnswers[position].second){
+                   answer4.setBackgroundColor(Color.GREEN)
+
+               }
+           }else if (category.questions0[position].answers.correctAnswer.title != userAnswers[position].second)
+           {
+               if (answer1.text == userAnswers[position].second)
+               {
+                   answer1.setBackgroundColor(Color.RED)
+                   if (answer2.text == category.questions0[position].answers.correctAnswer.title)
+                   {
+                       answer2.setBackgroundColor(Color.GREEN)
+                   }else if (answer3.text == category.questions0[position].answers.correctAnswer.title)
+                   {
+                       answer3.setBackgroundColor(Color.GREEN)
+                   }else if (answer4.text == category.questions0[position].answers.correctAnswer.title)
+                   {
+                       answer4.setBackgroundColor(Color.GREEN)
+                   }
+
+               }else if (answer2.text == userAnswers[position].second)
+               {
+                   answer2.setBackgroundColor(Color.RED)
+                   if (answer1.text == category.questions0[position].answers.correctAnswer.title)
+                   {
+                       answer1.setBackgroundColor(Color.GREEN)
+                   }else if (answer3.text == category.questions0[position].answers.correctAnswer.title)
+                   {
+                       answer3.setBackgroundColor(Color.GREEN)
+                   }else if (answer4.text == category.questions0[position].answers.correctAnswer.title)
+                   {
+                       answer4.setBackgroundColor(Color.GREEN)
+                   }
+
+               }else if (answer3.text == userAnswers[position].second){
+                   answer3.setBackgroundColor(Color.RED)
+                   if (answer1.text == category.questions0[position].answers.correctAnswer.title)
+                   {
+                       answer1.setBackgroundColor(Color.GREEN)
+                   }else if (answer2.text == category.questions0[position].answers.correctAnswer.title)
+                   {
+                       answer2.setBackgroundColor(Color.GREEN)
+                   }else if (answer4.text == category.questions0[position].answers.correctAnswer.title)
+                   {
+                       answer4.setBackgroundColor(Color.GREEN)
+                   }
+
+               }else if (answer4.text == userAnswers[position].second){
+                   answer4.setBackgroundColor(Color.RED)
+                   if (answer1.text == category.questions0[position].answers.correctAnswer.title)
+                   {
+                       answer1.setBackgroundColor(Color.GREEN)
+                   }else if (answer2.text == category.questions0[position].answers.correctAnswer.title)
+                   {
+                       answer2.setBackgroundColor(Color.GREEN)
+                   }else if (answer3.text == category.questions0[position].answers.correctAnswer.title)
+                   {
+                       answer3.setBackgroundColor(Color.GREEN)
+                   }
+
+               }
+           }
+
+//            if (answer1.text == userAnswers[position].second)
+//            {
+//                answer1.setBackgroundColor(Color.GREEN)
+//            }else{
+//                if (answer2.text == userAnswers[position].second)
+//                {
+//                    answer1.setBackgroundColor(Color.GREEN)
+//                    answer2.setBackgroundColor(Color.RED)
+//                }else if(answer3.text == userAnswers[position].second)
+//                {
+//                    answer1.setBackgroundColor(Color.GREEN)
+//                    answer3.setBackgroundColor(Color.RED)
+//                }else if(answer4.text == userAnswers[position].second)
+//                {
+//                    answer1.setBackgroundColor(Color.GREEN)
+//                    answer4.setBackgroundColor(Color.RED)
+//                }
+//            }
+
+
+//            if (answer2.text.toString() == category.questions0[position].answers.correctAnswer.title)
+//            {
+//               answer2.setBackgroundColor(Color.GREEN)
+//            }
+//            if (answer3.text.toString() == category.questions0[position].answers.correctAnswer.title)
+//            {
+//               answer3.setBackgroundColor(Color.GREEN)
+//            }
+//            if (answer4.text.toString() == category.questions0[position].answers.correctAnswer.title)
+//            {
+//               answer4.setBackgroundColor(Color.GREEN)
+//            }
+
+
+       }else{
 
 
 
-        answer1.setOnClickListener {
-
-                setXmlOnButton(answer1, answer2, answer3, answer4)
-
-            userAnswers[position] = Pair(category.questions0[position].id,answer1.text.toString())
-            println("size: ${userAnswers.size}")
-
-        }
-        answer2.setOnClickListener {
-
-            setXmlOnButton(answer2, answer1, answer3, answer4)
-
-
-            userAnswers[position] = Pair(category.questions0[position].id,answer2.text.toString())
 
 
 
-        }
-        answer3.setOnClickListener {
 
-            setXmlOnButton(answer3, answer2, answer1, answer4)
+           answer1.setOnClickListener {
+
+               setXmlOnButton(answer1, answer2, answer3, answer4)
+
+               userAnswers[position] = Pair(category.questions0[position].id,answer1.text.toString())
+               println("size: ${userAnswers.size}")
+
+           }
+           answer2.setOnClickListener {
+
+               setXmlOnButton(answer2, answer1, answer3, answer4)
 
 
-            userAnswers[position] = Pair(category.questions0[position].id,answer3.text.toString())
+               userAnswers[position] = Pair(category.questions0[position].id,answer2.text.toString())
 
 
 
-        }
-        answer4.setOnClickListener {
+           }
+           answer3.setOnClickListener {
 
-            setXmlOnButton( answer4, answer3, answer2, answer1)
+               setXmlOnButton(answer3, answer2, answer1, answer4)
 
-            userAnswers[position] = Pair(category.questions0[position].id,answer4.text.toString())
 
-        }
+               userAnswers[position] = Pair(category.questions0[position].id,answer3.text.toString())
+
+
+
+           }
+           answer4.setOnClickListener {
+
+               setXmlOnButton( answer4, answer3, answer2, answer1)
+
+               userAnswers[position] = Pair(category.questions0[position].id,answer4.text.toString())
+
+           }
+       }
 
         checkAnswerButton.setOnClickListener {
 
 
             var correctAnswers = category.questions0.filter { n -> n.id == userAnswers[n.id.toInt()].first && n.answers.correctAnswer.title == userAnswers.get(n.id.toInt()).second }
+
 
 
 
@@ -117,26 +244,46 @@ class ModuleExamAdapter (var context: Context, var category: Category, val check
             val db = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
 
 
-
-
-            if (modulesPassed.id == "null" && modulesPassed.name == "null")
+            if (modulesPassed == null)
             {
-
-                val modulePassed = ModulesPassed(time.toString(), category.categoryName, check.toString(), correctAnswers.size.toString())
-                db.child("Users").child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child("ModulesPassed").child(time.toString()).setValue(modulePassed)
+                val intent = Intent(holder.view.context.applicationContext, MainActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                holder.view.context.startActivity(intent)
 
             }else{
-                if (correctAnswers.size > modulesPassed.points.toInt())
+                if (modulesPassed!!.id == "null" && modulesPassed!!.name == "null")
                 {
-                    val modulePassed = ModulesPassed(modulesPassed.id, category.categoryName, check.toString(), correctAnswers.size.toString())
-                    db.child("Users").child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child("ModulesPassed").child(modulesPassed.id).setValue(modulePassed)
+
+                    val modulePassed = ModulesPassed(time.toString(), category.categoryName, check.toString(), correctAnswers.size.toString())
+                    db.child("Users").child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child("ModulesPassed").child(time.toString()).setValue(modulePassed)
+
+                }else{
+                    if (correctAnswers.size > modulesPassed!!.points.toInt())
+                    {
+                        val modulePassed = ModulesPassed(modulesPassed!!.id, category.categoryName, check.toString(), correctAnswers.size.toString())
+                        db.child("Users").child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child("ModulesPassed").child(modulesPassed!!.id).setValue(modulePassed)
+
+                    }
 
                 }
+                var extra = Bundle()
+                extra.putSerializable("userAnswer", userAnswers)
 
+                val intent = Intent(holder.view.context.applicationContext, ResultModuleExamActivity::class.java)
+                intent.putExtra("categoryName", category.categoryName)
+                intent.putExtra("userAnswerExtra", extra)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                holder.view.context.startActivity(intent)
             }
-            val intent = Intent(holder.view.context.applicationContext, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            holder.view.context.startActivity(intent)
+
+
+
+//            val intent = Intent(holder.view.context.applicationContext, MainActivity::class.java)
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+//            holder.view.context.startActivity(intent)
+
+
+
         }
     }
 
@@ -146,6 +293,7 @@ class ModuleExamAdapter (var context: Context, var category: Category, val check
 
 
 }
+
 
 private fun setXmlOnButton(answer1: TextView, answer2: TextView, answer3: TextView, answer4: TextView){
     answer1.setTypeface(null, Typeface.BOLD)

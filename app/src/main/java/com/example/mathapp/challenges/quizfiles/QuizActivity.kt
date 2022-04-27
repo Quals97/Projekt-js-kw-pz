@@ -22,8 +22,11 @@ import java.time.LocalTime
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.concurrent.schedule
+import kotlin.random.Random
+import kotlin.random.Random.Default.nextInt
 
 class QuizActivity : AppCompatActivity() {
+    val sizeOfQustionInQuest: Int = 5
     var totalTimeOnQestion: Long = 20000
 
 //    var delayPerQuestion: Long = intent.getStringExtra("userSettingsTime")!!.toLong()
@@ -107,6 +110,11 @@ class QuizActivity : AppCompatActivity() {
                                 }
 
                             }
+                            var helpSelectedQuestion: ArrayList<Question> = randQuestion(selectedQuestions)
+                            selectedQuestions = arrayListOf()
+                            selectedQuestions = helpSelectedQuestion
+
+
 
 
 
@@ -192,6 +200,7 @@ class QuizActivity : AppCompatActivity() {
                                                     {
 
                                                         question_title_1.text = "${selectedQuestions[id].title}"
+//                                                        question_title_1.text = "${questionClickListener.}"
                                                         //answer1.text = "${selectedQuestions[id].answers.answer1.title}"
 
                                                     }
@@ -422,6 +431,44 @@ class QuizActivity : AppCompatActivity() {
 
 
             }
+    }
+    private fun randQuestion(questionList:ArrayList<Question>): ArrayList<Question>{
+        var randQuestionList: ArrayList<Question> = arrayListOf()
+        var hashSet: HashSet<Question> = HashSet()
+
+
+        for (i in 0 until questionList.size)
+        {
+
+            var randId: Int = Random.nextInt(0, questionList.size)
+            randQuestionList.add(questionList[randId])
+
+        }
+        hashSet = randQuestionList.toHashSet()
+        var helpList: ArrayList<Question> = arrayListOf()
+
+
+        if(hashSet.size < questionList.size)
+        {
+            while (hashSet.size < questionList.size)
+            {
+                var randomId: Int = Random.nextInt(0, questionList.size)
+                hashSet.add(questionList[randomId])
+            }
+        }
+
+        for (hs in hashSet)
+        {
+            helpList.add(hs)
+        }
+        randQuestionList = arrayListOf()
+
+        for(i in 0 until sizeOfQustionInQuest)
+        {
+            randQuestionList.add(helpList[i])
+        }
+
+        return randQuestionList
     }
 
 

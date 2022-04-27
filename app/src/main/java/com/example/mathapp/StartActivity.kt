@@ -151,7 +151,7 @@ class StartActivity : AppCompatActivity() {
                         Paragraph("0", "text", "Przybliżając liczbę w postaci dziesiętnej, zwykle stosujemy regułę zaokrąglania, " +
                                 "która polega na odrzuceniu końcowych cyfr tej liczby:\n" +
                                 "- gdy pierwsza z odrzuconych cyfr jest: 0, 1, 2, 3, 4, " +
-                                "to ostatni z zachowanych cyfr pozostawiamy bez zmian;" +
+                                "to ostatni z zachowanych cyfr pozostawiamy bez zmian;\n" +
                                 "- gdy pierwszą z odrzuconych cyfr jest: 5, 6, 7, 8, 9, " +
                                 "to ostatnią z zachowanych cyfr zwiększamy o jeden.\n"),
                         Paragraph("1", "text", "Gdy przybliżenie liczby jest od niej " +
@@ -934,7 +934,7 @@ class StartActivity : AppCompatActivity() {
         var dbReference = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
         //dbReference.child("Modules").child(time.toString()).setValue(module)
         //dbReference.child("Modules").child(time.toString()).setValue(modulePrzyb)
-        dbReference.child("questionsCategories").child(category3.id).setValue(categoryPrzyb)
+        //dbReference.child("questionsCategories").child(category3.id).setValue(categoryPrzyb)
 
 
 

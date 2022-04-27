@@ -10,32 +10,27 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_result_module_exam.*
 import kotlinx.android.synthetic.main.module_exam_activity.*
 
-class ModuleExamActivity : AppCompatActivity() {
+class ResultModuleExamActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.module_exam_activity)
-        var modulesPassed: ModulesPassed = ModulesPassed()
-        if (intent.hasExtra("idModule"))
-        {
-            val idModulesPassed = intent.getStringExtra("idModulesPassed")
-            val pointsModulesPassed = intent.getStringExtra("pointsModulesPassed")
-            val statusModulesPassed = intent.getStringExtra("statusModulesPassed")
-            val nameModulesPassed = intent.getStringExtra("nameModulesPassed")
-            modulesPassed.id = idModulesPassed.toString()
-            modulesPassed.status = statusModulesPassed.toString()
-            modulesPassed.points = pointsModulesPassed.toString()
-            modulesPassed.name = nameModulesPassed.toString()
+        setContentView(R.layout.activity_result_module_exam)
 
-            println("ModuleExamAcivityModulesActivityid: ${idModulesPassed}")
-            println("ModuleExamAcivityModulesActivityPoints: ${pointsModulesPassed}")
-            println("ModuleExamAcivityModulesActivityStatus: ${statusModulesPassed}")
-            println("ModuleExamAcivityModulesActivityName: ${nameModulesPassed}")
+
+        var userAnswersB = intent.getBundleExtra("userAnswerExtra")
+        var userAnswers: ArrayList<Pair<String, String>> = userAnswersB!!.getSerializable("userAnswer") as ArrayList<Pair<String, String>>
+
+        for (uA in userAnswers)
+        {
+            println("${uA.first} || ${uA.second}")
         }
 
+
+
         var db = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
-        db.child("questionsCategories").addValueEventListener(object : ValueEventListener{
+        db.child("questionsCategories").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists())
                 {
@@ -60,13 +55,10 @@ class ModuleExamActivity : AppCompatActivity() {
                     }
 
                     //println("List: ${categories.filter { n -> n.categoryName == "Liczby naturalne" } }" )
-                    recycler_view_module_exam.layoutManager = LinearLayoutManager(applicationContext)
-                    recycler_view_module_exam.adapter = ModuleExamAdapter(applicationContext, category, btn_module_exam_activity,
-                                                                                completedList, modulesPassed
-                                                                            )
-                    btn_module_exam_activity.setOnClickListener {
-
-                    }
+                    recycler_view_result_module_exam.layoutManager = LinearLayoutManager(applicationContext)
+                    recycler_view_result_module_exam.adapter = ModuleExamAdapter(applicationContext, category, btn_result_module_exam_activity,
+                        userAnswers, null
+                    )
 
 
                 }
@@ -78,6 +70,7 @@ class ModuleExamActivity : AppCompatActivity() {
 
 
         })
+
 
 
 
