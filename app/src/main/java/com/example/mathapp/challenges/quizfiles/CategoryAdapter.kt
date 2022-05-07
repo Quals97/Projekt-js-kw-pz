@@ -3,11 +3,13 @@ package com.example.mathapp.challenges.quizfiles
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mathapp.R
+import com.example.mathapp.authentication.classes.ModulesPassed
 import com.example.mathapp.authentication.classes.User
 import com.example.mathapp.challenges.classes.Category
 import com.google.firebase.auth.FirebaseAuth
@@ -16,6 +18,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.position_in_category_recycler_view.view.*
+import java.io.Serializable
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -49,18 +52,19 @@ class CategoryAdapter (var context: Context, var categoriesList: ArrayList<Categ
                                 users.add(user!!)
                             }
 
-
                             var currentUser: List<User> = users.filter { n->n.id == FirebaseAuth.getInstance().currentUser!!.uid }
+
                             val intent = Intent(holder.view.context.applicationContext, QuizActivity::class.java)
                             intent.putExtra("difficultyLevel", difficultyLevel)
                             intent.putExtra("position", position)
                             intent.putExtra("difficultName", difficultName)
+                            intent.putExtra("currentUserId", currentUser[0].id)
+                            intent.putExtra("currentUserName", currentUser[0].name)
+                            intent.putExtra("currentUserEmail", currentUser[0].email)
                             intent.putExtra("userSettingsTime", currentUser[0].userSettings.quizSettings.delayTimePerQuestion)
 
                             holder.view.context.startActivity(intent)
 
-
-                            println("CURRENT USER: ${currentUser[0].email} ${currentUser[0].userSettings.quizSettings.delayTimePerQuestion}")
 
                         }
                     }

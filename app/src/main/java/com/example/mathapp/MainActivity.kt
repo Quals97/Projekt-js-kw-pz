@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.example.mathapp.challenges.ChallengesActivity
+import com.example.mathapp.rankings.RankingsActivity
 import com.example.mathapp.science.ScienceActivity
 import com.example.mathapp.science.ScienceAdapter
 import com.example.mathapp.useroption.OptionsActivity
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         study_button.setOnClickListener(scienceListener)
         options_button.setOnClickListener(optionsListener)
         challenge_button.setOnClickListener(challengeListener)
+        rankings_button.setOnClickListener(rankingsListener)
 
     }
 
@@ -44,6 +46,9 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+    private val rankingsListener: View.OnClickListener = View.OnClickListener {
+        goToRankingsActivity()
+    }
 
     private val challengeListener: View.OnClickListener = View.OnClickListener {
         goToChallengeActivity()
@@ -55,6 +60,10 @@ class MainActivity : AppCompatActivity() {
 
     private val optionsListener: View.OnClickListener = View.OnClickListener {
         goToOptionsActivity()
+    }
+    private fun goToRankingsActivity(){
+        val intent = Intent(applicationContext, RankingsActivity::class.java)
+        startActivity(intent)
     }
 
     private fun goToChallengeActivity(){

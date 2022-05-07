@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.mathapp.authentication.LoginActivity
+import com.example.mathapp.authentication.classes.DayStats
 import com.example.mathapp.challenges.classes.Answer
 import com.example.mathapp.challenges.classes.Answers
 import com.example.mathapp.challenges.classes.Category
@@ -935,6 +936,7 @@ class StartActivity : AppCompatActivity() {
         //dbReference.child("Modules").child(time.toString()).setValue(module)
         //dbReference.child("Modules").child(time.toString()).setValue(modulePrzyb)
         //dbReference.child("questionsCategories").child(category3.id).setValue(categoryPrzyb)
+
 
 
 

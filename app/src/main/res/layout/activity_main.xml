@@ -31,6 +31,16 @@
         android:text="@string/challenge"
         />
     <Button
+        android:id="@+id/rankings_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#E4731B"
+        android:text="@string/rankings"
+        />
+    <Button
         android:id="@+id/options_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

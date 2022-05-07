@@ -1,0 +1,102 @@
+package com.example.mathapp.rankings
+
+import android.content.Context
+import android.os.Build
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.RecyclerView
+import com.example.mathapp.R
+import com.example.mathapp.authentication.classes.ModuleStats
+import com.google.firebase.firestore.auth.User
+import kotlinx.android.synthetic.main.position_in_rankings_recycler_view.view.*
+
+class RankingsAdapter(val context: Context, val users: ArrayList<Pair<com.example.mathapp.authentication.classes.User, ArrayList<ModuleStats>>>):RecyclerView.Adapter<MyRankingsViewHolder>(){
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyRankingsViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val positionList = inflater.inflate(R.layout.position_in_rankings_recycler_view, parent, false)
+        return MyRankingsViewHolder(positionList)
+    }
+
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    override fun onBindViewHolder(holder: MyRankingsViewHolder, position: Int) {
+        val userName = holder.view.rankings_user_email
+        val userPoints = holder.view.rankings_user_points
+        val userPosition = holder.view.rankings_user_position
+
+        var userPointsList: ArrayList<Pair<String, Int>> = arrayListOf()
+
+        when(position)
+        {
+            0->{
+                userName.textSize = 32F
+                userPoints.textSize = 32F
+                userPosition.textSize = 32F
+
+            }
+            1->{
+                userName.textSize = 25F
+                userPoints.textSize = 25F
+                userPosition.textSize = 25F
+
+            }
+            2->{
+                userName.textSize = 23F
+                userPoints.textSize = 23F
+                userPosition.textSize = 23F
+
+            }
+
+
+        }
+
+
+        for (i in 0 until users.size)
+        {
+            var pair = Pair(users[i].first.email, 0)
+            for (j in 0 until users[i].second.size)
+            {
+                pair = Pair(pair.first, pair.second.plus(users[i].second[j].points.toInt()))
+
+
+            }
+            userPointsList.add(pair)
+        }
+
+
+//        var helpList = userPointsList.sortedWith(compareBy{it.second})
+        var helpList = userPointsList.sortedBy { it.second }.reversed()
+        userPointsList = arrayListOf()
+
+        for (i in helpList)
+        {
+            userPointsList.add(i)
+        }
+
+        for (i in userPointsList)
+        {
+            println("USER POINTS LIST: ${i.first} || ${i.second}")
+        }
+        println("SIZE: ${userPointsList.size}")
+
+
+
+        userName.text = userPointsList[position].first
+        userPoints.text = userPointsList[position].second.toString()
+        userPosition.text = position.plus(1).toString()
+    }
+
+    override fun getItemCount(): Int {
+        return users.size
+    }
+
+
+}
+
+
+
+
+
+class MyRankingsViewHolder(val view: View): RecyclerView.ViewHolder(view){}

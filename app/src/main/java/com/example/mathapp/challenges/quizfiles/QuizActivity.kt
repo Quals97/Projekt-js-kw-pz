@@ -10,6 +10,8 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.example.mathapp.R
+import com.example.mathapp.authentication.classes.ModulesPassed
+import com.example.mathapp.authentication.classes.User
 import com.example.mathapp.challenges.classes.Category
 import com.example.mathapp.challenges.classes.Question
 import com.google.firebase.database.DataSnapshot
@@ -29,7 +31,7 @@ class QuizActivity : AppCompatActivity() {
     val sizeOfQustionInQuest: Int = 5
     var totalTimeOnQestion: Long = 20000
 
-//    var delayPerQuestion: Long = intent.getStringExtra("userSettingsTime")!!.toLong()
+
     var delayPerQuestion: Long = 3000
     var correctAnswerColor = Color.parseColor("#CD038350")
     var wrongAnswerColor = Color.parseColor("#780606")
@@ -42,8 +44,10 @@ class QuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.quiz_activity)
 
+
+
             var delayPerQuestion = intent.getStringExtra("userSettingsTime")!!.toLong()
-            println("DELAYSETTINGS ${delayPerQuestion}")
+            //println("DELAYSETTINGS ${delayPerQuestion}")
 
             val progressBarTimer = findViewById<ProgressBar>(R.id.progress_bar_timer)
             var animation = ObjectAnimator.ofInt(progressBarTimer, "progress", 100,0)
@@ -139,7 +143,8 @@ class QuizActivity : AppCompatActivity() {
                                 delayPerQuestion,
                                 totalTimeOnQestion,
                                 difficultyLevel,
-                                difficultName!!
+                                difficultName!!,
+                                questionCategories[categoryId].id
                             )
                             var timerCountDownTimer: CountDownTimer = setIntervalTimer(questionTitle, questionClickListener,
                                 progressBarTimer, animation, currentIdQuestion, selectedQuestions,selectedQuestions)
@@ -149,7 +154,7 @@ class QuizActivity : AppCompatActivity() {
 //                            var timerCountDownTimer4: CountDownTimer = setIntervalTimer(questionTitle, questionClickListener, progressBarTimer, animation)
                             timerCountDownTimer.start()
 
-
+                            println("QuizActivity: ${selectedQuestions[categoryId].id}")
 
                             answer1.setOnClickListener{
 
@@ -527,15 +532,7 @@ class QuizActivity : AppCompatActivity() {
                         })
                     }).start()
 
-//                        questionTitle.invalidate()
-//                        var id = currentQuestionId
-//                        questionTitle.isPressed = true
-//                        if (questionTitle.isPressed)
-//                        {
-//                            ++id
-//                            showQuestion(questionList, id)
-//                            questionTitle.setTextColor(Color.MAGENTA)
-//                        }
+
 
                     if (questionClickListener.currentIdQuestion < questionClickListener.questionList.size)
                     {

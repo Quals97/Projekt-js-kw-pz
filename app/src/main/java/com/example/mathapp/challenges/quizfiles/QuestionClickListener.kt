@@ -32,13 +32,15 @@ class QuestionClickListener: View.OnClickListener {
     var spentAllTime: Int = 0
     var difficultyLevel: Int = 0
     var difficultName: String = String()
+    var categoryId: String = String()
+
 
     constructor()
 
     constructor(currentIdQuestion: Int, viewList: ArrayList<TextView>,categoryName: String, questionList: ArrayList<Question>,
                 maxQuestion: Int, progressBar: ProgressBar, spentTimeOnTheQuiz: LocalTime?,
                 delayTimeQuestion: Long, timeToSpentOnTheQuestion: Long, difficultyLevel: Int,
-                difficultName: String
+                difficultName: String, categoryId: String
                 )
     {
         this.currentIdQuestion = currentIdQuestion
@@ -52,6 +54,7 @@ class QuestionClickListener: View.OnClickListener {
         this.timeToSpentOnTheQuestion = timeToSpentOnTheQuestion
         this.difficultyLevel = difficultyLevel
         this.difficultName = difficultName
+        this.categoryId = categoryId
     }
 
 
@@ -148,6 +151,7 @@ class QuestionClickListener: View.OnClickListener {
         intent.putExtra("points", pointsReceived)
         intent.putExtra("totalPoints", questionList.size)
         intent.putExtra("spentTime", spentAllTime)
+        intent.putExtra("categoryId", categoryId)
         intent.putExtra("categoryName", categoryName)
         intent.putExtra("difficultyLevel", difficultyLevel)
         intent.putExtra("difficultName", difficultName)
