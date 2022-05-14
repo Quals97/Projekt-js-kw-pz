@@ -41,6 +41,10 @@ class ModuleExamAdapter (var context: Context, var category: Category, val check
         val percentToPass = 60
         val questionsSize: Int = category.questions0.size
 
+        var correctAnswerColor = Color.parseColor("#CD038350")
+        var wrongAnswerColor = Color.parseColor("#780606")
+        val textSizeOfCorrectAndWrondAnswers = 24F
+
         val layout = holder.view.position_in_module_exam_adapter
         var questionTitle = holder.view.questionTitleModuleExamActivity
         var answer1 = holder.view.questionAnswer1ModuleExamActivity
@@ -76,73 +80,92 @@ class ModuleExamAdapter (var context: Context, var category: Category, val check
            {
                if (answer1.text == userAnswers[position].second)
                {
-                   answer1.setBackgroundColor(Color.GREEN)
+                   answer1.setBackgroundColor(correctAnswerColor)
+                   answer1.textSize = textSizeOfCorrectAndWrondAnswers
 
                }else if (answer2.text == userAnswers[position].second)
                {
-                   answer2.setBackgroundColor(Color.GREEN)
+                   answer2.setBackgroundColor(correctAnswerColor)
+                   answer2.textSize = textSizeOfCorrectAndWrondAnswers
 
                }else if (answer3.text == userAnswers[position].second){
-                   answer3.setBackgroundColor(Color.GREEN)
+                   answer3.setBackgroundColor(correctAnswerColor)
+                   answer3.textSize = textSizeOfCorrectAndWrondAnswers
 
                }else if (answer4.text == userAnswers[position].second){
-                   answer4.setBackgroundColor(Color.GREEN)
-
+                   answer4.setBackgroundColor(correctAnswerColor)
+                   answer4.textSize = textSizeOfCorrectAndWrondAnswers
                }
            }else if (category.questions0[position].answers.correctAnswer.title != userAnswers[position].second)
            {
                if (answer1.text == userAnswers[position].second)
                {
-                   answer1.setBackgroundColor(Color.RED)
+                   answer1.setBackgroundColor(wrongAnswerColor)
+                   answer1.textSize = textSizeOfCorrectAndWrondAnswers
                    if (answer2.text == category.questions0[position].answers.correctAnswer.title)
                    {
-                       answer2.setBackgroundColor(Color.GREEN)
+                       answer2.setBackgroundColor(correctAnswerColor)
+                       answer2.textSize = textSizeOfCorrectAndWrondAnswers
                    }else if (answer3.text == category.questions0[position].answers.correctAnswer.title)
                    {
-                       answer3.setBackgroundColor(Color.GREEN)
+                       answer3.setBackgroundColor(correctAnswerColor)
+                       answer3.textSize = textSizeOfCorrectAndWrondAnswers
                    }else if (answer4.text == category.questions0[position].answers.correctAnswer.title)
                    {
-                       answer4.setBackgroundColor(Color.GREEN)
+                       answer4.setBackgroundColor(correctAnswerColor)
+                       answer4.textSize = textSizeOfCorrectAndWrondAnswers
                    }
 
                }else if (answer2.text == userAnswers[position].second)
                {
-                   answer2.setBackgroundColor(Color.RED)
+                   answer2.setBackgroundColor(wrongAnswerColor)
+                   answer2.textSize = textSizeOfCorrectAndWrondAnswers
                    if (answer1.text == category.questions0[position].answers.correctAnswer.title)
                    {
-                       answer1.setBackgroundColor(Color.GREEN)
+                       answer1.setBackgroundColor(correctAnswerColor)
+                       answer1.textSize = textSizeOfCorrectAndWrondAnswers
                    }else if (answer3.text == category.questions0[position].answers.correctAnswer.title)
                    {
-                       answer3.setBackgroundColor(Color.GREEN)
+                       answer3.setBackgroundColor(correctAnswerColor)
+                       answer3.textSize = textSizeOfCorrectAndWrondAnswers
                    }else if (answer4.text == category.questions0[position].answers.correctAnswer.title)
                    {
-                       answer4.setBackgroundColor(Color.GREEN)
+                       answer4.setBackgroundColor(correctAnswerColor)
+                       answer4.textSize = textSizeOfCorrectAndWrondAnswers
                    }
 
                }else if (answer3.text == userAnswers[position].second){
-                   answer3.setBackgroundColor(Color.RED)
+                   answer3.setBackgroundColor(wrongAnswerColor)
+                   answer3.textSize = textSizeOfCorrectAndWrondAnswers
                    if (answer1.text == category.questions0[position].answers.correctAnswer.title)
                    {
-                       answer1.setBackgroundColor(Color.GREEN)
+                       answer1.setBackgroundColor(correctAnswerColor)
+                       answer1.textSize = textSizeOfCorrectAndWrondAnswers
                    }else if (answer2.text == category.questions0[position].answers.correctAnswer.title)
                    {
-                       answer2.setBackgroundColor(Color.GREEN)
+                       answer2.setBackgroundColor(correctAnswerColor)
+                       answer2.textSize = textSizeOfCorrectAndWrondAnswers
                    }else if (answer4.text == category.questions0[position].answers.correctAnswer.title)
                    {
-                       answer4.setBackgroundColor(Color.GREEN)
+                       answer4.setBackgroundColor(correctAnswerColor)
+                       answer4.textSize = textSizeOfCorrectAndWrondAnswers
                    }
 
                }else if (answer4.text == userAnswers[position].second){
-                   answer4.setBackgroundColor(Color.RED)
+                   answer4.setBackgroundColor(wrongAnswerColor)
+                   answer4.textSize = textSizeOfCorrectAndWrondAnswers
                    if (answer1.text == category.questions0[position].answers.correctAnswer.title)
                    {
-                       answer1.setBackgroundColor(Color.GREEN)
+                       answer1.setBackgroundColor(correctAnswerColor)
+                       answer1.textSize = textSizeOfCorrectAndWrondAnswers
                    }else if (answer2.text == category.questions0[position].answers.correctAnswer.title)
                    {
-                       answer2.setBackgroundColor(Color.GREEN)
+                       answer2.setBackgroundColor(correctAnswerColor)
+                       answer2.textSize = textSizeOfCorrectAndWrondAnswers
                    }else if (answer3.text == category.questions0[position].answers.correctAnswer.title)
                    {
-                       answer3.setBackgroundColor(Color.GREEN)
+                       answer3.setBackgroundColor(correctAnswerColor)
+                       answer3.textSize = textSizeOfCorrectAndWrondAnswers
                    }
 
                }

@@ -19,6 +19,29 @@
         android:background="#E4731B"
         />
 
+    <Spinner
+        android:id="@+id/spinner_ranks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_gray2"
+        android:backgroundTint="@color/white"
+
+        />
+
+    <Spinner
+        android:visibility="gone"
+        android:id="@+id/spinner_ranks_modules"
+        android:background="@color/main_gray2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Spinner
+        android:visibility="gone"
+        android:id="@+id/spinner_ranks_difficulty"
+        android:background="@color/main_gray1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_rankings_activity"
         android:layout_margin="10dp"
