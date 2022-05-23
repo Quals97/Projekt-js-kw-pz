@@ -62,7 +62,7 @@ class ModuleExamActivity : AppCompatActivity() {
                     //println("List: ${categories.filter { n -> n.categoryName == "Liczby naturalne" } }" )
                     recycler_view_module_exam.layoutManager = LinearLayoutManager(applicationContext)
                     recycler_view_module_exam.adapter = ModuleExamAdapter(applicationContext, category, btn_module_exam_activity,
-                                                                                completedList, modulesPassed
+                                                                                completedList, modulesPassed, null
                                                                             )
                     btn_module_exam_activity.setOnClickListener {
 

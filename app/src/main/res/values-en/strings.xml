@@ -49,6 +49,9 @@
     <string name="quiz_settings">Quiz settings</string>
     <string name="text_information_about_delay_time">" This option allows you to freeze the time at the value in seconds specified above. This time will be stopped after selecting the answer in the quiz."</string>
     <string name="rankings">Rankings</string>
+    <string name="list_position">Lp.</string>
+    <string name="points">Points</string>
+    <string name="level">Lvl.</string>
 
 
 </resources>

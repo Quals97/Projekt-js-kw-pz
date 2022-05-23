@@ -4,20 +4,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mathapp.R
-import com.example.mathapp.authentication.classes.ModulesPassed
 import com.example.mathapp.challenges.classes.Category
+import com.example.mathapp.levels.Level
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_result_module_exam.*
-import kotlinx.android.synthetic.main.module_exam_activity.*
 
 class ResultModuleExamActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result_module_exam)
 
+        println("RESULTMODULEEXAMACTIVITY: ${intent.getStringExtra("level")} || ${intent.getStringExtra("points")}")
 
         var userAnswersB = intent.getBundleExtra("userAnswerExtra")
         var userAnswers: ArrayList<Pair<String, String>> = userAnswersB!!.getSerializable("userAnswer") as ArrayList<Pair<String, String>>
@@ -54,11 +55,45 @@ class ResultModuleExamActivity : AppCompatActivity() {
 
                     }
 
-                    //println("List: ${categories.filter { n -> n.categoryName == "Liczby naturalne" } }" )
-                    recycler_view_result_module_exam.layoutManager = LinearLayoutManager(applicationContext)
-                    recycler_view_result_module_exam.adapter = ModuleExamAdapter(applicationContext, category, btn_result_module_exam_activity,
-                        userAnswers, null
-                    )
+                    val dbLevel = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
+                    dbLevel.child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
+                        .child("level").addListenerForSingleValueEvent(object : ValueEventListener{
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                if (snapshot.exists())
+                                {
+                                    var level: Level = Level()
+                                    for (lvl in snapshot.children)
+                                    {
+                                        //println("LVL: ${lvl}")
+                                        if (lvl.key == "level"){
+                                            level.level = lvl.value.toString()
+                                        }else if(lvl.key == "points"){
+                                            level.points = lvl.value.toString()
+                                        }
+
+
+
+                                    }
+
+                                    recycler_view_result_module_exam.layoutManager = LinearLayoutManager(applicationContext)
+                                    recycler_view_result_module_exam.adapter = ModuleExamAdapter(applicationContext, category, btn_result_module_exam_activity,
+                                        userAnswers, null, level
+                                    )
+
+
+                                }
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+
+                            }
+
+
+                        })
+
+
+
+
 
 
                 }

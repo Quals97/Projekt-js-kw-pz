@@ -42,6 +42,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="20dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:background="#E4731B"
+        >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="17dp"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:text="@string/list_position"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:textSize="17dp"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:text="@string/email"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="17dp"
+                android:layout_height="wrap_content"
+                android:text="@string/points"
+                />
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_rankings_activity"
         android:layout_margin="10dp"

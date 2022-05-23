@@ -204,7 +204,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private val loginListener = View.OnClickListener {
-        val email = "LatajacyKot@gmail.com"
+//        val email = "LatajacyKot@gmail.com"
+//        val password = "123456789abc;"
+        val email = "example@gmail.com"
         val password = "123456789abc;"
 //        val email: String = user_email.text.toString()
 //        val password: String = user_password.text.toString()

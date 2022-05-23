@@ -68,12 +68,16 @@ class RankingsAdapter(val context: Context,
 
 
                     }
-                    userPointsList.add(pair)
+                    if(pair.second != 0){
+                        userPointsList.add(pair)
+                    }
+
                 }
 
 
 //        var helpList = userPointsList.sortedWith(compareBy{it.second})
                 var helpList = userPointsList.sortedBy { it.second }.reversed()
+
                 userPointsList = arrayListOf()
 
                 for (i in helpList) {
@@ -86,10 +90,13 @@ class RankingsAdapter(val context: Context,
                 println("SIZE: ${userPointsList.size}")
 
 
+                if (position < userPointsList.size)
+                {
+                    userName.text = userPointsList[position].first
+                    userPoints.text = userPointsList[position].second.toString()
+                    userPosition.text = position.plus(1).toString()
+                }
 
-                userName.text = userPointsList[position].first
-                userPoints.text = userPointsList[position].second.toString()
-                userPosition.text = position.plus(1).toString()
 
             }
             "Moduły" -> {
@@ -109,8 +116,13 @@ class RankingsAdapter(val context: Context,
                                 "Łatwy" -> {
                                     if (users[i].second[k].moduleName == "Liczby naturalne" && users[i].second[k].difficultyLevel == "Łatwy")
                                     {
-                                        sortedListOfQuestionForUser.add(Pair(users[i].first.email,users[i].second[k].points.toInt()))
-                                        check = true
+
+                                        if (users[i].second[k].points.toInt() != 0){
+                                            sortedListOfQuestionForUser.add(Pair(users[i].first.email,users[i].second[k].points.toInt()))
+                                            check = true
+                                            println("Łatwy: ${Pair(users[i].first.email,users[i].second[k].points.toInt())}")
+                                        }
+
 
                                     }
                                 }
@@ -118,8 +130,12 @@ class RankingsAdapter(val context: Context,
 
                                     if (users[i].second[k].moduleName == "Liczby naturalne" && users[i].second[k].difficultyLevel == "Trudny")
                                     {
-                                        sortedListOfQuestionForUser.add(Pair(users[i].first.email,users[i].second[k].points.toInt()))
-                                        check = true
+
+                                        if (users[i].second[k].points.toInt() != 0){
+                                            sortedListOfQuestionForUser.add(Pair(users[i].first.email,users[i].second[k].points.toInt()))
+                                            check = true
+                                            println("Trudny: ${Pair(users[i].first.email,users[i].second[k].points.toInt())}")
+                                        }
 
                                     }
                                 }
@@ -129,7 +145,7 @@ class RankingsAdapter(val context: Context,
                         }
                         if (!check)
                         {
-                            sortedListOfQuestionForUser.add(Pair(users[i].first.email, 0))
+                           // sortedListOfQuestionForUser.add(Pair(users[i].first.email, 0))
                         }
 
                     }
@@ -141,9 +157,16 @@ class RankingsAdapter(val context: Context,
 
                     }
 
-                    userName.text = sortedListOfQuestionForUser[position].first
+                        if (position < sortedListOfQuestionForUser.size)
+                        {
+                            userName.text = sortedListOfQuestionForUser[position].first
                             userPoints.text = sortedListOfQuestionForUser[position].second.toString()
                             userPosition.text = position.plus(1).toString()
+                        }
+
+
+
+
 
 
                 }
@@ -161,8 +184,13 @@ class RankingsAdapter(val context: Context,
                                     "Łatwy" -> {
                                         if (users[i].second[k].moduleName == "Zbiory" && users[i].second[k].difficultyLevel == "Łatwy")
                                         {
-                                            sortedListOfQuestionForUser.add(Pair(users[i].first.email,users[i].second[k].points.toInt()))
-                                            check = true
+                                            if (users[i].second[k].points.toInt() != 0){
+                                                sortedListOfQuestionForUser.add(Pair(users[i].first.email,users[i].second[k].points.toInt()))
+                                                check = true
+                                                println("Łatwy: ${Pair(users[i].first.email,users[i].second[k].points.toInt())}")
+
+                                            }
+
 
                                         }
 
@@ -171,8 +199,13 @@ class RankingsAdapter(val context: Context,
 
                                         if (users[i].second[k].moduleName == "Zbiory" && users[i].second[k].difficultyLevel == "Trudny")
                                         {
-                                            sortedListOfQuestionForUser.add(Pair(users[i].first.email,users[i].second[k].points.toInt()))
-                                            check = true
+                                            if (users[i].second[k].points.toInt() != 0){
+                                                sortedListOfQuestionForUser.add(Pair(users[i].first.email,users[i].second[k].points.toInt()))
+                                                check = true
+                                                println("Trudny: ${Pair(users[i].first.email,users[i].second[k].points.toInt())}")
+
+                                            }
+
 
                                         }
                                     }
@@ -184,7 +217,7 @@ class RankingsAdapter(val context: Context,
                             }
                             if (!check)
                             {
-                                sortedListOfQuestionForUser.add(Pair(users[i].first.email, 0))
+                               // sortedListOfQuestionForUser.add(Pair(users[i].first.email, 0))
                             }
 
                         }
@@ -196,9 +229,12 @@ class RankingsAdapter(val context: Context,
 
                         }
 
-                        userName.text = sortedListOfQuestionForUser[position].first
-                        userPoints.text = sortedListOfQuestionForUser[position].second.toString()
-                        userPosition.text = position.plus(1).toString()
+                        if (position < sortedListOfQuestionForUser.size) {
+                            userName.text = sortedListOfQuestionForUser[position].first
+                            userPoints.text = sortedListOfQuestionForUser[position].second.toString()
+                            userPosition.text = position.plus(1).toString()
+                        }
+
 
 
 
@@ -255,6 +291,7 @@ class RankingsAdapter(val context: Context,
 
     override fun getItemCount(): Int {
         return users.size
+
     }
 
 

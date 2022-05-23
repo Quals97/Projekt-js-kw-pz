@@ -17,6 +17,7 @@ import com.example.mathapp.R
 import com.example.mathapp.authentication.classes.Statistics
 import com.example.mathapp.authentication.classes.User
 import com.example.mathapp.authentication.classes.UserSettings
+import com.example.mathapp.levels.Level
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -263,7 +264,7 @@ class RegistrationActivity : AppCompatActivity() {
                         if (task.isSuccessful)
                         {
                             val userUId = FirebaseAuth.getInstance().currentUser!!.uid
-                            val user = User(userUId,name, email, arrayListOf(),  UserSettings(), Statistics())
+                            val user = User(userUId,name, email, arrayListOf(),  UserSettings(), Statistics(), Level())
                             val db = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
                             db.child("Users").child(userUId).setValue(user)
 

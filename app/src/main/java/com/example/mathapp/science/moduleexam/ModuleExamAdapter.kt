@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -12,12 +11,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mathapp.FakeModulesList
 import com.example.mathapp.MainActivity
 import com.example.mathapp.R
 import com.example.mathapp.authentication.classes.ModulesPassed
 import com.example.mathapp.challenges.classes.Category
+import com.example.mathapp.levels.ExperiencePerLevel
+import com.example.mathapp.levels.Level
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.module_exam_activity.*
@@ -27,9 +28,11 @@ import kotlinx.android.synthetic.main.quiz_activity.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ModuleExamAdapter (var context: Context, var category: Category, val checkAnswerButton: Button,
-                         var userAnswers: ArrayList<Pair<String, String>> = arrayListOf(),
-                         var modulesPassed: ModulesPassed?
+class ModuleExamAdapter(
+    var context: Context, var category: Category, val checkAnswerButton: Button,
+    var userAnswers: ArrayList<Pair<String, String>> = arrayListOf(),
+    var modulesPassed: ModulesPassed?,
+    var level: Level?
                          ):RecyclerView.Adapter<MyModuleExamAdapter>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyModuleExamAdapter {
         val inflater = LayoutInflater.from(parent.context)
@@ -40,6 +43,7 @@ class ModuleExamAdapter (var context: Context, var category: Category, val check
     override fun onBindViewHolder(holder: MyModuleExamAdapter, position: Int) {
         val percentToPass = 60
         val questionsSize: Int = category.questions0.size
+        val patternOfScoringSystem = 1
 
         var correctAnswerColor = Color.parseColor("#CD038350")
         var wrongAnswerColor = Color.parseColor("#780606")
@@ -171,38 +175,6 @@ class ModuleExamAdapter (var context: Context, var category: Category, val check
                }
            }
 
-//            if (answer1.text == userAnswers[position].second)
-//            {
-//                answer1.setBackgroundColor(Color.GREEN)
-//            }else{
-//                if (answer2.text == userAnswers[position].second)
-//                {
-//                    answer1.setBackgroundColor(Color.GREEN)
-//                    answer2.setBackgroundColor(Color.RED)
-//                }else if(answer3.text == userAnswers[position].second)
-//                {
-//                    answer1.setBackgroundColor(Color.GREEN)
-//                    answer3.setBackgroundColor(Color.RED)
-//                }else if(answer4.text == userAnswers[position].second)
-//                {
-//                    answer1.setBackgroundColor(Color.GREEN)
-//                    answer4.setBackgroundColor(Color.RED)
-//                }
-//            }
-
-
-//            if (answer2.text.toString() == category.questions0[position].answers.correctAnswer.title)
-//            {
-//               answer2.setBackgroundColor(Color.GREEN)
-//            }
-//            if (answer3.text.toString() == category.questions0[position].answers.correctAnswer.title)
-//            {
-//               answer3.setBackgroundColor(Color.GREEN)
-//            }
-//            if (answer4.text.toString() == category.questions0[position].answers.correctAnswer.title)
-//            {
-//               answer4.setBackgroundColor(Color.GREEN)
-//            }
 
 
        }else{
@@ -267,37 +239,69 @@ class ModuleExamAdapter (var context: Context, var category: Category, val check
             val db = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
 
 
-            if (modulesPassed == null)
-            {
-                val intent = Intent(holder.view.context.applicationContext, MainActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                holder.view.context.startActivity(intent)
 
-            }else{
-                if (modulesPassed!!.id == "null" && modulesPassed!!.name == "null")
+//                var currentUserLevel = level
+//                var scoringSystem: Int = correctAnswers.size * 1
+//                var newUserLevel: Level = calculateLevel(currentUserLevel!!, scoringSystem)
+
+               // println("NEW USER LEVEL: ${newUserLevel.level} || ${newUserLevel.points} || ${scoringSystem}")
+                if (modulesPassed == null)
                 {
+                    println("Level: Points: ${level?.level} || ${level?.points}")
+                    val scoringSystem: Int = correctAnswers.size * patternOfScoringSystem
+                    val newUserLevel: Level = ExperiencePerLevel.calculateLevel(level!!, scoringSystem)
 
-                    val modulePassed = ModulesPassed(time.toString(), category.categoryName, check.toString(), correctAnswers.size.toString())
-                    db.child("Users").child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child("ModulesPassed").child(time.toString()).setValue(modulePassed)
+                    val dbLevel = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
+                        dbLevel.child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
+                            .child("level").setValue(newUserLevel)
+
+
+                    val intent = Intent(holder.view.context.applicationContext, MainActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    holder.view.context.startActivity(intent)
 
                 }else{
-                    if (correctAnswers.size > modulesPassed!!.points.toInt())
+                    if (modulesPassed!!.id == "null" && modulesPassed!!.name == "null")
                     {
-                        val modulePassed = ModulesPassed(modulesPassed!!.id, category.categoryName, check.toString(), correctAnswers.size.toString())
-                        db.child("Users").child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child("ModulesPassed").child(modulesPassed!!.id).setValue(modulePassed)
+
+
+
+                        val modulePassed = ModulesPassed(time.toString(), category.categoryName, check.toString(), correctAnswers.size.toString())
+                        db.child("Users").child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child("ModulesPassed").child(time.toString()).setValue(modulePassed)
+
+//                        val dbLevel = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
+//                        dbLevel.child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
+//                            .child("level").setValue(newUserLevel)
+
+
+                    }else{
+                        if (correctAnswers.size > modulesPassed!!.points.toInt())
+                        {
+                            val modulePassed = ModulesPassed(modulesPassed!!.id, category.categoryName, check.toString(), correctAnswers.size.toString())
+                            db.child("Users").child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child("ModulesPassed").child(modulesPassed!!.id).setValue(modulePassed)
+//                            val dbLevel = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
+//                            dbLevel.child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
+//                                .child("level").setValue(newUserLevel)
+                        }
 
                     }
+                    var extra = Bundle()
+                    extra.putSerializable("userAnswer", userAnswers)
 
+                    val intent = Intent(holder.view.context.applicationContext, ResultModuleExamActivity::class.java)
+                    intent.putExtra("categoryName", category.categoryName)
+                    intent.putExtra("userAnswerExtra", extra)
+                    intent.putExtra("level", level?.level)
+                    intent.putExtra("points", level?.points)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    holder.view.context.startActivity(intent)
                 }
-                var extra = Bundle()
-                extra.putSerializable("userAnswer", userAnswers)
 
-                val intent = Intent(holder.view.context.applicationContext, ResultModuleExamActivity::class.java)
-                intent.putExtra("categoryName", category.categoryName)
-                intent.putExtra("userAnswerExtra", extra)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                holder.view.context.startActivity(intent)
-            }
+
+
+
+
+
 
 
 
@@ -316,6 +320,27 @@ class ModuleExamAdapter (var context: Context, var category: Category, val check
 
 
 }
+
+private fun calculateLevel(level: Level, scoringSystem: Int): Level {
+
+
+    var levelu = level.level.toInt()
+    var points = level.points.toInt()
+
+
+    if (level.points.toInt() >= ExperiencePerLevel.experiencePerLevel[level.level.toInt()]
+        && points < ExperiencePerLevel.experiencePerLevel[level.level.toInt() + 1]
+    ) {
+
+
+    }
+    points += scoringSystem
+
+
+
+    return Level(levelu.toString(), points.toString())
+}
+
 
 
 private fun setXmlOnButton(answer1: TextView, answer2: TextView, answer3: TextView, answer4: TextView){

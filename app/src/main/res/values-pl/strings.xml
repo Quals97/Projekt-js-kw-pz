@@ -49,4 +49,7 @@
     <string name="quiz_settings">Opcje quizu</string>
     <string name="text_information_about_delay_time">Opcja pozwala na zatrzymanie czasu na określoną wyżej wartość w sekundach. Czas ten zatrzymany będzie po wybraniu odpowiedzi w quizie.</string>
     <string name="rankings">Rankingi</string>
+    <string name="list_position">p.</string>
+    <string name="points">Punkty</string>
+    <string name="level">Poz.</string>
 </resources>

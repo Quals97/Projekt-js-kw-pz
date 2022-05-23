@@ -7,14 +7,19 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mathapp.MainActivity
 import com.example.mathapp.R
 import com.example.mathapp.authentication.classes.*
+import com.example.mathapp.levels.ExperiencePerLevel
+import com.example.mathapp.levels.Level
+import com.example.mathapp.science.moduleexam.ModuleExamAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_result_module_exam.*
 import kotlinx.android.synthetic.main.quiz_result_activity.*
 import java.time.LocalTime
 import java.util.*
@@ -22,9 +27,14 @@ import kotlin.collections.ArrayList
 
 class QuizResultActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
+    val patternOfScoringSystemEasyLevel = 2
+    val patternOfScoringSystemDifficultLevel = 3
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.quiz_result_activity)
+
+
 
         var difficultyLevel = intent.getIntExtra("difficultyLevel", -1)
         var difficultName = intent.getStringExtra("difficultName")
@@ -83,53 +93,6 @@ class QuizResultActivity : AppCompatActivity() {
         var difficultName = intent.getStringExtra("difficultName")
         println("CategoryId: ${categoryId}")
 
-//        var db = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
-//        db.child("UserStatistics").child(FirebaseAuth.getInstance().currentUser!!.uid)
-//            .addValueEventListener(object : ValueEventListener{
-//                override fun onDataChange(snapshot: DataSnapshot) {
-//                    if (snapshot.exists()) {
-//                        var dayStats: ArrayList<DayStats> = arrayListOf()
-//                        for (uS in snapshot.children) {
-//                            println("uS: ${uS}")
-//                            var dayStat = uS.getValue(DayStats::class.java)
-//                            dayStats.add(dayStat!!)
-//
-//                        }
-//                        println("DayStats Size: ${dayStats.size}")
-//                        for (d in dayStats)
-//                        {
-//                            println("DayStats: ${d.day} - ${d.month} - ${d.year} || ${d.difficultyLevel}")
-//                            for (m in d.moduleStats)
-//                            {
-//                                println("Modules: ${m.numberOfGames} ${m.points} ${m.moduleName} ${m.id}")
-//                            }
-//                        }
-//
-//
-//
-////                        var moduleStats: ModuleStats = ModuleStats(categoryId!!, categoryName!!, "2", "1")
-////
-////                        var helpList: ArrayList<ModuleStats> = dayStats[1].moduleStats
-////                        helpList.add(moduleStats)
-//
-//
-////                        var dayStatsUser = DayStats("22", "06", "2022",difficultName!!, helpList)
-////                        var dbC = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
-////                        dbC.child("UserStatistics").child(FirebaseAuth.getInstance().currentUser!!.uid)
-////                            .child("${dayStatsUser.day}-${dayStatsUser.month}-${dayStatsUser.year}")
-////                            .setValue(dayStats)
-//
-//
-//
-//
-//                    }
-//                }
-//
-//                override fun onCancelled(error: DatabaseError) {
-//
-//                }
-//
-//            })
         var timeId = Date().time
 
         var dbConnectionStatistics = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
@@ -145,14 +108,6 @@ class QuizResultActivity : AppCompatActivity() {
                             var moduleStats = stat.getValue(ModuleStats::class.java)
                             modulesStats.add(moduleStats!!)
                         }
-//                        println("ModulesSize: ${modulesStats.size}")
-
-
-
-//                        var dbC = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
-//                        dbC.child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
-//                            .child("Statistics").child(categoryId).setValue(moduleStats)
-
 
 
 
@@ -217,8 +172,53 @@ class QuizResultActivity : AppCompatActivity() {
 
 
 
+        val dbLevel = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
+        dbLevel.child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child("level").addListenerForSingleValueEvent(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists())
+                    {
+                        var level: Level = Level()
+                        for (lvl in snapshot.children)
+                        {
+                            //println("LVL: ${lvl}")
+                            if (lvl.key == "level"){
+                                level.level = lvl.value.toString()
+                            }else if(lvl.key == "points"){
+                                level.points = lvl.value.toString()
+                            }
 
-        goToMainActivity()
+
+
+                        }
+
+                        if(difficultName == "Łatwy"){
+
+                            val scoringSystem: Int = intent.getIntExtra("points",-1) * patternOfScoringSystemEasyLevel
+                            val newUserLevel: Level = ExperiencePerLevel.calculateLevel(level!!, scoringSystem)
+
+                            val dbLevel = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
+                            dbLevel.child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
+                                .child("level").setValue(newUserLevel)
+                        }else if(difficultName == "Trudny"){
+                            val scoringSystem: Int = intent.getIntExtra("points",-1) * patternOfScoringSystemDifficultLevel
+                            val newUserLevel: Level = ExperiencePerLevel.calculateLevel(level!!, scoringSystem)
+
+                            val dbLevel = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
+                            dbLevel.child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
+                                .child("level").setValue(newUserLevel)
+
+                        }
+
+
+                        goToMainActivity()
+
+                    }
+                }
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
+
 
     }
 

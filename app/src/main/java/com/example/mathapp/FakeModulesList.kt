@@ -1,5 +1,8 @@
 package com.example.mathapp
 
+import com.example.mathapp.levels.ExperiencePerLevel
+import com.example.mathapp.levels.Level
+
 object FakeModulesList {
 
     val modulesList: ArrayList<String> = arrayListOf(
@@ -12,4 +15,9 @@ object FakeModulesList {
 
     )
 
+
+
+
 }
+
+
