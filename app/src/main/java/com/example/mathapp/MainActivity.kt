@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         rankings_button.setOnClickListener(rankingsListener)
 
         setMenuIcon()
-
+//        println("LANGUAGE: ${Locale.getDefault().displayLanguage}")
 
 
 
@@ -151,16 +151,47 @@ class MainActivity : AppCompatActivity() {
                         for (icon in snapshot.children)
                         {
 
-                            if (icon.key == "science"){
-                                println("SCIENCE LOGO")
-                                Picasso.get().load(icon.value.toString()).into(sciencie_icon)
-                            }else if(icon.key == "challenge"){
-                                Picasso.get().load(icon.value.toString()).into(challenge_icon)
-                            }else if(icon.key == "rankings"){
-                                Picasso.get().load(icon.value.toString()).into(rankings_icon)
-                            }else if(icon.key == "settings"){
-                                Picasso.get().load(icon.value.toString()).into(settings_icon)
+                            when(Locale.getDefault().displayLanguage.toString()){
+                                "English"-> {
+                                    if (icon.key == "scienceEng"){
+                                        println("SCIENCE LOGO")
+                                        Picasso.get().load(icon.value.toString()).into(sciencie_icon)
+                                    }else if(icon.key == "challengeEng"){
+                                        Picasso.get().load(icon.value.toString()).into(challenge_icon)
+                                    }else if(icon.key == "rankingEngPl"){
+                                        Picasso.get().load(icon.value.toString()).into(rankings_icon)
+                                    }else if(icon.key == "settingsEng"){
+                                        Picasso.get().load(icon.value.toString()).into(settings_icon)
+                                    }
+
+
+                                }
+                                "polski" -> {
+                                    if (icon.key == "sciencePl"){
+                                        Picasso.get().load(icon.value.toString()).into(sciencie_icon)
+                                    }else if(icon.key == "challengePl"){
+                                        Picasso.get().load(icon.value.toString()).into(challenge_icon)
+                                    }else if(icon.key == "rankingEngPl"){
+                                        Picasso.get().load(icon.value.toString()).into(rankings_icon)
+                                    }else if(icon.key == "settingsPl"){
+                                        Picasso.get().load(icon.value.toString()).into(settings_icon)
+                                    }
+
+                                }
+
                             }
+
+
+//                            if (icon.key == "science"){
+//                                println("SCIENCE LOGO")
+//                                Picasso.get().load(icon.value.toString()).into(sciencie_icon)
+//                            }else if(icon.key == "challenge"){
+//                                Picasso.get().load(icon.value.toString()).into(challenge_icon)
+//                            }else if(icon.key == "rankings"){
+//                                Picasso.get().load(icon.value.toString()).into(rankings_icon)
+//                            }else if(icon.key == "settings"){
+//                                Picasso.get().load(icon.value.toString()).into(settings_icon)
+//                            }
                         }
                     }
                 }
