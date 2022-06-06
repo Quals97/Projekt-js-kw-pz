@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
+            android:name=".help.HelpActivity4"
+            android:exported="false" />
+        <activity
+            android:name=".help.HelpActivity3"
+            android:exported="false" />
+        <activity
+            android:name=".help.HelpActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".help.HelpActivity1"
+            android:exported="false" />
+        <activity
             android:name=".rankings.RankingsActivity"
             android:exported="false" />
         <activity

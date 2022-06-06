@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.example.mathapp.challenges.ChallengesActivity
+import com.example.mathapp.help.HelpActivity1
 import com.example.mathapp.levels.ExperiencePerLevel
 import com.example.mathapp.levels.Level
 import com.example.mathapp.rankings.RankingsActivity
@@ -32,8 +33,11 @@ class MainActivity : AppCompatActivity() {
         options_button.setOnClickListener(optionsListener)
         challenge_button.setOnClickListener(challengeListener)
         rankings_button.setOnClickListener(rankingsListener)
+        helpIcon.setOnClickListener(helpListener)
 
         setMenuIcon()
+        helpIcon()
+
 //        println("LANGUAGE: ${Locale.getDefault().displayLanguage}")
 
 
@@ -101,6 +105,11 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+    private val helpListener: View.OnClickListener = View.OnClickListener {
+        startActivity(Intent(applicationContext, HelpActivity1::class.java))
+
+    }
+
     private val rankingsListener: View.OnClickListener = View.OnClickListener {
         goToRankingsActivity()
     }
@@ -138,13 +147,41 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun helpIcon(){
+//        helpIcon
+        val dbC = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
+        dbC.child("MenuIcons"). addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    for (icon in snapshot.children){
+                        if (icon.key == "helpIcon"){
+                            Picasso.get().load(icon.value.toString()).into(helpIcon)
+                        }
+
+                    }
+
+
+                }
+
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+
+        })
+
+
+    }
 
     private fun setMenuIcon(){
 //        Picasso.get().load(appInfor!!.logo).into(image_logo)
 //        sciencie_icon
         val dbC = FirebaseDatabase.getInstance("https://mathapp-74bce-default-rtdb.europe-west1.firebasedatabase.app/").reference
         dbC.child("MenuIcons")
-            .addListenerForSingleValueEvent(object : ValueEventListener{
+            .addValueEventListener(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if(snapshot.exists()) {
 

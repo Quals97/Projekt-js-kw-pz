@@ -4,9 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mathapp.R
 import com.example.mathapp.authentication.classes.ModulesPassed
@@ -24,11 +27,14 @@ class ScienceAdapter(val context: Context, val modulesList:ArrayList<Module>, va
         return MySienceViewHolder(positionList)
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onBindViewHolder(holder: MySienceViewHolder, position: Int) {
         val moduleTitle = holder.view.module_title
         val layout = holder.view.position_in_sience_recycler_view
 
-        println("SIZE MODULES: ${modulesPassed.size}")
+
+
+//        println("SIZE MODULES: ${modulesPassed.size}")
         moduleTitle.text = modulesList[position].name
 
         layout.setBackgroundResource(R.drawable.roundup)
@@ -88,17 +94,27 @@ class ScienceAdapter(val context: Context, val modulesList:ArrayList<Module>, va
 
         }
 
+
         if (position < modulesPassed.size)
         {
             if (modulesPassed[position].status.toBoolean())
             {
                 drawable.setColor(Color.parseColor("#CD038350"))
+                //layout.isClickable = true
+                layout.isClickable = true
+
             }else{
                 drawable.setColor(Color.GRAY)
+                layout.isClickable = true
             }
         }else{
+
+            layout.isClickable = position <= modulesPassed.size
             drawable.setColor(Color.GRAY)
+
         }
+
+       // println("Color: ${drawable.color.toString()}")
 //           println("Module name ${modulesPassed[position]?.status}")
 
 
